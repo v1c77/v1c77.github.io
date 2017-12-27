@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on vici&#39;blog</title>
-    <link>/tags/docker/</link>
+    <link>http://blog.heyuhua.com/tags/docker/</link>
     <description>Recent content in Docker on vici&#39;blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 15 Feb 2017 16:20:14 +0000</lastBuildDate>
     
-	<atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.heyuhua.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>postgresq-xl&amp;docker分布式实践</title>
-      <link>/2017/02/postgresq-xldocker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</link>
+      <link>http://blog.heyuhua.com/2017/02/postgresq-xldocker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Wed, 15 Feb 2017 16:20:14 +0000</pubDate>
       
-      <guid>/2017/02/postgresq-xldocker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>http://blog.heyuhua.com/2017/02/postgresq-xldocker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文在 2017年3月7日被重写。祝愿各位女王及屏幕那边的大雕萌妹们节日快乐。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>aria2 配置笔记</title>
-      <link>/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/</link>
+      <link>http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;p&gt;这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&amp;mdash;Lolita&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -41,10 +41,10 @@
     
     <item>
       <title>docker 入门笔记</title>
-      <link>/2016/11/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</link>
+      <link>http://blog.heyuhua.com/2016/11/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Mon, 28 Nov 2016 19:48:21 +0000</pubDate>
       
-      <guid>/2016/11/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://blog.heyuhua.com/2016/11/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;!-- toc --&gt;
 
 &lt;h1 id=&#34;入门&#34;&gt;入门&lt;/h1&gt;
