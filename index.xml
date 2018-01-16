@@ -6,10 +6,20 @@
     <description>Recent content on vici&#39;blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 19 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.heyuhua.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>highlighted code example</title>
+      <link>http://blog.heyuhua.com/2018/01/highlighted-code-example/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.heyuhua.com/2018/01/highlighted-code-example/</guid>
+      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&amp;rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>python重修之旅（五）</title>
