@@ -283,10 +283,21 @@ ga('send', 'pageview');
 </ul></li>
 <li><a href="#python常用设计模式">python常用设计模式</a>
 <ul>
-<li><a href="#抽象工厂-abstract-factory">抽象工厂 / abstract_factory</a></li>
+<li><a href="#abstract-factory-抽象工厂">abstract_factory / 抽象工厂</a></li>
 <li><a href="#borg-集体主义模式">borg / 集体主义模式</a></li>
 <li><a href="#builder-建造者模式">builder / 建造者模式</a></li>
 <li><a href="#factory-工厂模式">factory / 工厂模式</a></li>
+<li><a href="#lazy-evaluation-惰性求值">lazy_evaluation / 惰性求值</a></li>
+<li><a href="#pool-池模式">pool /池模式</a></li>
+<li><a href="#protopype-原型">protopype / 原型</a></li>
+<li><a href="#adapter-适配器">adapter / 适配器</a></li>
+<li><a href="#bridge-桥接模式">bridge / 桥接模式</a></li>
+<li><a href="#composite-组合模式">composite / 组合模式</a></li>
+<li><a href="#faced-门面">faced / 门面</a></li>
+<li><a href="#flyweight-享元">flyweight / 享元</a></li>
+<li><a href="#front-controtllor-前端控制器">front controtllor / 前端控制器</a></li>
+<li><a href="#mvc-n-tier-分层">mvc&amp;n-tier / 分层</a></li>
+<li><a href="#proxy-代理">proxy / 代理</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -378,7 +389,7 @@ import scipy.misc
 
 <p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;生成模式&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
 
-<h3 id="抽象工厂-abstract-factory">抽象工厂 / abstract_factory</h3>
+<h3 id="abstract-factory-抽象工厂">abstract_factory / 抽象工厂</h3>
 
 <p>最直白的就是“鸡鸭鹅狗猫都是动物”：</p>
 
@@ -633,6 +644,838 @@ if __name__ == &#39;__main__&#39;:
     </tbody>
   </table>
 </figure></p>
+
+<h3 id="lazy-evaluation-惰性求值">lazy_evaluation / 惰性求值</h3>
+
+<p>Delays the eval of an expr until its value is needed and avoids repeated evals.</p>
+
+<p>表达式计算延迟到调用时，同时避免重复计算
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">import functools
+
+class cached_property(object):
+    def __init__(self, function):
+        self.function = function
+        functools.update_wrapper(self, function)
+
+    def __get__(self, obj, type_):
+        if obj is None:
+            return self
+        val = self.function(obj)
+        obj.__dict__[self.function.__name__] = val
+        return val</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>The cached_property(a.k.a lazy_property) is a decorator which convert a func
+into a lazy evaluation property. The first time property accessed, the func
+is called to get result and then the value is used the next time you access
+the property.</p>
+
+<p>eg:
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">class LogHandler:
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    @cached_property
+    def load_log_file(self):
+        with open(self.file_path) as f:
+            # the file is to big that I have to cost 2s to read all file
+            return f.read()
+
+log_handler = LogHandler(&#39;./sys.log&#39;)
+# only the first time call will cost 2s.
+print(log_handler.load_log_file)
+# return value is cached to the log_handler obj.
+print(log_handler.load_log_file)</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="pool-池模式">pool /池模式</h3>
+
+<p>预初始化一批对象并保持可用状态。
+pool模式常用来提供各种服务连接，比如各大数据库提供的ConnectionPool, python内建的
+threadingPools。</p>
+
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">import queue
+
+
+class ObjPool:
+
+    def __init__(self, queue, auto_get=False):
+        self._queue = queue
+        self.item = self._queue.get() if auto_get else None
+
+    def __enter__(self):
+        if self.item is None:
+            self.item = self._queue.get()
+            return self.item
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.item is not None:
+            self._queue.put(self.item)
+            self. item = None
+
+    def __del__(self):
+        if self.item is not None:
+            self._queue.put(self.item)
+            self. item = None
+
+
+my_queue = queue.Queue(maxsize=20)
+
+my_queue.put(&#39;huahua&#39;)
+my_queue.put(&#39;dandan&#39;)
+
+
+def do_sth_in_queue(myqueue):
+    with ObjPool(myqueue) as obj:
+        print(f&#39;inside {obj}&#39;)
+    out_item = myqueue.get()
+    print(f&#39;outside {out_item}&#39;)
+    myqueue.put(out_item)
+    while True:
+        with ObjPool(myqueue) as obj:
+            print(f&#39;inside {obj}&#39;)
+
+
+do_sth_in_queue(my_queue)
+# inside huahua
+# inside dandan
+# inside huahua
+# inside dandan
+# inside huahua
+# inside dandan
+# ...</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="protopype-原型">protopype / 原型</h3>
+
+<p>通过clone原型来创建新的实例。似乎并没有人用过。。。
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">class Prototype(object):
+
+    value = &#39;default&#39;
+
+    def clone(self, **attrs):
+        &#34;&#34;&#34;Clone a prototype and update inner attributes dictionary&#34;&#34;&#34;
+        # Python in Practice, Mark Summerfield
+        obj = self.__class__()
+        obj.__dict__.update(attrs)
+        return obj</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;生成模式&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+
+<h3 id="adapter-适配器">adapter / 适配器</h3>
+
+<p>我想起了10年前家里用的万能充：万能充总是能通过改变自己的接口形状来适应不同的手机电池。</p>
+
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">class Dog(object):
+
+    def __init__(self):
+        self.name = &#34;Dog&#34;
+
+    def bark(self):
+        return &#34;woof!&#34;
+
+
+class Cat(object):
+
+    def __init__(self):
+        self.name = &#34;Cat&#34;
+
+    def meow(self):
+        return &#34;meow!&#34;
+
+
+class Human(object):
+
+    def __init__(self):
+        self.name = &#34;Human&#34;
+
+    def speak(self):
+        return &#34;&#39;hello&#39;&#34;
+
+
+class Car(object):
+
+    def __init__(self):
+        self.name = &#34;Car&#34;
+
+    def make_noise(self, octane_level):
+        return &#34;vroom{0}&#34;.format(&#34;!&#34; * octane_level)
+
+
+class Adapter(object):
+    &#34;&#34;&#34;
+    Adapts an object by replacing methods.
+    Usage:
+    dog = Dog
+    dog = Adapter(dog, dict(make_noise=dog.bark))
+    &gt;&gt;&gt; objects = []
+    &gt;&gt;&gt; dog = Dog()
+    &gt;&gt;&gt; print(dog.__dict__)
+    {&#39;name&#39;: &#39;Dog&#39;}
+    &gt;&gt;&gt; objects.append(Adapter(dog, make_noise=dog.bark))
+    &gt;&gt;&gt; print(objects[0].original_dict())
+    {&#39;name&#39;: &#39;Dog&#39;}
+    &gt;&gt;&gt; cat = Cat()
+    &gt;&gt;&gt; objects.append(Adapter(cat, make_noise=cat.meow))
+    &gt;&gt;&gt; human = Human()
+    &gt;&gt;&gt; objects.append(Adapter(human, make_noise=human.speak))
+    &gt;&gt;&gt; car = Car()
+    &gt;&gt;&gt; car_noise = lambda: car.make_noise(3)
+    &gt;&gt;&gt; objects.append(Adapter(car, make_noise=car_noise))
+    &gt;&gt;&gt; for obj in objects:
+    ...     print(&#39;A {} goes {}&#39;.format(obj.name, obj.make_noise()))
+    A Dog goes woof!
+    A Cat goes meow!
+    A Human goes &#39;hello&#39;
+    A Car goes vroom!!!
+    &#34;&#34;&#34;
+
+    def __init__(self, obj, **adapted_methods):
+        &#34;&#34;&#34;We set the adapted methods in the object&#39;s dict&#34;&#34;&#34;
+        self.obj = obj
+        self.__dict__.update(adapted_methods)
+
+    def __getattr__(self, attr):
+        &#34;&#34;&#34;All non-adapted calls are passed to the object&#34;&#34;&#34;
+        return getattr(self.obj, attr)
+
+    def original_dict(self):
+        &#34;&#34;&#34;Print original object dict&#34;&#34;&#34;
+        return self.obj.__dict__</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="bridge-桥接模式">bridge / 桥接模式</h3>
+
+<p>桥接的使用集中在频繁更换实现方法时。用于把容易拆分的实现抽象成接口。然后挑选使用。</p>
+
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># ConcreteImplementor 1/2
+class DrawingAPI1(object):
+
+    def draw_circle(self, x, y, radius):
+        print(&#39;API1.circle at {}:{} radius {}&#39;.format(x, y, radius))
+
+
+# ConcreteImplementor 2/2
+class DrawingAPI2(object):
+
+    def draw_circle(self, x, y, radius):
+        print(&#39;API2.circle at {}:{} radius {}&#39;.format(x, y, radius))
+
+
+# Refined Abstraction
+class CircleShape(object):
+
+    def __init__(self, x, y, radius, drawing_api):
+        self._x = x
+        self._y = y
+        self._radius = radius
+        self._drawing_api = drawing_api
+
+    # low-level i.e. Implementation specific
+    def draw(self):
+        self._drawing_api.draw_circle(self._x, self._y, self._radius)
+
+    # high-level i.e. Abstraction specific
+    def scale(self, pct):
+        self._radius *= pct
+
+
+def main():
+    shapes = (
+        CircleShape(1, 2, 3, DrawingAPI1()),
+        CircleShape(5, 7, 11, DrawingAPI2())
+    )
+
+    for shape in shapes:
+        shape.scale(2.5)
+        shape.draw()
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+
+### OUTPUT ###
+# API1.circle at 1:2 radius 7.5
+# API2.circle at 5:7 radius 27.5</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="composite-组合模式">composite / 组合模式</h3>
+
+<p>一种表达树形结构的方法,恕在下才疏学浅，还没有注意到生产代码中的类似用例。
+贴一段 soucemaking上的用例：
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">import abc
+
+
+class Component(metaclass=abc.ABCMeta):
+    &#34;&#34;&#34;
+    Declare the interface for objects in the composition.
+    Implement default behavior for the interface common to all classes,
+    as appropriate.
+    Declare an interface for accessing and managing its child
+    components.
+    Define an interface for accessing a component&#39;s parent in the
+    recursive structure, and implement it if that&#39;s appropriate
+    (optional).
+    &#34;&#34;&#34;
+
+    @abc.abstractmethod
+    def operation(self):
+        pass
+
+
+class Composite(Component):
+    &#34;&#34;&#34;
+    Define behavior for components having children.
+    Store child components.
+    Implement child-related operations in the Component interface.
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        self._children = set()
+
+    def operation(self):
+        for child in self._children:
+            child.operation()
+
+    def add(self, component):
+        self._children.add(component)
+
+    def remove(self, component):
+        self._children.discard(component)
+
+
+class Leaf(Component):
+    &#34;&#34;&#34;
+    Represent leaf objects in the composition. A leaf has no children.
+    Define behavior for primitive objects in the composition.
+    &#34;&#34;&#34;
+
+    def operation(self):
+        pass
+
+
+def main():
+    leaf = Leaf()
+    composite = Composite()
+    composite.add(leaf)
+    composite.operation()
+
+
+if __name__ == &#34;__main__&#34;:
+    main()</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="faced-门面">faced / 门面</h3>
+
+<p>可以叫它总闸模式： 一个独立的模块单独负责所有子对象的运行。
+举个极其抽象的例子：
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">def runner():
+    a = lambda: &#34;task a&#34;
+    b = lambda: &#34;task b&#34;
+    c = lambda: &#34;task c&#34;
+    tasks = [a, b, c]
+    task_ret = [task() for task in tasks]
+    print(task_ret)</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="flyweight-享元">flyweight / 享元</h3>
+
+<p>通过与其他相似的对象共享数据来达到节省内存的目的。
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># -*- coding: utf-8 -*-
+
+&#34;&#34;&#34;
+*References:
+http://codesnipers.com/?q=python-flyweights
+http://yloiseau.net/articles/DesignPatterns/flyweight/
+*TL;DR80
+Minimizes memory usage by sharing data with other similar objects.
+&#34;&#34;&#34;
+
+import weakref
+
+
+class FlyweightMeta(type):
+
+    def __new__(mcs, name, parents, dct):
+        &#34;&#34;&#34;
+        Set up object pool
+        :param name: class name
+        :param parents: class parents
+        :param dct: dict: includes class attributes, class methods,
+        static methods, etc
+        :return: new class
+        &#34;&#34;&#34;
+        dct[&#39;pool&#39;] = weakref.WeakValueDictionary()
+        # 调用 type 的 new 方法。
+        return super(FlyweightMeta, mcs).__new__(mcs, name, parents, dct)
+
+    @staticmethod
+    def _serialize_params(cls, *args, **kwargs):
+        &#34;&#34;&#34;
+        Serialize input parameters to a key.
+        Simple implementation is just to serialize it as a string
+        &#34;&#34;&#34;
+        args_list = list(map(str, args))
+        args_list.extend([str(kwargs), cls.__name__])
+        key = &#39;&#39;.join(args_list)
+        return key
+
+    def __call__(cls, *args, **kwargs):
+        key = FlyweightMeta._serialize_params(cls, *args, **kwargs)
+        pool = getattr(cls, &#39;pool&#39;, {})
+
+        instance = pool.get(key)
+        if instance is None:
+            instance = super(FlyweightMeta, cls).__call__(*args, **kwargs)
+            pool[key] = instance
+        return instance
+
+
+def with_metaclass(meta, *bases):
+    &#34;&#34;&#34; Provide python cross-version metaclass compatibility. &#34;&#34;&#34;
+    return meta(&#34;NewBase&#34;, bases, {})
+
+
+class Card2(with_metaclass(FlyweightMeta)):
+
+    def __init__(self, *args, **kwargs):
+        pass
+
+
+if __name__ == &#39;__main__&#39;:
+    # comment __new__ and uncomment __init__ to see the difference
+
+    # Tests with metaclass
+    instances_pool = getattr(Card2, &#39;pool&#39;)
+    cm1 = Card2(&#39;10&#39;, &#39;h&#39;, a=1)
+    cm2 = Card2(&#39;10&#39;, &#39;h&#39;, a=1)
+    cm3 = Card2(&#39;10&#39;, &#39;h&#39;, a=2)
+    print(f&#39;id:{id(cm1)}, {cm1}&#39;)
+    print(f&#39;id:{id(cm2)}, {cm2}&#39;)
+    print(f&#39;id:{id(cm3)}, {cm3}&#39;)
+
+    assert (cm1 == cm2) != cm3
+    assert (cm1 is cm2) is not cm3
+    assert len(instances_pool) == 2
+
+    del cm1
+    assert len(instances_pool) == 2
+
+    del cm2
+    assert len(instances_pool) == 1
+
+    del cm3
+    assert len(instances_pool) == 0</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="front-controtllor-前端控制器">front controtllor / 前端控制器</h3>
+
+<p>front controtollr 提供了一个中控平台控制和管理请求。
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>front_controller.py</span><a href="https://github.com/faif/python-patterns/blob/master/structural/front_controller.py" target="_blank" rel="external">front_controller.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># 点击右上角查看示例</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="mvc-n-tier-分层">mvc&amp;n-tier / 分层</h3>
+
+<p>mvc 和 n-tier 的差别就是， n-tier 模式中各模块为线性关系，而 mvc结构中，view 向controllor
+发送更新信息，controllor更新model，然后view层获取model层的更新。</p>
+
+<p>在应用中，我们通常用mvc，mvvc等来形容app的代码层级结构，而在基础设施搭建中，我们通常用n-tier来
+描述该协议/模式的运行模式。比如网络的7层/3层结构。</p>
+
+<p><strong>mvc</strong>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>mvc.py</span><a href="https://github.com/faif/python-patterns/blob/master/structural/mvc.py" target="_blank" rel="external">mvc.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># 点击右上角查看示例</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p><strong>3-tier</strong>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>3-tier.py</span><a href="https://github.com/faif/python-patterns/blob/master/structural/3-tier.py" target="_blank" rel="external">3-tier.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># 点击右上角查看示例</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="proxy-代理">proxy / 代理</h3>
+
+<p>代理的核心思想是控制对一个对象的访问过程，比如网络代理，控制了网络访问的过程。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>proxy.py</span><a href="https://sourcemaking.com/design_patterns/proxy/python/1" target="_blank" rel="external">proxy.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># 点击右上角查看源网址
+&#34;&#34;&#34;
+Provide a surrogate or placeholder for another object to control access
+to it or add other responsibilities.
+&#34;&#34;&#34;
+
+import abc
+
+
+class Subject(metaclass=abc.ABCMeta):
+    &#34;&#34;&#34;
+    Define the common interface for RealSubject and Proxy so that a
+    Proxy can be used anywhere a RealSubject is expected.
+    &#34;&#34;&#34;
+
+    @abc.abstractmethod
+    def request(self):
+        pass
+
+
+class Proxy(Subject):
+    &#34;&#34;&#34;
+    Maintain a reference that lets the proxy access the real subject.
+    Provide an interface identical to Subject&#39;s.
+    &#34;&#34;&#34;
+
+    def __init__(self, real_subject):
+        self._real_subject = real_subject
+
+    def request(self):
+        # ...
+        self._real_subject.request()
+        # ...
+
+
+class RealSubject(Subject):
+    &#34;&#34;&#34;
+    Define the real object that the proxy represents.
+    &#34;&#34;&#34;
+
+    def request(self):
+        pass
+
+
+def main():
+    real_subject = RealSubject()
+    proxy = Proxy(real_subject)
+    proxy.request()
+
+
+if __name__ == &#34;__main__&#34;:
+    main()</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;行为模式&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
               
             </div>
           </div>
