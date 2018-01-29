@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.31 with theme Tranquilpeak 0.4.3-BETA">
     <title>python重修之旅（五）</title>
-    <meta name="author" content="woailuoli993">
+    <meta name="author" content="vici">
     <meta name="keywords" content=", vici, blog, heyuhua.com">
 
     <link rel="icon" href="//qiniu.heyuhua.com/blog_favicon.ico">
@@ -118,7 +118,7 @@ ga('send', 'pageview');
         <a href="http://blog.heyuhua.com/#about">
           <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
         </a>
-        <h4 class="sidebar-profile-name">woailuoli993</h4>
+        <h4 class="sidebar-profile-name">vici</h4>
         
           <h5 class="sidebar-profile-bio">极度选择困难. <strong>懒癌晚期</strong></h5>
         
@@ -182,7 +182,7 @@ ga('send', 'pageview');
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/woailuoli993" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/v1c77" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -299,6 +299,9 @@ ga('send', 'pageview');
 <li><a href="#mvc-n-tier-分层">mvc&amp;n-tier / 分层</a></li>
 <li><a href="#proxy-代理">proxy / 代理</a></li>
 <li><a href="#chain-责任链">chain / 责任链</a></li>
+<li><a href="#command-命令模式">command / 命令模式</a></li>
+<li><a href="#iterator-迭代器">iterator / 迭代器</a></li>
+<li><a href="#mediator-中介">mediator / 中介</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1615,6 +1618,197 @@ if __name__ == &#34;__main__&#34;:
     </tbody>
   </table>
 </figure>
+
+<h3 id="command-命令模式">command / 命令模式</h3>
+
+<p>一种数据驱动的设计模式。请求以命令的形式包裹在对象中，并传给调用对象。调用对象寻找可以
+处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>command.py</span><a href="https://github.com/gennad/Design-Patterns-in-Python/blob/master/command.py" target="_blank" rel="external">command.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># -*- coding: utf8 -*-
+import abc
+from sys import stdout as console
+
+
+# Handling &#39;exit&#39; command
+class SessionClosed(Exception):
+    def __init__(self, value):
+        self.value = value
+
+
+# Interface
+class Command(metaclass=abc.ABCMeta):
+    def execute(self):
+        raise NotImplementedError()
+
+    def cancel(self):
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def name(self):
+        ...
+
+
+# rm command
+class RmCommand(Command):
+    def execute(self):
+        console.write(&#34;You are executed \&#34;rm\&#34; command\n&#34;)
+
+    def cancel(self):
+        console.write(&#34;You are canceled \&#34;rm\&#34; command\n&#34;)
+
+    def name(self):
+        return &#34;rm&#34;
+
+
+# uptime command
+class UptimeCommand(Command):
+    def execute(self):
+        console.write(&#34;You are executed \&#34;uptime\&#34; command\n&#34;)
+
+    def cancel(self):
+        console.write(&#34;You are canceled \&#34;uptime\&#34; command\n&#34;)
+
+    def name(self):
+        return &#34;uptime&#34;
+
+
+# undo command
+class UndoCommand(Command):
+    def execute(self):
+        try:
+            cmd = HISTORY.pop()
+            TRASH.append(cmd)
+            console.write(&#34;Undo command \&#34;{0}\&#34;\n&#34;.format(cmd.name()))
+            cmd.cancel()
+
+        except IndexError:
+            console.write(&#34;ERROR: HISTORY is empty\n&#34;)
+
+    def name(self):
+        return &#34;undo&#34;
+
+
+# redo command
+class RedoCommand(Command):
+    def execute(self):
+        try:
+            cmd = TRASH.pop()
+            HISTORY.append(cmd)
+            console.write(&#34;Redo command \&#34;{0}\&#34;\n&#34;.format(cmd.name()))
+            cmd.execute()
+        except IndexError:
+            console.write(&#34;ERROR: TRASH is empty\n&#34;)
+
+    def name(self):
+        return &#34;redo&#34;
+
+
+# history command
+class HistoryCommand(Command):
+    def execute(self):
+        i = 0
+        for cmd in HISTORY:
+            console.write(&#34;{0}: {1}\n&#34;.format(i, cmd.name()))
+            i = i &#43; 1
+
+    def name(self):
+        print(&#34;history&#34;)
+
+
+# exit command
+class ExitCommand(Command):
+    def execute(self):
+        raise SessionClosed(&#34;Good day!&#34;)
+
+    def name(self):
+        return &#34;exit&#34;
+
+# available commands
+COMMANDS = {&#39;rm&#39;: RmCommand(), &#39;uptime&#39;: UptimeCommand(), &#39;undo&#39;:
+            UndoCommand(), &#39;redo&#39;: RedoCommand(), &#39;history&#39;: HistoryCommand(),
+            &#39;exit&#39;: ExitCommand()}
+
+HISTORY = list()
+TRASH = list()
+
+
+# Shell
+def main():
+    try:
+        while True:
+            console.flush()
+            console.write(&#34;pysh &gt;&gt; &#34;)
+
+            cmd = input()
+
+            try:
+                command = COMMANDS[cmd]
+                command.execute()
+                if (not isinstance(command, UndoCommand) and not
+                    isinstance(command, RedoCommand) and not
+                        isinstance(command, HistoryCommand)):
+                    global TRASH
+                    TRASH = list()
+                    HISTORY.append(command)
+
+            except KeyError:
+                console.write(&#34;ERROR: Command \&#34;%s\&#34; not found\n&#34; % cmd)
+
+    except SessionClosed as e:
+        console.write(e.value)
+
+if __name__ == &#34;__main__&#34;:
+    main()</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="iterator-迭代器">iterator / 迭代器</h3>
+
+<p>emmm&hellip; class里的 magic methods <code>__next__</code>,  <code>__iter__</code>, 函数中的<code>yield</code>, 都可以用来
+生成iterator。
+一个简单的迭代器。</p>
+
+<pre><code class="language-python">def aiter():
+    a = [1 ,2, 3, 4, 4, 5, 5, 6, 6, 7]
+    for i in a:
+        yield i
+</code></pre>
+
+<h3 id="mediator-中介">mediator / 中介</h3>
+
+<p>用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，
+并支持松耦合，使代码易于维护。</p>
               
             </div>
           </div>
@@ -1702,7 +1896,7 @@ if __name__ == &#34;__main__&#34;:
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2018 woailuoli993. All Rights Reserved
+    &copy; 2018 vici. All Rights Reserved
   </span>
 </footer>
 
@@ -1813,7 +2007,7 @@ if __name__ == &#34;__main__&#34;:
     
       <img id="about-card-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
     
-    <h4 id="about-card-name">woailuoli993</h4>
+    <h4 id="about-card-name">vici</h4>
     
       <div id="about-card-bio">极度选择困难. <strong>懒癌晚期</strong></div>
     
