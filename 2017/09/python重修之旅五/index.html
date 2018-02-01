@@ -302,6 +302,9 @@ ga('send', 'pageview');
 <li><a href="#command-命令模式">command / 命令模式</a></li>
 <li><a href="#iterator-迭代器">iterator / 迭代器</a></li>
 <li><a href="#mediator-中介">mediator / 中介</a></li>
+<li><a href="#memento-备忘录">memento / 备忘录</a></li>
+<li><a href="#observer-观察者">observer / 观察者</a></li>
+<li><a href="#pub-sub-发布-订阅">pub_sub / 发布 - 订阅</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1808,7 +1811,235 @@ if __name__ == &#34;__main__&#34;:
 <h3 id="mediator-中介">mediator / 中介</h3>
 
 <p>用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，
-并支持松耦合，使代码易于维护。</p>
+并支持松耦合，使代码易于维护。 &ndash;&gt; 想聊天的人多了，才出现了qq群。</p>
+
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>mediator.py</span><a href="https://github.com/JakubVojvoda/design-patterns-python/blob/master/mediator/Mediator.py" target="_blank" rel="external">mediator.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">#
+# Python Design Patterns: Mediator
+# Author: Jakub Vojvoda [github.com/JakubVojvoda]
+# 2016
+#
+# Source code is licensed under MIT License
+# (for more details see LICENSE)
+#
+
+import sys
+
+#
+# Colleague classes
+# each colleague communicates with its mediator whenever
+# it would have otherwise communicated with another colleague
+#
+class Colleague:
+  def __init__(self, mediator, identity):
+    self._mediator = mediator
+    self._id = identity
+
+  def getID(self):
+    return self._id
+
+  def send(self, message):
+    pass
+
+  def receive(self, message):
+    pass
+
+class ConcreteColleague(Colleague):
+  def __init__(self, mediator, identity):
+    super().__init__(mediator, identity)
+
+  def send(self, message):
+    print(&#34;Message &#39;&#34; &#43; message &#43; &#34;&#39; sent by Colleague &#34; &#43; str(self._id))
+    self._mediator.distribute(self, message)
+
+  def receive(self, message):
+    print(&#34;Message &#39;&#34; &#43; message &#43; &#34;&#39; received by Colleague &#34; &#43; str(self._id))
+
+#
+# Mediator
+# defines an interface for communicating with Colleague objects
+#
+class Mediator:
+  def add(self, colleague):
+    pass
+
+  def distribute(self, sender, message):
+    pass
+
+#
+# Concrete Mediator
+# implements cooperative behavior by coordinating Colleague objects
+# and knows its colleagues
+#
+class ConcreteMediator(Mediator):
+  def __init__(self):
+    Mediator.__init__(self)
+    self._colleagues = []
+
+  def add(self, colleague):
+    self._colleagues.append(colleague)
+
+  def distribute(self, sender, message):
+    for colleague in self._colleagues:
+      if colleague.getID() != sender.getID():
+        colleague.receive(message)
+
+
+if __name__ == &#34;__main__&#34;:
+
+  # 群。
+  mediator = ConcreteMediator()
+  # 三个臭味相投的路人。
+  c1 = ConcreteColleague(mediator, 1)
+  c2 = ConcreteColleague(mediator, 2)
+  c3 = ConcreteColleague(mediator, 3)
+
+ # 三个人进群了。
+  mediator.add(c1)
+  mediator.add(c2)
+  mediator.add(c3)
+
+  # 路人们在群里聊天。
+  c1.send(&#34;Hi!&#34;);
+  c3.send(&#34;Hello!&#34;);</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="memento-备忘录">memento / 备忘录</h3>
+
+<p>如果有了后悔药你写的代码该多放浪形骸？</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>memento.py</span><a href="https://github.com/faif/python-patterns/blob/master/behavioral/memento.py" target="_blank" rel="external">memento.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">右上角。点点点。</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="observer-观察者">observer / 观察者</h3>
+
+<p>常用的状态机订阅模式。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>memento.py</span><a href="https://github.com/faif/python-patterns/blob/master/behavioral/observer.py" target="_blank" rel="external">memento.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">右上角。点点点。</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="pub-sub-发布-订阅">pub_sub / 发布 - 订阅</h3>
+
+<p>去年毕业的时候面试过一次今日头条, 当时就问了设计模式的发布 订阅模型。。可惜可惜除了那道题别的我连听都没听说过啊。。。。
+
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class=""></code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
               
             </div>
           </div>
