@@ -305,6 +305,12 @@ ga('send', 'pageview');
 <li><a href="#memento-备忘录">memento / 备忘录</a></li>
 <li><a href="#observer-观察者">observer / 观察者</a></li>
 <li><a href="#pub-sub-发布-订阅">pub_sub / 发布 - 订阅</a></li>
+<li><a href="#registry-出生登记">registry / 出生登记</a></li>
+<li><a href="#specification-规格">specification /规格</a></li>
+<li><a href="#state-状态机">state / 状态机</a></li>
+<li><a href="#strategy-策略">strategy / 策略</a></li>
+<li><a href="#template-模版">template / 模版</a></li>
+<li><a href="#visitor-来访者">visitor / 来访者</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -382,7 +388,8 @@ import scipy.misc
 
 <h2 id="python常用设计模式">python常用设计模式</h2>
 
-<p>项目地址： <a href="https://github.com/faif/python-patterns">https://github.com/faif/python-patterns</a></p>
+<p>行文结构参照以下项目。
+项目地址： <a href="https://github.com/faif/python-patterns">https://github.com/faif/python-patterns</a></p>
 
 <p>《松本行弘的程序世界》对三人组的《设计模式》称赞有加：</p>
 
@@ -392,7 +399,8 @@ import scipy.misc
 
 <p>在设计模式原书中一共提到23种常用的设计模式，分为三大类：生成模式（creational），
 构造模式（structural）， 行为模式（behavioral）。该项目同样按照这三大类进行了分类整理，
-同时还补充了一些python常用的其他场景的特用模式。</p>
+同时还补充了一些python常用的其他场景的特用模式。
+在整理这片文章的过程中，我忽略了一些无聊的模式，并引用或者另写了一些更好的代码用例。</p>
 
 <p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;生成模式&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
 
@@ -1813,7 +1821,7 @@ if __name__ == &#34;__main__&#34;:
 <p>用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，
 并支持松耦合，使代码易于维护。 &ndash;&gt; 想聊天的人多了，才出现了qq群。</p>
 
-<p>
+
   
     
   
@@ -1933,7 +1941,7 @@ if __name__ == &#34;__main__&#34;:
       </tr>
     </tbody>
   </table>
-</figure></p>
+</figure>
 
 <h3 id="memento-备忘录">memento / 备忘录</h3>
 
@@ -2031,15 +2039,522 @@ if __name__ == &#34;__main__&#34;:
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-"><code class=""></code></pre>
+          <pre class="code-highlight language-"><code class="">&#34;&#34;&#34;
+    pattern publish subscribe
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+&#34;&#34;&#34;
+
+
+class Provider:
+
+    def __init__(self):
+        self.msg_queue = []
+        self.subscribers = {}
+
+    def notify(self, msg):
+        self.msg_queue.append(msg)
+
+    def subscribe(self, msg, subscriber):
+        # 订阅相关频道。
+        self.subscribers.setdefault(msg, []).append(subscriber)
+
+    def unsubscribe(self, msg, subscriber):
+        # 取消订阅
+        self.subscribers[msg].remove(subscriber)
+
+    def update(self):
+        for msg in self.msg_queue:
+            # 从消息列表中获取消息
+            for sub in self.subscribers.get(msg, []):
+                # 从订阅者中找到相关方
+                # 推送
+                sub.run(msg)
+        # 清空队列
+        self.msg_queue.clear()
+
+
+class Publisher:
+
+    def __init__(self, msg_center):
+        self.provider = msg_center
+
+    def publish(self, msg):
+        # 发布者负责发布消息
+        self.provider.notify(msg)
+
+
+class Subscriber:
+    &#34;&#34;&#34;
+    订阅者接受不了消息，处理消息。
+    &#34;&#34;&#34;
+    def __init__(self, name, msg_center):
+        self.name = name
+        self.provider = msg_center
+
+    def subscribe(self, msg):
+        self.provider.subscribe(msg, self)
+
+    def unsubscribe(self, msg):
+        self.provider.unsubscribe(msg, self)
+
+    def run(self, msg):
+        print(f&#39;{self.name} got {msg}&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    provider = Provider()
+
+    cctv = Publisher(provider)
+
+    xiaoming = Subscriber(&#39;xiaoming&#39;, provider)
+    huahua = Subscriber(&#39;huahua&#39;, provider)
+    dandan = Subscriber(&#39;dandan&#39;, provider)
+
+    huahua.subscribe(&#39;chiji&#39;)
+    dandan.subscribe(&#39;csgo&#39;)
+    xiaoming.subscribe(&#39;python&#39;)
+    cctv.publish(&#39;csgo&#39;)
+    provider.update()</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure></p>
+
+<h3 id="registry-出生登记">registry / 出生登记</h3>
+
+<p>网传这种模式适合与singleton混用，如果登记处有这个人就复用，没有则生成一个单例。
+在实际项目中，我个人更倾向于用来整理同类资源做反向查找。
+这种模式上的整合可能要比 python 的 <code>cls.__subclasses__()</code>更通俗一点</p>
+
+
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">class RegistryHolder(type):
+
+    REGISTRY = {}
+
+    def __new__(mcs, name, bases, attrs):
+        new_cls = type.__new__(mcs, name, bases, attrs)
+
+        mcs.REGISTRY[new_cls.__name__] = new_cls
+        return new_cls
+
+    # def __init__(cls, *args, **kwargs):
+    #     pass
+
+    @classmethod
+    def get_registry(mcs):
+        return dict(mcs.REGISTRY)
+
+
+class ClassRegistree(metaclass=RegistryHolder):
+    pass
+
+
+class ClassregisA(ClassRegistree):
+    pass
+
+if __name__ == &#39;__main__&#39;:
+    print(&#34;Before subclassing: &#34;)
+    for k in RegistryHolder.get_registry():
+        print(k)
+
+    class classregisB(ClassRegistree):
+        pass
+    print(&#34;After subclassing&#34;)
+    for k in RegistryHolder.get_registry():
+        print(k)</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="specification-规格">specification /规格</h3>
+
+<p>或者说是描述规则的模式。 常见的规则包括 and, or, is, not, specification 也需要实现这四个接口。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>specification.py</span><a href="https://github.com/faif/python-patterns/blob/master/behavioral/specification.py" target="_blank" rel="external">specification.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># -*- coding: utf-8 -*-
+from abc import abstractmethod
+
+
+class Specification(object):
+
+    def and_specification(self, candidate):
+        raise NotImplementedError()
+
+    def or_specification(self, candidate):
+        raise NotImplementedError()
+
+    def not_specification(self):
+        raise NotImplementedError()
+
+
+class CompositeSpecification(Specification):
+
+    @abstractmethod
+    def is_satisfied_by(self, candidate):
+        pass
+
+    def and_specification(self, candidate):
+        return AndSpecification(self, candidate)
+
+    def or_specification(self, candidate):
+        return OrSpecification(self, candidate)
+
+    def not_specification(self):
+        return NotSpecification(self)
+
+
+class AndSpecification(CompositeSpecification):
+    _one = Specification()
+    _other = Specification()
+
+    def __init__(self, one, other):
+        self._one = one
+        self._other = other
+
+    def is_satisfied_by(self, candidate):
+        return bool(self._one.is_satisfied_by(candidate) and
+                    self._other.is_satisfied_by(candidate))
+
+
+class OrSpecification(CompositeSpecification):
+    _one = Specification()
+    _other = Specification()
+
+    def __init__(self, one, other):
+        self._one = one
+        self._other = other
+
+    def is_satisfied_by(self, candidate):
+        return bool(self._one.is_satisfied_by(candidate) or
+                    self._other.is_satisfied_by(candidate))
+
+
+class NotSpecification(CompositeSpecification):
+    _wrapped = Specification()
+
+    def __init__(self, wrapped):
+        self._wrapped = wrapped
+
+    def is_satisfied_by(self, candidate):
+        return bool(not self._wrapped.is_satisfied_by(candidate))
+
+
+class User:
+
+    def __init__(self, archive=True):
+        self.archive = archive
+
+
+class UserSpecification(CompositeSpecification):
+    def is_satisfied_by(self, candidate):
+        return isinstance(candidate, User)
+
+
+class UserArciveSpecification(CompositeSpecification):
+    def is_satisfied_by(self, candidate):
+        return getattr(candidate, &#39;archive&#39;, True)
+
+
+if __name__ == &#39;__main__&#39;:
+    print(&#39;specification&#39;)
+    niko = User(archive=True)
+    olomeister = User(archive=False)
+
+    the_specification = UserSpecification().\
+        and_specification(UserArciveSpecification())
+
+    print(the_specification.is_satisfied_by(niko))
+    print(the_specification.is_satisfied_by(olomeister))</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="state-状态机">state / 状态机</h3>
+
+<p>适用于 状态较少的对象。利用状态来控制对象的表现形式。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>state.py</span><a href="https://github.com/JakubVojvoda/design-patterns-python/blob/master/state/State.py" target="_blank" rel="external">state.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">点击右上角查看代码。</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h3 id="strategy-策略">strategy / 策略</h3>
+
+<p>用于拆分策略，方便算法的替换
+对于python的类对象，可以使用 <code>types.MethodType</code>方法将方法动态注册到实例。
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>strategy.py</span><a href="https://github.com/faif/python-patterns/blob/master/behavioral/strategy.py" target="_blank" rel="external">strategy.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># -*- coding: utf-8 -*-
+
+import types
+
+
+class StrategyExample:
+
+    def __init__(self, func=None):
+        self.name = &#39;Strategy Example 0&#39;
+        if func is not None:
+            self.execute = types.MethodType(func, self)
+
+    def execute(self):
+        print(self.name)
+
+
+def execute_replacement1(self):
+    print(self.name &#43; &#39; from execute 1&#39;)
+
+
+def execute_replacement2(self):
+    print(self.name &#43; &#39; from execute 2&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    strat0 = StrategyExample()
+
+    strat1 = StrategyExample(execute_replacement1)
+    strat1.name = &#39;Strategy Example 1&#39;
+
+    strat2 = StrategyExample(execute_replacement2)
+    strat2.name = &#39;Strategy Example 2&#39;
+
+    strat0.execute()
+    strat1.execute()
+    strat2.execute()</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="template-模版">template / 模版</h3>
+
+<p>定义算法的框架，细节操作留给后人。
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+      <span>strategy.py</span><a href="https://github.com/faif/python-patterns/blob/master/behavioral/template.py" target="_blank" rel="external">strategy.py</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python">点右上角！</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h3 id="visitor-来访者">visitor / 来访者</h3>
+
+
+  
+  
+  
+  
+
+
+<figure class="highlight python language-python">
+  <figcaption>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-python"><code class="python"># -*- coding: utf-8 -*-
+from abc import abstractmethod
+
+
+class ComputerPart:
+
+    @abstractmethod
+    def accept(self, computer_part_visitor):
+        pass
+
+
+class Monitor(ComputerPart):
+
+    def accept(self, computer_part_visitor):
+        computer_part_visitor.visit(self)
+
+
+class KeyBoard(ComputerPart):
+
+    def accept(self, computer_part_visitor):
+        computer_part_visitor.visit(self)
+
+
+class Mouse(ComputerPart):
+
+    def accept(self, computer_part_visitor):
+        computer_part_visitor.visit(self)
+
+
+class Computer(ComputerPart):
+
+    def __init__(self):
+        self.parts = [Monitor(), KeyBoard(), Mouse()]
+
+    def accept(self, computer_part_visitor):
+        for part in self.parts:
+            part.accept(computer_part_visitor)
+
+        computer_part_visitor.visit(self)
+
+
+class ComputerPartVisitor:
+
+    @abstractmethod
+    def visit(self, computer_visitor):
+        pass
+
+
+class ComputerPartDisplayVisitor(ComputerPartVisitor):
+
+    def visit(self, computer_part):
+        print(&#34;Display &#34; &#43; computer_part.__class__.__name__)
+
+
+if __name__ == &#39;__main__&#39;:
+    computer = Computer()
+    computer.accept(ComputerPartDisplayVisitor())</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
               
             </div>
           </div>
