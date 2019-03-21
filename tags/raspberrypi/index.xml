@@ -34,9 +34,7 @@
 
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 
-&lt;p&gt;某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。
-
-在实际操作中，你很快就会发现贱婢同事说的是对的，但是他只说了一半，留白是：&lt;em&gt;&lt;code&gt;”你很难操作得当。“&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;</description>
+&lt;p&gt;某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,9 +49,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;树莓派是去年（2016年10月份买的），当时买上也不知道干啥就当升级旧打印机的模块了。。。趁过年整理一下。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

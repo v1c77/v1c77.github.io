@@ -17,8 +17,7 @@
       <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2018/01/highlighted-code-example/</guid>
-      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&amp;rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&amp;rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,8 +27,8 @@
       
       <guid>http://blog.heyuhua.com/2017/09/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%BA%94/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;In code we trust. &amp;ndash;BitCoin
-&lt;/p&gt;</description>
+&lt;p&gt;In code we trust. &amp;ndash;BitCoin&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -38,8 +37,7 @@
       <pubDate>Wed, 30 Aug 2017 18:46:37 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/</guid>
-      <description>&lt;p&gt;一个14岁孩子经历的的任何事，都会让他铭记一生。—&amp;ndash;《lolita》
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;一个14岁孩子经历的的任何事，都会让他铭记一生。—&amp;ndash;《lolita》&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,8 +59,7 @@
       <pubDate>Mon, 07 Aug 2017 13:45:06 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2017/08/iterm2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/</guid>
-      <description>&lt;p&gt;其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -75,9 +72,7 @@
 
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 
-&lt;p&gt;某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。
-
-在实际操作中，你很快就会发现贱婢同事说的是对的，但是他只说了一半，留白是：&lt;em&gt;&lt;code&gt;”你很难操作得当。“&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;</description>
+&lt;p&gt;某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -99,9 +94,7 @@
       <guid>http://blog.heyuhua.com/2017/04/pyenv-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;明日再有风雨，明日再作打算&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -112,9 +105,7 @@
       <guid>http://blog.heyuhua.com/2017/03/go-%E5%85%A5%E9%97%A8day-1/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Hello world!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -125,9 +116,7 @@
       <guid>http://blog.heyuhua.com/2017/03/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%89tornado%E5%BC%82%E6%AD%A5%E5%8D%8F%E7%A8%8B/</guid>
       <description>&lt;div class=&#34;alert warning &#34;&gt;
   &lt;p&gt;该博文内容缺失&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -144,9 +133,7 @@
 &lt;p&gt;对于一个职场新人来说，我最不愿意看到的就是办公室政治。工程师不应该是这样的。&lt;/p&gt;
 
 &lt;p&gt;模块化的写作不适合我， 所以我决定把重修之旅写成游记形式。就酱。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -157,9 +144,7 @@
       <guid>http://blog.heyuhua.com/2017/02/postgresq-xldocker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文在 2017年3月7日被重写。祝愿各位女王及屏幕那边的大雕萌妹们节日快乐。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -174,9 +159,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;树莓派是去年（2016年10月份买的），当时买上也不知道干啥就当升级旧打印机的模块了。。。趁过年整理一下。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -189,9 +172,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;注意：此文很可能只适用于mac ！！！&amp;mdash;&amp;gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -202,9 +183,7 @@
       <guid>http://blog.heyuhua.com/2017/01/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%80/</guid>
       <description>&lt;p&gt;还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&amp;hellip;
 本宝宝的第一个专题。第三次系统学习python。2017年计划之一。
-&amp;gt; 年底就是爽，每天就是开开会，下午就自己疯狂coding。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&amp;gt; 年底就是爽，每天就是开开会，下午就自己疯狂coding。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -213,8 +192,7 @@
       <pubDate>Mon, 16 Jan 2017 18:23:50 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2017/01/2017-2018%E5%B9%B4-%E4%B8%A4%E5%B9%B4%E8%AE%A1%E5%88%92/</guid>
-      <description>&lt;p&gt;我的·贤者时间·发生在开完周会或者面试结束的时候。。。
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;我的·贤者时间·发生在开完周会或者面试结束的时候。。。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -224,8 +202,7 @@
       
       <guid>http://blog.heyuhua.com/2017/01/mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;p&gt;开平衡车的人都会走残疾人通道。| 做人要谦逊。
-&amp;gt; 从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。
-&lt;/p&gt;</description>
+&amp;gt; 从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -238,8 +215,7 @@
   &lt;p&gt;推荐使用cvim，本人不再使用 vimium &amp;ndash; 2017.10.03&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;p&gt;CTO大人把组内gitlib的地址route到了ooxx.com，受他的启发我把*.zhihu.com host 到了冷宫，跟百度作伴。
-&lt;/p&gt;</description>
+&lt;p&gt;CTO大人把组内gitlib的地址route到了ooxx.com，受他的启发我把*.zhihu.com host 到了冷宫，跟百度作伴。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -248,8 +224,7 @@
       <pubDate>Thu, 15 Dec 2016 16:17:05 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2016/12/python-%E7%9A%84%E5%9D%91/</guid>
-      <description>&lt;p&gt;生死怎能看淡, 不服就是要干
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;生死怎能看淡, 不服就是要干&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -258,8 +233,7 @@
       <pubDate>Fri, 02 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2016/12/linux-shell-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
-      <description>&lt;p&gt;linux忽悠原则： 一切皆文件， 通信皆管道， 不管闲事，不说废话.(只能信50%)
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;linux忽悠原则： 一切皆文件， 通信皆管道， 不管闲事，不说废话.(只能信50%)&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -270,9 +244,7 @@
       <guid>http://blog.heyuhua.com/2016/12/git-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;They are gonna get me one wey or another.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -289,9 +261,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;不定时看心情更新&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -303,8 +273,8 @@
       <description>&lt;p&gt;本事借的钱，为什么要还？&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;此文章脱胎于我在stackoverflow的某回答
-&lt;/p&gt;</description>
+&lt;p&gt;此文章脱胎于我在stackoverflow的某回答&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -314,8 +284,8 @@
       
       <guid>http://blog.heyuhua.com/2016/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;副标题+ 内容缩略：好看的皮囊千篇一律，有趣的人200多斤。想变的有趣还是得多吃多睡。。。
-&lt;/p&gt;</description>
+&lt;p&gt;副标题+ 内容缩略：好看的皮囊千篇一律，有趣的人200多斤。想变的有趣还是得多吃多睡。。。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -333,9 +303,8 @@
 
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/yeasy/docker_practice/details&#34;&gt;入门手册二(偏实践)&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;qus1-使用安装docker后-使用普通用户无法运行-docker-run-and-docker-version&#34;&gt;qus1: 使用安装docker后 使用普通用户无法运行&lt;code&gt;docker run&lt;/code&gt; AND &lt;code&gt;docker version&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;h2 id=&#34;qus1-使用安装docker后-使用普通用户无法运行-docker-run-and-docker-version&#34;&gt;qus1: 使用安装docker后 使用普通用户无法运行&lt;code&gt;docker run&lt;/code&gt; AND &lt;code&gt;docker version&lt;/code&gt;&lt;/h2&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -344,8 +313,7 @@
       <pubDate>Mon, 28 Nov 2016 17:43:37 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2016/11/%E4%BD%BF%E7%94%A8%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E4%BB%A3%E7%90%86%E8%AE%A8%E8%AE%BA/</guid>
-      <description>&lt;p&gt;我有一身绝佳的溜门撬锁技巧
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;我有一身绝佳的溜门撬锁技巧&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -354,9 +322,7 @@
       <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2016/11/%E6%9F%90%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</guid>
-      <description>&lt;p&gt;禅师寻一鸡，系绳于其足。拉绳，鸡倒而复起，如此有八。吾问：汝教我锲而不舍？答曰：No, 拉鸡八倒。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;禅师寻一鸡，系绳于其足。拉绳，鸡倒而复起，如此有八。吾问：汝教我锲而不舍？答曰：No, 拉鸡八倒。&lt;/p&gt;</description>
     </item>
     
   </channel>

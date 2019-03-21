@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31 with theme Tranquilpeak 0.4.3-BETA">
+    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
     <title>利用lirc对松下空调遥控器指令的录制</title>
     <meta name="author" content="vici">
     <meta name="keywords" content=", vici, blog, heyuhua.com">
@@ -79,14 +79,17 @@
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-88015219-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-88015219-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -268,8 +271,7 @@ ga('send', 'pageview');
 
 <p>7月份入职之后，一直在闲暇之余鼓捣树莓派。在制作联网空调遥控器的时候遇到了很多挫折。</p>
 
-<p>
-比如在录制的红外波谱中有莫名的不符合协议的极长时间空白。</p>
+<p>比如在录制的红外波谱中有莫名的不符合协议的极长时间空白。</p>
 
 <p>比如即使看上去正常的波普也不能被空调接收。</p>
 
@@ -317,7 +319,38 @@ ga('send', 'pageview');
 <p>本来还想继续往下写的。 Arch arm 版 linux 4.9 内核升级后 i2c io无法使用。红外模块罢工。正在懊恼中。（于2017.08.27）</p>
 </blockquote>
 
-<h3 id="todo-未完待续">TODO：未完待续&hellip;</h3>
+<p>toDOtoDO&hellip;.</p>
+
+<h3 id="续集-2019-03-22">续集。 2019-03-22</h3>
+
+<p>深圳开始变热了。 我不得不解决每天回家热成狗的问题了。 空调不能停！！！！！！！！！</p>
+
+<p>更重要的是， 我找到了能够稳定开启 I2c module 的办法。</p>
+
+<p>安装一些必要的东西：</p>
+
+<pre><code class="language-bash">pacman -S git python2 i2c-tools base-devel python2-distribute python2-pip
+</code></pre>
+
+<p>安装 PIGPIO 支持</p>
+
+<pre><code class="language-bash">sudo pip2 install RPi.GPIO
+</code></pre>
+
+<p>*<strong><em>安装raspi-config</em></strong>*</p>
+
+<pre><code class="language-bash">sudo pacman -S xorg-xrandr libnewt
+git clone https://aur.archlinux.org/raspi-config.git
+cd raspi-config
+makepkg -i
+</code></pre>
+
+<p>然后使用 Raspi-config 开启I2C</p>
+
+<pre><code>sudo raspi-config
+</code></pre>
+
+<p><img src="http://blog.heyuhua.com/img/arch-resp-config.png" alt="resp-config" /></p>
 
 <p>七夕快乐。</p>
               
@@ -417,7 +450,7 @@ ga('send', 'pageview');
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2018 vici. All Rights Reserved
+    &copy; 2019 vici. All Rights Reserved
   </span>
 </footer>
 
@@ -579,8 +612,7 @@ ga('send', 'pageview');
                   Jan 1, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak Hugo theme have its own theme to highlight source code. It&rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.
-</p></div>
+              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak Hugo theme have its own theme to highlight source code. It&rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -598,8 +630,8 @@ ga('send', 'pageview');
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>In code we trust. &ndash;BitCoin
-</p></div>
+<p>In code we trust. &ndash;BitCoin</p>
+</blockquote></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -616,8 +648,7 @@ ga('send', 'pageview');
                   Aug 8, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》
-</p></div>
+              <div class="media-content hide-xs font-merryweather"><p>一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -655,8 +686,7 @@ ga('send', 'pageview');
                   Aug 8, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。
-</p></div>
+              <div class="media-content hide-xs font-merryweather"><p>其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -677,9 +707,7 @@ ga('send', 'pageview');
 
 <h2 id="前言">前言</h2>
 
-<p>某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。
-
-在实际操作中，你很快就会发现贱婢同事说的是对的，但是他只说了一半，留白是：<em><code>”你很难操作得当。“</code></em></p></div>
+<p>某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -717,9 +745,7 @@ ga('send', 'pageview');
               </span>
               <div class="media-content hide-xs font-merryweather"><blockquote>
 <p>明日再有风雨，明日再作打算</p>
-</blockquote>
-
-<p></p></div>
+</blockquote></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -738,9 +764,7 @@ ga('send', 'pageview');
               </span>
               <div class="media-content hide-xs font-merryweather"><blockquote>
 <p>Hello world!</p>
-</blockquote>
-
-<p></p></div>
+</blockquote></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -759,9 +783,7 @@ ga('send', 'pageview');
               </span>
               <div class="media-content hide-xs font-merryweather"><div class="alert warning ">
   <p>该博文内容缺失</p>
-</div>
-
-<p></p></div>
+</div></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
