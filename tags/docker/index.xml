@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Docker on vici&#39;blog</title>
+    <title>docker on vici&#39;blog</title>
     <link>http://blog.heyuhua.com/tags/docker/</link>
-    <description>Recent content in Docker on vici&#39;blog</description>
+    <description>Recent content in docker on vici&#39;blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 15 Feb 2017 16:20:14 +0000</lastBuildDate>
@@ -29,7 +29,6 @@
       
       <guid>http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;p&gt;这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&amp;mdash;Lolita&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;注意：此文很可能只适用于mac ！！！&amp;mdash;&amp;gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -41,17 +40,13 @@
       <pubDate>Mon, 28 Nov 2016 19:48:21 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2016/11/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid>
-      <description>&lt;!-- toc --&gt;
-
+      <description>&lt;!-- raw HTML omitted --&gt;
 &lt;h1 id=&#34;入门&#34;&gt;入门&lt;/h1&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.gitbook.com/book/hujb2000/docker-flow-evolution/details&#34;&gt;入门手册一(偏理论)&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.gitbook.com/book/yeasy/docker_practice/details&#34;&gt;入门手册二(偏实践)&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;qus1-使用安装docker后-使用普通用户无法运行-docker-run-and-docker-version&#34;&gt;qus1: 使用安装docker后 使用普通用户无法运行&lt;code&gt;docker run&lt;/code&gt; AND &lt;code&gt;docker version&lt;/code&gt;&lt;/h2&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;li&gt;&lt;a href=&#34;https://www.gitbook.com/book/yeasy/docker_practice/details&#34;&gt;入门手册二(偏实践)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;qus1-使用安装docker后-使用普通用户无法运行docker-run-and-docker-version&#34;&gt;qus1: 使用安装docker后 使用普通用户无法运行&lt;code&gt;docker run&lt;/code&gt; AND &lt;code&gt;docker version&lt;/code&gt;&lt;/h2&gt;</description>
     </item>
     
   </channel>

@@ -1,71 +1,88 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="vici">
+<meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
+<meta name="description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
+
+注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
+">
+
+
+<meta property="og:description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
+
+注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="aria2 配置笔记">
+<meta name="twitter:title" content="aria2 配置笔记">
+<meta property="og:url" content="http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/">
+<meta property="twitter:url" content="http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/">
+<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
+
+注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
+">
+<meta name="twitter:description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
+
+注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
+">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2017-01-18T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-01-18T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="develop">
+    
+  
+  
+    
+      <meta property="article:tag" content="aria2c">
+    
+      <meta property="article:tag" content="docker">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@bookerHe">
+
+
+  <meta name="twitter:creator" content="@bookerHe">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+
+
     <title>aria2 配置笔记</title>
-    <meta name="author" content="vici">
-    <meta name="keywords" content=", vici, blog, heyuhua.com">
 
     <link rel="icon" href="//qiniu.heyuhua.com/blog_favicon.ico">
     
 
     
-    <meta name="description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
 
-
-注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
-">
-    <meta property="og:description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
-
-
-注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="aria2 配置笔记">
-    <meta property="og:url" content="/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/">
-    <meta property="og:site_name" content="vici&#39;blog">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="vici&#39;blog">
-    <meta name="twitter:description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
-
-
-注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
-">
-    
-    
-
-    
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
-    
-
-    
-    
-    
-
-    
+    <link rel="canonical" href="http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -73,7 +90,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
@@ -105,14 +122,12 @@ if (!doNotTrack) {
   </div>
   
     
-      <a class="header-right-picture "
-         href="http://blog.heyuhua.com/#about">
+      <a class="header-right-icon st-search-show-outputs"
+         href="http://blog.heyuhua.com/#search">
     
     
+      <i class="fa fa-lg fa-search"></i>
     
-      
-        <img class="header-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=90" alt="作者的图片" />
-      
     
     </a>
   
@@ -123,7 +138,7 @@ if (!doNotTrack) {
     
       <div class="sidebar-profile">
         <a href="http://blog.heyuhua.com/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
         </a>
         <h4 class="sidebar-profile-name">vici</h4>
         
@@ -266,23 +281,18 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita</p>
-
 <blockquote>
 <p>注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。</p>
 </blockquote>
-
 <div class="alert info ">
   <p>配置文件什么的不改 ==路径== 是不能用的！！</p>
 </div>
-
-<h2 id="单纯安装-配置-aria2">单纯安装&amp;配置 aria2</h2>
-
+<h2 id="单纯安装配置-aria2">单纯安装&amp;配置 aria2</h2>
 <ol>
 <li>命令行<code>brew install aria2</code> 即可。2017年1月10日安装时版本为1.30。
 2.配置。（之前copy了个几个貌似很权威的配置文件，结果能不能用 ）乖乖看了遍文档，照着几个大佬的配置文档自己写了一个，勉强能用了。
 <a href="./aria2.conf">aria2.conf</a>内容如下。</li>
 </ol>
-
 <pre><code># 文件保存路径。
 dir=/Users/vici/Downloads
 # 为了启动后继续下载之前的文件 承接 save-session
@@ -356,140 +366,122 @@ min-split-size=10M
 #百度盘
 user-agent=netdisk;5.2.6;PC;PC-Windows;6.2.9200;WindowsBaiduYunGuanJia
 referer=http://pan.baidu.com/disk/home
-</code></pre>
-
-<ol>
-<li><p>试着运行<code>aria2c --conf-path=/路径/aria2.conf</code>然后 用 yAAw 什么的UI试用一波。
-稳妥起见 可以把 配置文件里面的 <code>deamon</code> 改为 false。</p></li>
-
-<li><p>如果很幸运的走到了这一步，接着写个deamon脚本 加载到mac的launchctl里。
-<code>touch ~/Library/LaunchAgents/local.Aria2.plist</code></p></li>
+</code></pre><ol start="3">
+<li>
+<p>试着运行<code>aria2c --conf-path=/路径/aria2.conf</code>然后 用 yAAw 什么的UI试用一波。
+稳妥起见 可以把 配置文件里面的 <code>deamon</code> 改为 false。</p>
+</li>
+<li>
+<p>如果很幸运的走到了这一步，接着写个deamon脚本 加载到mac的launchctl里。
+<code>touch ~/Library/LaunchAgents/local.Aria2.plist</code></p>
+</li>
 </ol>
-
 <ul>
-<li>在里面写入如下信息。
-```
-&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?&gt;
-&lt;!DOCTYPE plist PUBLIC &ldquo;-//Apple//DTD PLIST 1.0//EN&rdquo; &ldquo;<a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;">http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</a></li>
+<li>在里面写入如下信息。</li>
 </ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
 
-<p><plist version="1.0">
-<dict>
-<key>RunAtLoad</key>
-<true/>
-<key>Label</key>
-<string>aria2</string>
-<key>ProgramArguments</key>
-<array>
-<string>/usr/local/aria2/bin/aria2c</string>
-<string>&ndash;conf-path=/Users/vici/.aria2/aria2.conf</string>
-</array>
-</dict>
-</plist></p>
 
-<pre><code>- 运行 `launchctl load ~/Library/LaunchAgents/local.Aria2.plist`
-- 重启 试一试。不行的话。。。。。。。。。。。。。。。。。。。。。。。。就算了。
-
-## 使用docker 一次性配置 webui-aria2及 aria2服务。
-
-最好还是看看 https://github.com/ziahamza/webui-aria2 的说明。
-1. 拉源码，进入工作目录
-
-```bash
-git clone https://github.com/ziahamza/webui-aria2.git
-cd webui-aria2
-</code></pre>
-
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+&lt;key&gt;RunAtLoad&lt;/key&gt;
+&lt;true/&gt;
+&lt;key&gt;Label&lt;/key&gt;
+&lt;string&gt;aria2&lt;/string&gt;
+&lt;key&gt;ProgramArguments&lt;/key&gt;
+&lt;array&gt;
+&lt;string&gt;/usr/local/aria2/bin/aria2c&lt;/string&gt;
+&lt;string&gt;--conf-path=/Users/vici/.aria2/aria2.conf&lt;/string&gt;
+&lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre><ul>
+<li>运行 <code>launchctl load ~/Library/LaunchAgents/local.Aria2.plist</code></li>
+<li>重启 试一试。不行的话。。。。。。。。。。。。。。。。。。。。。。。。就算了。</li>
+</ul>
+<h2 id="使用docker-一次性配置-webui-aria2及-aria2服务">使用docker 一次性配置 webui-aria2及 aria2服务。</h2>
+<p>最好还是看看 <a href="https://github.com/ziahamza/webui-aria2">https://github.com/ziahamza/webui-aria2</a> 的说明。</p>
 <ol>
+<li>拉源码，进入工作目录</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/ziahamza/webui-aria2.git
+cd webui-aria2
+</code></pre></div><ol start="2">
 <li>如果你想将webui的默认语言改为中文。。。 而且像我一样找不到配置文件的套路（第二次更新）
 可以在index.html的最后添加：</li>
 </ol>
-
-<pre><code class="language-javascript">
-&lt;script&gt;
-  window.onload = function(){
-    $(&quot;.flag-icon-cn&quot;).click()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+  window.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
+    <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;.flag-icon-cn&#34;</span>).<span style="color:#a6e22e">click</span>()
   }
-&lt;/script&gt;
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
 
-</code></pre>
-
-<ol>
+</code></pre></div><ol start="3">
 <li>修改Dockerfile （其实就改了一行。。。将 goreman setup 中的aria2启动部分做一些修改）</li>
 </ol>
-
-<pre><code class="language-Dockerfile">FROM debian:8
-
-# less priviledge user, the id should map the user the downloaded files belongs to
-RUN groupadd -r dummy &amp;&amp; useradd -r -g dummy dummy -u 1000
-
-# webui + aria2
-RUN apt-get update \
-    &amp;&amp; apt-get install -y aria2 busybox curl \
-    &amp;&amp; rm -rf /var/lib/apt/lists/*
-
-ADD . /webui-aria2
-
-# gosu install latest
-RUN GITHUB_REPO=&quot;https://github.com/tianon/gosu&quot; \
-  &amp;&amp; LATEST=`curl -s  $GITHUB_REPO&quot;/releases/latest&quot; | grep -Eo &quot;[0-9].[0-9]*&quot;` \
-  &amp;&amp; curl -L $GITHUB_REPO&quot;/releases/download/&quot;$LATEST&quot;/gosu-amd64&quot; &gt; /usr/local/bin/gosu \
-  &amp;&amp; chmod +x /usr/local/bin/gosu
-
-# goreman supervisor install latest
-RUN GITHUB_REPO=&quot;https://github.com/mattn/goreman&quot; \
-  &amp;&amp; LATEST=`curl -s  $GITHUB_REPO&quot;/releases/latest&quot; | grep -Eo &quot;v[0-9]*.[0-9]*.[0-9]*&quot;` \
-  &amp;&amp; curl -L $GITHUB_REPO&quot;/releases/download/&quot;$LATEST&quot;/goreman_linux_amd64.tar.gz&quot; &gt; goreman.tar.gz \
-  &amp;&amp; tar -xvzf goreman.tar.gz &amp;&amp; mv /goreman_linux_amd64/goreman /usr/local/bin/goreman &amp;&amp; rm -R goreman*
-
-# goreman setup
-RUN echo &quot;web: gosu dummy /bin/busybox httpd -f -p 8080 -h /webui-aria2\nbackend: gosu dummy /usr/bin/aria2c --conf-path=/data/.aria2/aria2.conf&quot; &gt; Procfile
-
-# aria2 downloads directory
-VOLUME /data
-
-# aria2 RPC port, map as-is or reconfigure webui
-EXPOSE 6800/tcp
-
-# webui static content web server, map wherever is convenient
-EXPOSE 8080/tcp
-
-CMD [&quot;start&quot;]
-ENTRYPOINT [&quot;/usr/local/bin/goreman&quot;]
-</code></pre>
-
-<ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> debian:8</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># less priviledge user, the id should map the user the downloaded files belongs to</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> groupadd -r dummy <span style="color:#f92672">&amp;&amp;</span> useradd -r -g dummy dummy -u <span style="color:#ae81ff">1000</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># webui + aria2</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> apt-get install -y aria2 busybox curl <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> . /webui-aria2<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># gosu install latest</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/tianon/gosu&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> LATEST<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -s  $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/latest&#34;</span> | grep -Eo <span style="color:#e6db74">&#34;[0-9].[0-9]*&#34;</span><span style="color:#e6db74">`</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> curl -L $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/download/&#34;</span>$LATEST<span style="color:#e6db74">&#34;/gosu-amd64&#34;</span> &gt; /usr/local/bin/gosu <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> chmod +x /usr/local/bin/gosu<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># goreman supervisor install latest</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/mattn/goreman&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> LATEST<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -s  $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/latest&#34;</span> | grep -Eo <span style="color:#e6db74">&#34;v[0-9]*.[0-9]*.[0-9]*&#34;</span><span style="color:#e6db74">`</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> curl -L $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/download/&#34;</span>$LATEST<span style="color:#e6db74">&#34;/goreman_linux_amd64.tar.gz&#34;</span> &gt; goreman.tar.gz <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> tar -xvzf goreman.tar.gz <span style="color:#f92672">&amp;&amp;</span> mv /goreman_linux_amd64/goreman /usr/local/bin/goreman <span style="color:#f92672">&amp;&amp;</span> rm -R goreman*<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># goreman setup</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#34;web: gosu dummy /bin/busybox httpd -f -p 8080 -h /webui-aria2\nbackend: gosu dummy /usr/bin/aria2c --conf-path=/data/.aria2/aria2.conf&#34;</span> &gt; Procfile<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># aria2 downloads directory</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">VOLUME</span><span style="color:#e6db74"> /data</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># aria2 RPC port, map as-is or reconfigure webui</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 6800/tcp</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># webui static content web server, map wherever is convenient</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080/tcp</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;start&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/goreman&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><ol start="4">
 <li>生成镜像。</li>
 </ol>
-
 <pre><code># 从dockerfile生成镜像
 docker build -t yourname/webui-aria2 .
-</code></pre>
-
-<ol>
-<li><p>准备数据卷
-趁着生成镜像的时候 你可以开一个新的terminal，在 你的用户目录 新建一个aria2文件夹，及子文件，结构如下：</p>
-
+</code></pre><ol start="5">
+<li>准备数据卷
+趁着生成镜像的时候 你可以开一个新的terminal，在 你的用户目录 新建一个aria2文件夹，及子文件，结构如下：</li>
+</ol>
 <pre><code>aria2
 └── .aria2
-├── aria2.conf
-├── aria2.log
-└── session.txt
-</code></pre></li>
-
-<li><p>并且修改配置文件 <code>aria2.conf</code></p></li>
+    ├── aria2.conf
+    ├── aria2.log
+    └── session.txt
+</code></pre><ol start="6">
+<li>并且修改配置文件 <code>aria2.conf</code></li>
 </ol>
-
 <p>文档中说明了几个重要文件在容器中的存放地点。</p>
-
 <pre><code>/data/.aria2/session.txt  (空文件。存放未下载完成的任务)
 /data/.aria2/aria2.log    (空文件，记录日志)
 /data/.aria2/aria2.conf   (aria2的日志)
 /data/.downloads/        (文件下载地址。)
-</code></pre>
-
-<p>所以对原来的配置做了一点点改动来适应docker( <a href="./aria2-docker.conf">这个</a>可以直接用 )</p>
-
+</code></pre><p>所以对原来的配置做了一点点改动来适应docker( <a href="./aria2-docker.conf">这个</a>可以直接用 )</p>
 <pre><code># 文件保存路径。
 dir=/data/.downloads
 # 为了启动后继续下载之前的文件 承接 save-session
@@ -563,56 +555,47 @@ min-split-size=10M
 #百度盘
 user-agent=netdisk;5.2.6;PC;PC-Windows;6.2.9200;WindowsBaiduYunGuanJia
 referer=http://pan.baidu.com/disk/home
-</code></pre>
-
-<ol>
+</code></pre><ol start="7">
 <li>生成容器(需要改路径！)</li>
 </ol>
-
 <pre><code>docker run --restart=always -d -v /Users/vici/aria2/:/data -v /Users/vici/Downloads/aria2_dl:/data/.downloads -p 6800-6802:6800-6802 -p 9100:8080 --name=&quot;webui-aria2&quot; vici/webui-aria2-debain
-</code></pre>
-
-<p>其中 <code>Users/vici/Downloads/aria2_dl</code>为我下载文件的存放地址。<code>/Users/vici/aria2</code>为之前新建的相关文件目录（记得改）。</p>
-
+</code></pre><p>其中 <code>Users/vici/Downloads/aria2_dl</code>为我下载文件的存放地址。<code>/Users/vici/aria2</code>为之前新建的相关文件目录（记得改）。</p>
 <p>成果应该是这样子滴：
-<img src="http://qiniu.heyuhua.com/2017-01-19%2014webui-aria2.png" alt="webui-aria2" /></p>
-
+<img src="http://qiniu.heyuhua.com/2017-01-19%2014webui-aria2.png" alt="webui-aria2"></p>
 <h2 id="全文完">。。。全文完。。。</h2>
-
-<h2 id="让人抓狂的lowb想法-用mac自带的apache部署web-ui">让人抓狂的lowb想法：用mac自带的apache部署web-ui</h2>
-
+<h2 id="让人抓狂的lowb想法用mac自带的apache部署web-ui">让人抓狂的lowb想法：用mac自带的apache部署web-ui</h2>
 <p>为了保持web ui能保持deamon，感觉可以使用mac自带的apache服务器。（测试时候可以用python -m simplehtttpserver 或者node.js）</p>
-
 <ol>
-<li>前期测试: 查看版本 试运行  打开浏览器 <a href="http://localhost">http://localhost</a></li>
+<li>前期测试: 查看版本 试运行  打开浏览器 http://localhost</li>
 </ol>
-
 <pre><code># 查看版本
 sudo apachectl -v
 # 启动
 sudo apachectl start
 # 浏览
 open http://localhost
-</code></pre>
-
-<ol>
-<li><p>开启虚拟主机。 配置网站。</p>
-
+</code></pre><ol start="2">
+<li>
+<p>开启虚拟主机。 配置网站。</p>
 <ul>
-<li>在终端运行<code>sudo vi /etc/apache2/httpd.conf</code>，打开Apche的配置文件</li>
-<li>在httpd.conf中找到<code>#Include /private/etc/apache2/extra/httpd-vhosts.conf</code>，去掉前面的“＃”，保存并退出。</li>
-
-<li><p>运行<code>sudo apachectl restart</code></p></li>
-
-<li><p>运行 <code>sudo vi /etc/apache2/extra/httpd-vhosts.conf</code></p></li>
+<li>
+<p>在终端运行<code>sudo vi /etc/apache2/httpd.conf</code>，打开Apche的配置文件</p>
+</li>
+<li>
+<p>在httpd.conf中找到<code>#Include /private/etc/apache2/extra/httpd-vhosts.conf</code>，去掉前面的“＃”，保存并退出。</p>
+</li>
+<li>
+<p>运行<code>sudo apachectl restart</code></p>
+</li>
+<li>
+<p>运行 <code>sudo vi /etc/apache2/extra/httpd-vhosts.conf</code></p>
+</li>
 </ul>
-
-<p>你会看到两段配置信息 类似&rsquo;<VirtuaHost *:80>&hellip;.&lsquo;什么的。这两个主机是不存在的。所以此时访问localhost会提示403错误：<code>Forbidden
-You don't have permission to access /index.php on this server</code>. 网上的大佬说用# 注释掉就好。</p>
-
+<p>你会看到两段配置信息 类似'&lt;VirtuaHost *:80&gt;&hellip;.&lsquo;什么的。这两个主机是不存在的。所以此时访问localhost会提示403错误：<code>Forbidden You don't have permission to access /index.php on this server</code>. 网上的大佬说用# 注释掉就好。</p>
 <blockquote>
 <p>事实证明apache 的方法真的是很lowb。什么 user Root 乱七八糟的搞了半天，丢雷楼某黑。 是我想多了。还是乖乖的用docker。</p>
-</blockquote></li>
+</blockquote>
+</li>
 </ol>
               
             </div>
@@ -633,8 +616,8 @@ You don't have permission to access /index.php on this server</code>. 网上的�
                 
               
             
-            
-  <div class="post-actions-wrap">
+            <div class="post-actions-wrap">
+  
       <nav >
         <ul class="post-actions post-action-nav">
           
@@ -699,8 +682,8 @@ You don't have permission to access /index.php on this server</code>. 网上的�
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
             
               
@@ -719,8 +702,8 @@ You don't have permission to access /index.php on this server</code>. 网上的�
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-        
-  <div class="post-actions-wrap">
+        <div class="post-actions-wrap">
+  
       <nav >
         <ul class="post-actions post-action-nav">
           
@@ -785,8 +768,8 @@ You don't have permission to access /index.php on this server</code>. 网上的�
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
@@ -822,7 +805,7 @@ You don't have permission to access /index.php on this server</code>. 网上的�
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
     
     <h4 id="about-card-name">vici</h4>
     
@@ -832,242 +815,24 @@ You don't have permission to access /index.php on this server</code>. 网上的�
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Python Developer
+        software enginer
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        ShangHai
+        Shenzhen | Beijing | Shanghai
       </div>
     
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="搜索" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2018/01/highlighted-code-example/">
-                <h3 class="media-heading">highlighted code example</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak Hugo theme have its own theme to highlight source code. It&rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/09/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%BA%94/">
-                <h3 class="media-heading">python重修之旅（五）</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>In code we trust. &ndash;BitCoin</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/">
-                <h3 class="media-heading">zsh git 插件内置别名一览表</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/08/%E5%88%A9%E7%94%A8lirc%E5%AF%B9%E6%9D%BE%E4%B8%8B%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8%E6%8C%87%E4%BB%A4%E7%9A%84%E5%BD%95%E5%88%B6/">
-                <h3 class="media-heading">利用lirc对松下空调遥控器指令的录制</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>听风听雨过七夕，愁草瘗花铭。对影双人中酒，交加晓梦啼莺。</p>
+    
 
-<h3 id="前言">前言</h3>
-
-<p>7月份入职之后，一直在闲暇之余鼓捣树莓派。在制作联网空调遥控器的时候遇到了很多挫折。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/08/iterm2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/">
-                <h3 class="media-heading">iterm2常用快捷键总结</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/07/raspberry-pi3-archlinux-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">
-                <h3 class="media-heading">raspberry pi3 ArchLinux 安装记录</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><!-- toc -->
-
-<h2 id="前言">前言</h2>
-
-<p>某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/07/python-%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E5%9B%9B/">
-                <h3 class="media-heading">python 重修之旅（四）</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>我有一万个理由不用vim&amp;emacs</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/04/pyenv-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-                <h3 class="media-heading">pyenv 常用命令</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>明日再有风雨，明日再作打算</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/03/go-%E5%85%A5%E9%97%A8day-1/">
-                <h3 class="media-heading">go 入门（day 1）</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>Hello world!</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/03/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%89tornado%E5%BC%82%E6%AD%A5%E5%8D%8F%E7%A8%8B/">
-                <h3 class="media-heading">python重修之旅（三）tornado异步&amp;协程</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><div class="alert warning ">
-  <p>该博文内容缺失</p>
-</div></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         27 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
-    
-    <div id="cover" style="background-image:url('http://blog.heyuhua.com/images/cover_2.jpg');"></div>
+    <div id="cover" style="background-image:url('http://qiniu.heyuhua.com/India1.little.jpg!huge.webp');"></div>
   
 
 
@@ -1079,13 +844,27 @@ You don't have permission to access /index.php on this server</code>. 网上的�
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="http://blog.heyuhua.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="http://blog.heyuhua.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
   
     <script src="http://qiniu.heyuhua.com/highlight.pack.js"></script>
   
 
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
 
 <script>
 $(document).ready(function() {
@@ -1116,7 +895,7 @@ $(document).ready(function() {
             return;
           }
           var d = document, s = d.createElement('script');
-          var disqus_shortname = 'vic1blog';
+          var disqus_shortname = 'vici_blog';
           s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
           s.setAttribute('data-timestamp', +new Date());
@@ -1125,6 +904,7 @@ $(document).ready(function() {
       </script>
     
   
+
 
 
 

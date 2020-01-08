@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Postgre Xl on vici&#39;blog</title>
+    <title>postgre-xl on vici&#39;blog</title>
     <link>http://blog.heyuhua.com/tags/postgre-xl/</link>
-    <description>Recent content in Postgre Xl on vici&#39;blog</description>
+    <description>Recent content in postgre-xl on vici&#39;blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 15 Feb 2017 16:20:14 +0000</lastBuildDate>

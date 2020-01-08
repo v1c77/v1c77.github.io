@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Develop on vici&#39;blog</title>
+    <title>develop on vici&#39;blog</title>
     <link>http://blog.heyuhua.com/categories/develop/</link>
-    <description>Recent content in Develop on vici&#39;blog</description>
+    <description>Recent content in develop on vici&#39;blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 16 Jan 2018 00:00:00 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2018/01/highlighted-code-example/</guid>
-      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&amp;rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&#39;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -47,9 +47,7 @@
       
       <guid>http://blog.heyuhua.com/2017/08/%E5%88%A9%E7%94%A8lirc%E5%AF%B9%E6%9D%BE%E4%B8%8B%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8%E6%8C%87%E4%BB%A4%E7%9A%84%E5%BD%95%E5%88%B6/</guid>
       <description>&lt;p&gt;听风听雨过七夕，愁草瘗花铭。对影双人中酒，交加晓梦啼莺。&lt;/p&gt;
-
 &lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
-
 &lt;p&gt;7月份入职之后，一直在闲暇之余鼓捣树莓派。在制作联网空调遥控器的时候遇到了很多挫折。&lt;/p&gt;</description>
     </item>
     
@@ -68,10 +66,8 @@
       <pubDate>Wed, 26 Jul 2017 12:43:18 +0000</pubDate>
       
       <guid>http://blog.heyuhua.com/2017/07/raspberry-pi3-archlinux-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</guid>
-      <description>&lt;!-- toc --&gt;
-
+      <description>&lt;!-- raw HTML omitted --&gt;
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-
 &lt;p&gt;某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。&lt;/p&gt;</description>
     </item>
     
@@ -115,7 +111,6 @@
       
       <guid>http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;p&gt;这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&amp;mdash;Lolita&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;注意：此文很可能只适用于mac ！！！&amp;mdash;&amp;gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -128,7 +123,6 @@
       
       <guid>http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/</guid>
       <description>&lt;p&gt;本事借的钱，为什么要还？&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;此文章脱胎于我在stackoverflow的某回答&lt;/p&gt;
 &lt;/blockquote&gt;</description>

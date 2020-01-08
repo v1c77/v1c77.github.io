@@ -1,59 +1,70 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="vici">
+<meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
+<meta name="description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
+
+
+<meta property="og:description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zsh git 插件内置别名一览表">
+<meta name="twitter:title" content="zsh git 插件内置别名一览表">
+<meta property="og:url" content="http://blog.heyuhua.com/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/">
+<meta property="twitter:url" content="http://blog.heyuhua.com/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/">
+<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
+<meta name="twitter:description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2017-08-30T18:46:37">
+  
+  
+    <meta property="article:modified_time" content="2017-08-30T18:46:37">
+  
+  
+  
+    
+      <meta property="article:section" content="develop">
+    
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@bookerHe">
+
+
+  <meta name="twitter:creator" content="@bookerHe">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+
+
     <title>zsh git 插件内置别名一览表</title>
-    <meta name="author" content="vici">
-    <meta name="keywords" content=", vici, blog, heyuhua.com">
 
     <link rel="icon" href="//qiniu.heyuhua.com/blog_favicon.ico">
     
 
     
-    <meta name="description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
-    <meta property="og:description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="zsh git 插件内置别名一览表">
-    <meta property="og:url" content="/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/">
-    <meta property="og:site_name" content="vici&#39;blog">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="vici&#39;blog">
-    <meta name="twitter:description" content="一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》">
-    
-    
 
-    
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
-    
-
-    
-    
-    
-
-    
+    <link rel="canonical" href="http://blog.heyuhua.com/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -61,7 +72,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
@@ -93,14 +104,12 @@ if (!doNotTrack) {
   </div>
   
     
-      <a class="header-right-picture "
-         href="http://blog.heyuhua.com/#about">
+      <a class="header-right-icon st-search-show-outputs"
+         href="http://blog.heyuhua.com/#search">
     
     
+      <i class="fa fa-lg fa-search"></i>
     
-      
-        <img class="header-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=90" alt="作者的图片" />
-      
     
     </a>
   
@@ -111,7 +120,7 @@ if (!doNotTrack) {
     
       <div class="sidebar-profile">
         <a href="http://blog.heyuhua.com/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
         </a>
         <h4 class="sidebar-profile-name">vici</h4>
         
@@ -254,7 +263,6 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》</p>
-
 <table>
 <thead>
 <tr>
@@ -262,623 +270,499 @@ if (!doNotTrack) {
 <th>full command</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>g</td>
 <td><code>git</code></td>
 </tr>
-
 <tr>
 <td>ga</td>
 <td><code>git add</code></td>
 </tr>
-
 <tr>
 <td>gaa</td>
 <td><code>git add —all</code></td>
 </tr>
-
 <tr>
 <td>gapa</td>
 <td><code>git add —patch</code></td>
 </tr>
-
 <tr>
 <td>gau</td>
 <td><code>git add —update</code></td>
 </tr>
-
 <tr>
 <td>gb</td>
 <td><code>git branch</code></td>
 </tr>
-
 <tr>
 <td>gba</td>
 <td><code>git branch -a</code></td>
 </tr>
-
 <tr>
 <td>gbd</td>
 <td><code>git branch -d</code></td>
 </tr>
-
 <tr>
 <td>gbda</td>
 <td><code>git branch --no-color --merged \| command grep -vE &quot;^(\*\|\s*(master\|develop\|dev)\s*$)&quot; \| command xargs -n 1 git branch -d</code></td>
 </tr>
-
 <tr>
 <td>gbl</td>
 <td><code>git blame -b -w</code></td>
 </tr>
-
 <tr>
 <td>gbnm</td>
 <td><code>git branch --no-merged</code></td>
 </tr>
-
 <tr>
 <td>gbr</td>
 <td><code>git branch —remote</code></td>
 </tr>
-
 <tr>
 <td>gbs</td>
 <td><code>git bisect</code></td>
 </tr>
-
 <tr>
 <td>gbsb</td>
 <td><code>git bisect bad</code></td>
 </tr>
-
 <tr>
 <td>gbsg</td>
 <td><code>git bisect good</code></td>
 </tr>
-
 <tr>
 <td>gbsr</td>
 <td><code>git bisect reset</code></td>
 </tr>
-
 <tr>
 <td>gbss</td>
 <td><code>git bisect start</code></td>
 </tr>
-
 <tr>
 <td>gc</td>
 <td><code>git commit -v</code></td>
 </tr>
-
 <tr>
 <td>gc!</td>
 <td><code>git commit -v —amend</code></td>
 </tr>
-
 <tr>
 <td>gcn!</td>
 <td><code>git commit -v --no-edit —amend</code></td>
 </tr>
-
 <tr>
 <td>gca</td>
 <td><code>git commit -v -a</code></td>
 </tr>
-
 <tr>
 <td>gca!</td>
 <td><code>git commit -v -a —amend</code></td>
 </tr>
-
 <tr>
 <td>gcan!</td>
 <td><code>git commit -v -a --no-edit —amend</code></td>
 </tr>
-
 <tr>
 <td>gcans!</td>
 <td><code>git commit -v -a -s --no-edit —amend</code></td>
 </tr>
-
 <tr>
 <td>gcam</td>
 <td><code>git commit -a -m</code></td>
 </tr>
-
 <tr>
 <td>gcsm</td>
 <td><code>git commit -s -m</code></td>
 </tr>
-
 <tr>
 <td>gcb</td>
 <td><code>git checkout -b</code></td>
 </tr>
-
 <tr>
 <td>gcf</td>
 <td><code>git config —list</code></td>
 </tr>
-
 <tr>
 <td>gcl</td>
 <td><code>git clone —recursive</code></td>
 </tr>
-
 <tr>
 <td>gclean</td>
 <td><code>git clean -fd</code></td>
 </tr>
-
 <tr>
 <td>gpristine</td>
 <td><code>git reset --hard &amp;&amp; git clean -dfx</code></td>
 </tr>
-
 <tr>
 <td>gcm</td>
 <td><code>git checkout master</code></td>
 </tr>
-
 <tr>
 <td>gcd</td>
 <td><code>git checkout develop</code></td>
 </tr>
-
 <tr>
 <td>gcmsg</td>
 <td><code>git commit -m</code></td>
 </tr>
-
 <tr>
 <td>gco</td>
 <td><code>git checkout</code></td>
 </tr>
-
 <tr>
 <td>gcount</td>
 <td><code>git shortlog -sn</code></td>
 </tr>
-
 <tr>
 <td>gcp</td>
 <td><code>git cherry-pick</code></td>
 </tr>
-
 <tr>
 <td>gcpa</td>
 <td><code>git cherry-pick —abort</code></td>
 </tr>
-
 <tr>
 <td>gcpc</td>
 <td><code>git cherry-pick —continue</code></td>
 </tr>
-
 <tr>
 <td>gcs</td>
 <td><code>git commit -S</code></td>
 </tr>
-
 <tr>
 <td>gd</td>
 <td><code>git diff</code></td>
 </tr>
-
 <tr>
 <td>gdca</td>
 <td><code>git diff —cached</code></td>
 </tr>
-
 <tr>
 <td>gdct</td>
 <td><code>git describe --tags git rev-list --tags --max-count=1</code></td>
 </tr>
-
 <tr>
 <td>gdt</td>
 <td><code>git diff-tree --no-commit-id --name-only -r</code></td>
 </tr>
-
 <tr>
 <td>gdw</td>
 <td><code>git diff --word-diff</code></td>
 </tr>
-
 <tr>
 <td>gf</td>
 <td><code>git fetch</code></td>
 </tr>
-
 <tr>
 <td>gfa</td>
 <td><code>git fetch --all —prune</code></td>
 </tr>
-
 <tr>
 <td>gfo</td>
 <td><code>git fetch origin</code></td>
 </tr>
-
 <tr>
 <td>gg</td>
 <td><code>git gui citool</code></td>
 </tr>
-
 <tr>
 <td>gga</td>
 <td><code>git gui citool —amend</code></td>
 </tr>
-
 <tr>
 <td>ggpur</td>
 <td><code>ggu</code></td>
 </tr>
-
 <tr>
 <td>ggpull</td>
 <td><code>git pull origin $(git_current_branch)</code></td>
 </tr>
-
 <tr>
 <td>ggpush</td>
 <td><code>git push origin $(git_current_branch)</code></td>
 </tr>
-
 <tr>
 <td>ggsup</td>
 <td><code>git branch --set-upstream-to=origin/$(git_current_branch)</code></td>
 </tr>
-
 <tr>
 <td>gpsup</td>
 <td><code>git push --set-upstream origin $(git_current_branch)</code></td>
 </tr>
-
 <tr>
 <td>ghh</td>
 <td><code>git help</code></td>
 </tr>
-
 <tr>
 <td>gignore</td>
 <td><code>git update-index --assume-unchanged</code></td>
 </tr>
-
 <tr>
 <td>gignored</td>
 <td><code>git ls-files -v \| grep &quot;^[[:lower:]]&quot;</code></td>
 </tr>
-
 <tr>
 <td>git-svn-dcommit-push</td>
 <td><code>git-svn-dcommit-push git svn dcommit &amp;&amp; git push github master:svntrunk</code></td>
 </tr>
-
 <tr>
 <td>gk</td>
 <td><code>\gitk --all —branches</code></td>
 </tr>
-
 <tr>
 <td>gke</td>
 <td><code>\gitk --all $(git log -g --pretty=%h)</code></td>
 </tr>
-
 <tr>
 <td>gl</td>
 <td><code>git pull</code></td>
 </tr>
-
 <tr>
 <td>glg</td>
 <td><code>git log —stat</code></td>
 </tr>
-
 <tr>
 <td>glgp</td>
 <td><code>git log --stat -p</code></td>
 </tr>
-
 <tr>
 <td>glgg</td>
 <td><code>git log —graph</code></td>
 </tr>
-
 <tr>
 <td>glgga</td>
 <td><code>git log --graph --decorate —all</code></td>
 </tr>
-
 <tr>
 <td>glgm</td>
 <td><code>git log --graph --max-count=10</code></td>
 </tr>
-
 <tr>
 <td>glo</td>
 <td><code>git log --oneline —decorate</code></td>
 </tr>
-
 <tr>
 <td>glol</td>
 <td><code>git log --graph --pretty%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset --abbrev-commit</code></td>
 </tr>
-
 <tr>
 <td>glola</td>
 <td><code>git log --graph --pretty%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset--abbrev-commit —all</code></td>
 </tr>
-
 <tr>
 <td>glog</td>
 <td><code>git log --oneline --decorate —graph</code></td>
 </tr>
-
 <tr>
 <td>gloga</td>
 <td><code>git log --oneline --decorate --graph —all</code></td>
 </tr>
-
 <tr>
 <td>glp</td>
 <td><code>_git_log_prettily</code></td>
 </tr>
-
 <tr>
 <td>gm</td>
 <td><code>git merge</code></td>
 </tr>
-
 <tr>
 <td>gmom</td>
 <td><code>git merge origin/master</code></td>
 </tr>
-
 <tr>
 <td>gmt</td>
 <td><code>git mergetool --no-prompt</code></td>
 </tr>
-
 <tr>
 <td>gmtvim</td>
 <td><code>git mergetool --no-prompt --tool=vimdiff</code></td>
 </tr>
-
 <tr>
 <td>gmum</td>
 <td><code>git merge upstream/master</code></td>
 </tr>
-
 <tr>
 <td>gp</td>
 <td><code>git push</code></td>
 </tr>
-
 <tr>
 <td>gpd</td>
 <td><code>git push --dry-run</code></td>
 </tr>
-
 <tr>
 <td>gpoat</td>
 <td><code>git push origin --all &amp;&amp; git push origin —tags</code></td>
 </tr>
-
 <tr>
 <td>gpu</td>
 <td><code>git push upstream</code></td>
 </tr>
-
 <tr>
 <td>gpv</td>
 <td><code>git push -v</code></td>
 </tr>
-
 <tr>
 <td>gr</td>
 <td><code>git remote</code></td>
 </tr>
-
 <tr>
 <td>gra</td>
 <td><code>git remote add</code></td>
 </tr>
-
 <tr>
 <td>grb</td>
 <td><code>git rebase</code></td>
 </tr>
-
 <tr>
 <td>grba</td>
 <td><code>git rebase —abort</code></td>
 </tr>
-
 <tr>
 <td>grbc</td>
 <td><code>git rebase —continue</code></td>
 </tr>
-
 <tr>
 <td>grbi</td>
 <td><code>git rebase -i</code></td>
 </tr>
-
 <tr>
 <td>grbm</td>
 <td><code>git rebase master</code></td>
 </tr>
-
 <tr>
 <td>grbs</td>
 <td><code>git rebase —skip</code></td>
 </tr>
-
 <tr>
 <td>grh</td>
 <td><code>git reset HEAD</code></td>
 </tr>
-
 <tr>
 <td>grhh</td>
 <td><code>git reset HEAD —hard</code></td>
 </tr>
-
 <tr>
 <td>grmv</td>
 <td><code>git remote rename</code></td>
 </tr>
-
 <tr>
 <td>grrm</td>
 <td><code>git remote remove</code></td>
 </tr>
-
 <tr>
 <td>grset</td>
 <td><code>git remote set-url</code></td>
 </tr>
-
 <tr>
 <td>grt</td>
 <td><code>cd $(git rev-parse --show-toplevel \|\| echo &quot;.&quot;)</code></td>
 </tr>
-
 <tr>
 <td>gru</td>
 <td><code>git reset —</code></td>
 </tr>
-
 <tr>
 <td>grup</td>
 <td><code>git remote update</code></td>
 </tr>
-
 <tr>
 <td>grv</td>
 <td><code>git remote -v</code></td>
 </tr>
-
 <tr>
 <td>gsb</td>
 <td><code>git status -sb</code></td>
 </tr>
-
 <tr>
 <td>gsd</td>
 <td><code>git svn dcommit</code></td>
 </tr>
-
 <tr>
 <td>gsi</td>
 <td><code>git submodule init</code></td>
 </tr>
-
 <tr>
 <td>gsps</td>
 <td><code>git show --pretty=short --show-signature</code></td>
 </tr>
-
 <tr>
 <td>gsr</td>
 <td><code>git svn rebase</code></td>
 </tr>
-
 <tr>
 <td>gss</td>
 <td><code>git status -s</code></td>
 </tr>
-
 <tr>
 <td>gst</td>
 <td><code>git status</code></td>
 </tr>
-
 <tr>
 <td>gsta</td>
 <td><code>git stash save</code></td>
 </tr>
-
 <tr>
 <td>gstaa</td>
 <td><code>git stash apply</code></td>
 </tr>
-
 <tr>
 <td>gstc</td>
 <td><code>git stash clear</code></td>
 </tr>
-
 <tr>
 <td>gstd</td>
 <td><code>git stash drop</code></td>
 </tr>
-
 <tr>
 <td>gstl</td>
 <td><code>git stash list</code></td>
 </tr>
-
 <tr>
 <td>gstp</td>
 <td><code>git stash pop</code></td>
 </tr>
-
 <tr>
 <td>gsts</td>
 <td><code>git stash show —text</code></td>
 </tr>
-
 <tr>
 <td>gsu</td>
 <td><code>git submodule update</code></td>
 </tr>
-
 <tr>
 <td>gts</td>
 <td><code>git tag -s</code></td>
 </tr>
-
 <tr>
 <td>gtv</td>
 <td><code>git tag \| sort -V</code></td>
 </tr>
-
 <tr>
 <td>gunignore</td>
 <td><code>git update-index --no-assume-unchanged</code></td>
 </tr>
-
 <tr>
 <td>gunwip</td>
 <td><code>git log -n 1 \| grep -q -c &quot;\-\-wip\-\-&quot; &amp;&amp; git reset HEAD~1</code></td>
 </tr>
-
 <tr>
 <td>gup</td>
 <td><code>git pull —rebase</code></td>
 </tr>
-
 <tr>
 <td>gupv</td>
-<td>git pull &ndash;rebase -v`</td>
+<td>git pull &ndash;rebase -v`                    |</td>
 </tr>
-
 <tr>
 <td>glum</td>
 <td><code>git pull upstream master</code></td>
 </tr>
-
 <tr>
 <td>gwch</td>
 <td><code>git whatchanged -p --abbrev-commit --pretty=medium</code></td>
 </tr>
-
 <tr>
 <td>gwip</td>
 <td><code>git add -A; git rm $(git ls-files --deleted) 2&gt; /dev/null; git commit --no-verify -m &quot;--wip-- [skip ci]&quot;</code></td>
@@ -892,8 +776,8 @@ if (!doNotTrack) {
             
               
             
-            
-  <div class="post-actions-wrap">
+            <div class="post-actions-wrap">
+  
       <nav >
         <ul class="post-actions post-action-nav">
           
@@ -958,8 +842,8 @@ if (!doNotTrack) {
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
             
               
@@ -978,8 +862,8 @@ if (!doNotTrack) {
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-        
-  <div class="post-actions-wrap">
+        <div class="post-actions-wrap">
+  
       <nav >
         <ul class="post-actions post-action-nav">
           
@@ -1044,8 +928,8 @@ if (!doNotTrack) {
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
@@ -1081,7 +965,7 @@ if (!doNotTrack) {
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
     
     <h4 id="about-card-name">vici</h4>
     
@@ -1091,242 +975,24 @@ if (!doNotTrack) {
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Python Developer
+        software enginer
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        ShangHai
+        Shenzhen | Beijing | Shanghai
       </div>
     
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="搜索" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2018/01/highlighted-code-example/">
-                <h3 class="media-heading">highlighted code example</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak Hugo theme have its own theme to highlight source code. It&rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/09/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%BA%94/">
-                <h3 class="media-heading">python重修之旅（五）</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>In code we trust. &ndash;BitCoin</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/08/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/">
-                <h3 class="media-heading">zsh git 插件内置别名一览表</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>一个14岁孩子经历的的任何事，都会让他铭记一生。—&ndash;《lolita》</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/08/%E5%88%A9%E7%94%A8lirc%E5%AF%B9%E6%9D%BE%E4%B8%8B%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8%E6%8C%87%E4%BB%A4%E7%9A%84%E5%BD%95%E5%88%B6/">
-                <h3 class="media-heading">利用lirc对松下空调遥控器指令的录制</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>听风听雨过七夕，愁草瘗花铭。对影双人中酒，交加晓梦啼莺。</p>
+    
 
-<h3 id="前言">前言</h3>
-
-<p>7月份入职之后，一直在闲暇之余鼓捣树莓派。在制作联网空调遥控器的时候遇到了很多挫折。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/08/iterm2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/">
-                <h3 class="media-heading">iterm2常用快捷键总结</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/07/raspberry-pi3-archlinux-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">
-                <h3 class="media-heading">raspberry pi3 ArchLinux 安装记录</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><!-- toc -->
-
-<h2 id="前言">前言</h2>
-
-<p>某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/07/python-%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E5%9B%9B/">
-                <h3 class="media-heading">python 重修之旅（四）</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>我有一万个理由不用vim&amp;emacs</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/04/pyenv-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-                <h3 class="media-heading">pyenv 常用命令</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>明日再有风雨，明日再作打算</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/03/go-%E5%85%A5%E9%97%A8day-1/">
-                <h3 class="media-heading">go 入门（day 1）</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><blockquote>
-<p>Hello world!</p>
-</blockquote></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://blog.heyuhua.com/2017/03/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%89tornado%E5%BC%82%E6%AD%A5%E5%8D%8F%E7%A8%8B/">
-                <h3 class="media-heading">python重修之旅（三）tornado异步&amp;协程</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><div class="alert warning ">
-  <p>该博文内容缺失</p>
-</div></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         27 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
-    
-    <div id="cover" style="background-image:url('http://blog.heyuhua.com/images/cover_2.jpg');"></div>
+    <div id="cover" style="background-image:url('http://qiniu.heyuhua.com/India1.little.jpg!huge.webp');"></div>
   
 
 
@@ -1338,13 +1004,27 @@ if (!doNotTrack) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="http://blog.heyuhua.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="http://blog.heyuhua.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
   
     <script src="http://qiniu.heyuhua.com/highlight.pack.js"></script>
   
 
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
 
 <script>
 $(document).ready(function() {
@@ -1375,7 +1055,7 @@ $(document).ready(function() {
             return;
           }
           var d = document, s = d.createElement('script');
-          var disqus_shortname = 'vic1blog';
+          var disqus_shortname = 'vici_blog';
           s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
           s.setAttribute('data-timestamp', +new Date());
@@ -1384,6 +1064,7 @@ $(document).ready(function() {
       </script>
     
   
+
 
 
 
