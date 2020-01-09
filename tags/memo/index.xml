@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>memo on vici&#39;blog</title>
+    <link>http://blog.heyuhua.com/tags/memo/</link>
+    <description>Recent content in memo on vici&#39;blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 16 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.heyuhua.com/tags/memo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>代码高亮及板式书写备忘</title>
+      <link>http://blog.heyuhua.com/2018/01/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E5%8F%8A%E6%9D%BF%E5%BC%8F%E4%B9%A6%E5%86%99%E5%A4%87%E5%BF%98/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.heyuhua.com/2018/01/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E5%8F%8A%E6%9D%BF%E5%BC%8F%E4%B9%A6%E5%86%99%E5%A4%87%E5%BF%98/</guid>
+      <description>&lt;p&gt;blog 代码相关功能测试。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高亮渲染&lt;/li&gt;
+&lt;li&gt;代码块切换测试&lt;/li&gt;
+&lt;li&gt;行号测试&lt;/li&gt;
+&lt;li&gt;复制粘贴&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
