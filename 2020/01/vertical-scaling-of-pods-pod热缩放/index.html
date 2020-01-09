@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="vici">
+<meta name="keywords" content="scale, k8s, auto, resource, vici, blog, heyuhua.com, 何育华, v1c77">
+<meta name="description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
+
+
+<meta property="og:description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vertical Scaling of Pods | pod热缩放">
+<meta name="twitter:title" content="Vertical Scaling of Pods | pod热缩放">
+<meta property="og:url" content="http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+<meta property="twitter:url" content="http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
+<meta name="twitter:description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-01-09T11:30:34">
+  
+  
+    <meta property="article:modified_time" content="2020-01-09T11:30:34">
+  
+  
+  
+    
+      <meta property="article:section" content="develop">
+    
+  
+  
+    
+      <meta property="article:tag" content="k8s">
+    
+      <meta property="article:tag" content="proposal">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@bookerHe">
+
+
+  <meta name="twitter:creator" content="@bookerHe">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+
+
+    <title>Vertical Scaling of Pods | pod热缩放</title>
+
+    <link rel="icon" href="//qiniu.heyuhua.com/blog_favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-88015219-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://blog.heyuhua.com/">vici&#39;blog</a>
+  </div>
+  
+    
+      <a class="header-right-icon st-search-show-outputs"
+         href="http://blog.heyuhua.com/#search">
+    
+    
+      <i class="fa fa-lg fa-search"></i>
+    
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://blog.heyuhua.com/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">vici</h4>
+        
+          <h5 class="sidebar-profile-bio">极度选择困难. <strong>懒癌晚期</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/v1c77" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/6382035/vi-ci" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Vertical Scaling of Pods | pod热缩放
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-01-09T11:30:34&#43;08:00">
+        
+  一月 9, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="http://blog.heyuhua.com/categories/develop">develop</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.</p>
+<p>Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。</p>
+<p>OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。</p>
+<p>Vertical pod auto scaler， <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/verticalpodautoscaler?hl=zh-cn">GKE 文档</a> 有详细的中文介绍， 社区一般将该功能简称为 VPA.  设计目的是为了能够调整 pod CPU / Memory 的request limit限制。</p>
+<p>这里我们希望在 VPA 实现中寻找一个方式能够</p>
+<p>摘抄自 GKE：</p>
+<blockquote>
+<h2 id="概览">概览</h2>
+<p>垂直 Pod 自动扩缩 (VPA) 使您不必考虑为容器的 CPU 请求和内存求指定具体的值。自动调节程序可以为 CPU 和内存请求和限制建议值，也可以自动更新值。</p>
+<p>垂直 Pod 自动扩缩提供以下好处：</p>
+<ul>
+<li>因为 Pod 完全用其所需，所以集群节点使用效率高。</li>
+<li>Pod 会被安排到具有适当可用资源的节点上。</li>
+<li>您不必运行耗时的基准测试任务来确定 CPU 和内存请求的正确值。</li>
+<li>自动调节程序可以随时调整 CPU 和内存请求，而无需您执行任何操作，所以维护时间更短。</li>
+</ul>
+</blockquote>
+<p>ok ，别人家的瓜只能吃到这里了。</p>
+<p>漫长的 G站扫街环节后。。。</p>
+<p>该功能的设计环节较为挫折，第一次参与人数较多的 讨论发生在 16年年初，隶属于 sig-node 小组，之后被重新分配到了 sig-autoscaling 小组下。 大概经过了 3年左右的开发周期。 将在近期（k8s 1.18 ）GA.</p>
+<p><a href="https://github.com/kubernetes/community/blob/master/contributors/design-proposals/autoscaling/vertical-pod-autoscaler.md" title="设计实现方案">设计方案</a>详细描写了技术细节。这里会挑一些重点介绍。</p>
+<h2 id="介绍">介绍</h2>
+<h3 id="技术细节">技术细节</h3>
+<ul>
+<li><a href="https://kubernetes.io/docs/user-guide/compute-resources/">资源计算</a></li>
+<li><a href="https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node/resource-qos.md">资源Qos</a></li>
+<li><a href="https://kubernetes.io/docs/admin/admission-controllers/">准入控制</a></li>
+<li><a href="https://kubernetes.io/docs/admin/extensible-admission-controllers/#external-admission-webhooks">外部准入控制</a></li>
+</ul>
+<h3 id="目标">目标：</h3>
+<ol>
+<li>引入自动维护，减少维护成本。</li>
+<li>提高资源利用率，减少container OOM 发生的情况。</li>
+</ol>
+<h3 id="相关功能">相关功能</h3>
+<h4 id="hpa-horizontal-pod-autoscaler">HPA( Horizontal Pod Autoscaler)</h4>
+<p>横向扩展，  通过监听 cpu 压力和其他用户指定的 metric 动态缩扩。一般情况下 用户将会对无状态负载制定 HPA 方案，对有状态服务设置 VPA.</p>
+<h4 id="ca-cluster-autoscaler">CA (Cluster Autoscaler)</h4>
+<p>自动进行集群大小的配置。 可以和 VPA, HPA 组成完整的自动化伸缩方案。</p>
+<h4 id="initial-resources">initial resources</h4>
+<p>概念性的功能，基于历史利用率指标， 可以在pod创建时给予resource建议。 VPA 会覆盖重写该功能。</p>
+<h4 id="resource-estimation">Resource estimation</h4>
+<p>资源预算, 旨在提高节点资源的利用率。通过临时回收容器当前未使用的资源。 可以对标虚拟化的 DMC.概念和实现。使用Node pod 短时间时序数据进行资源回收和释放。 该功能与 VPA 互补。 仍处于<strong>设计阶段</strong>。</p>
+<h3 id="需求">需求</h3>
+<h4 id="功能特性">功能特性</h4>
+<ol>
+<li>VPA 可以修改 POD 的资源 request/limit</li>
+<li>VPA 可以对 CPU 高负载， 内存 OOM 的事件作出相应。</li>
+<li>重启 VPA 管理下的 pod 可以遵循破坏预算功能（disruption budget）</li>
+<li>VPA 可配置：用户可以制定 VPA 动态缩扩的上下限。</li>
+<li>VPA 支持 pod controller,至少支持 deployment.</li>
+</ol>
+<p>&hellip;..</p>
+<p>其他:</p>
+<pre><code>- 高可用的
+- 在 in-place update 功能完成后可以自动支持。（我们关注的重点之一）
+</code></pre>
+<h3 id="设计">设计</h3>
+<ol>
+<li>添加了一个 新的 API Server资源<code>vertialPodAutoscaler</code>,  包含了一个<strong>label selector</strong>去筛选 pod，使用 <strong>resources policy</strong>控制如何将pod 的配置更新， 并且给出 给出推荐的 pod resource 配置。</li>
+<li>一个新的组件 <strong>VPA Recommender</strong> ， 响应 集群所有的 pod 资源负载信号， 和 OOM信号。</li>
+</ol>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="http://blog.heyuhua.com/tags/k8s/">k8s</a>
+
+  <a class="tag tag--primary tag--small" href="http://blog.heyuhua.com/tags/proposal/">proposal</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2018/01/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E5%8F%8A%E6%9D%BF%E5%BC%8F%E4%B9%A6%E5%86%99%E5%A4%87%E5%BF%98/" data-tooltip="代码高亮及板式书写备忘">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2018/01/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E5%8F%8A%E6%9D%BF%E5%BC%8F%E4%B9%A6%E5%86%99%E5%A4%87%E5%BF%98/" data-tooltip="代码高亮及板式书写备忘">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fblog.heyuhua.com%2F2020%2F01%2Fvertical-scaling-of-pods-pod%25E7%2583%25AD%25E7%25BC%25A9%25E6%2594%25BE%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fblog.heyuhua.com%2F2020%2F01%2Fvertical-scaling-of-pods-pod%25E7%2583%25AD%25E7%25BC%25A9%25E6%2594%25BE%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http%3A%2F%2Fblog.heyuhua.com%2F2020%2F01%2Fvertical-scaling-of-pods-pod%25E7%2583%25AD%25E7%25BC%25A9%25E6%2594%25BE%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">vici</h4>
+    
+      <div id="about-card-bio">极度选择困难. <strong>懒癌晚期</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        software enginer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Shenzhen | Beijing | Shanghai
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('http://qiniu.heyuhua.com/India1.little.jpg!huge.webp');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="http://blog.heyuhua.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="http://qiniu.heyuhua.com/highlight.pack.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'http:\/\/blog.heyuhua.com\/2020\/01\/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE\/';
+          
+            this.page.identifier = '\/2020\/01\/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'vici_blog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

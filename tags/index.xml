@@ -6,10 +6,28 @@
     <description>Recent content in Tags on vici&#39;blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 16 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jan 2020 11:30:34 +0800</lastBuildDate>
     
 	<atom:link href="http://blog.heyuhua.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>k8s</title>
+      <link>http://blog.heyuhua.com/tags/k8s/</link>
+      <pubDate>Thu, 09 Jan 2020 11:30:34 +0800</pubDate>
+      
+      <guid>http://blog.heyuhua.com/tags/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>proposal</title>
+      <link>http://blog.heyuhua.com/tags/proposal/</link>
+      <pubDate>Thu, 09 Jan 2020 11:30:34 +0800</pubDate>
+      
+      <guid>http://blog.heyuhua.com/tags/proposal/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>blog</title>
