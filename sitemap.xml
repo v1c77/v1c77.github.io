@@ -8,12 +8,12 @@
   </url>
   
   <url>
-    <loc>http://blog.heyuhua.com/categories/category/</loc>
+    <loc>http://blog.heyuhua.com/categories/develop/</loc>
     <lastmod>2020-01-14T11:35:58+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.heyuhua.com/2020/01/k8s-kubelet-cgroup/</loc>
+    <loc>http://blog.heyuhua.com/2020/01/kubelet-cgroup-%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B/</loc>
     <lastmod>2020-01-14T11:35:58+08:00</lastmod>
   </url>
   
@@ -23,33 +23,8 @@
   </url>
   
   <url>
-    <loc>http://blog.heyuhua.com/categories/subcategory/</loc>
-    <lastmod>2020-01-14T11:35:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.heyuhua.com/tags/tag1/</loc>
-    <lastmod>2020-01-14T11:35:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.heyuhua.com/tags/tag2/</loc>
-    <lastmod>2020-01-14T11:35:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.heyuhua.com/tags/</loc>
-    <lastmod>2020-01-14T11:35:58+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.heyuhua.com/</loc>
     <lastmod>2020-01-14T11:35:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.heyuhua.com/categories/develop/</loc>
-    <lastmod>2020-01-09T11:30:34+08:00</lastmod>
   </url>
   
   <url>
@@ -59,6 +34,11 @@
   
   <url>
     <loc>http://blog.heyuhua.com/tags/proposal/</loc>
+    <lastmod>2020-01-09T11:30:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.heyuhua.com/tags/</loc>
     <lastmod>2020-01-09T11:30:34+08:00</lastmod>
   </url>
   
