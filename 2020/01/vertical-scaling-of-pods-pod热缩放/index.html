@@ -9,13 +9,13 @@
 <meta name="author" content="vici">
 <meta name="keywords" content="scale, k8s, auto, resource, vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
-Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目作者。
 
 OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
 
 
 <meta property="og:description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
-Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目作者。
 
 OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
 <meta property="og:type" content="article">
@@ -25,11 +25,11 @@ OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少
 <meta property="twitter:url" content="http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/">
 <meta property="og:site_name" content="vici&#39;blog">
 <meta property="og:description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
-Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目作者。
 
 OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
 <meta name="twitter:description" content="这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.
-Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。
+Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目作者。
 
 OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。">
 <meta property="og:locale" content="zh-cn">
@@ -281,7 +281,7 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.</p>
-<p>Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目的贡献者。</p>
+<p>Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目作者。</p>
 <hr>
 <p>OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。</p>
 <p>Vertical pod auto scaler， <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/verticalpodautoscaler?hl=zh-cn">GKE 文档</a> 有详细的中文介绍， 社区一般将该功能简称为 VPA.  设计目的是为了能够调整 pod CPU / Memory 的request limit限制。</p>
@@ -416,6 +416,7 @@ type VerticalPodAutoscalerStatus {
 </ol>
 <h5 id="resource-policy">Resource Policy</h5>
 <p>资源上下限。自动伸缩波动范围 threshold.</p>
+<p>写到这里应该是差不多了。 后面的实现细节并不设计 resource in-place update 相关内容。</p>
               
             </div>
           </div>
@@ -442,7 +443,7 @@ type VerticalPodAutoscalerStatus {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2020/01/k8s-kubelet-cgroup/" data-tooltip="K8s Kubelet Cgroup">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -528,7 +529,7 @@ type VerticalPodAutoscalerStatus {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2020/01/k8s-kubelet-cgroup/" data-tooltip="K8s Kubelet Cgroup">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
