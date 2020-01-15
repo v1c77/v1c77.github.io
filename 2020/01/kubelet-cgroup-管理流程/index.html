@@ -562,6 +562,83 @@ if !kl.podIsTerminated(pod) {
     </tbody>
   </table>
 </figure>
+<p>上述流程我们需要关注的是 如下几个流程</p>
+<blockquote>
+<p>syncPod  -&gt; kl.containerManager.NewPodContainerManager() -&gt; pcm.Exists(pod) -&gt; kl.containerManager.UpdateQOSCgroups()</p>
+</blockquote>
+<p><code>NewPodContainerManager</code> 并没有实质性的cgroup操作，紧跟着的判断 <code>Exists(pod)</code>-&gt; <code>GetPodContainerName</code>函数调用会尝试获取 当前 pod应当存在的 cgroup路径。并检查 pod 对应cgroup的存在。</p>
+<p>如果发现不存在  对应cgroup 则进入创建流程 【创建cgroup 发生在 pod其他资源创建前】，  即 <code>UpdateQOSChroups</code>:</p>
+<p>还函数会进行：</p>
+<ul>
+<li><code>setCPUCgroupConfig</code>  比如说保证 BestEffort  pod cpu share =2; 计算 Burst.slice 路径 cpu shares 设置应该为  <strong>所有 burstable_pod_CPU_request</strong> 的和。</li>
+</ul>
+<ul>
+<li><code>setMemoryReserve</code> 取决于是否开启了特性功能 <strong>QOSReserved</strong>, 该功能会为  <strong>Burstable</strong> 和 <strong>BestEffort</strong> pod slice 设置 可用内存上限， 基于实时计算的各个类型的 pod的 内存使用状况。  【暂定默认关闭】</li>
+<li><code>setHugePagesConfig</code> 根据功能开关设置 hugepage 用量。【暂定默认关闭】</li>
+</ul>
+<p>上述动作完成后 将会执行 pod 粒度 的 cgroup  创建， 更新操作 <code>EnsureExists</code></p>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight golang language-golang">
+  <figcaption>
+    
+      <span>pod_container_manager_linux.go</span><a href="https://github.com/kubernetes/kubernetes/blob/v1.17.0/pkg/kubelet/cm/pod_container_manager_linux.go#L76" target="_blank" rel="external">pkg/kubelet/cm/pod_container_manager_linux.go#L76</a>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-golang"><code class="golang">// EnsureExists takes a pod as argument and makes sure that
+// pod cgroup exists if qos cgroup hierarchy flag is enabled.
+// If the pod level container doesn&#39;t already exist it is created.
+func (m *podContainerManagerImpl) EnsureExists(pod *v1.Pod) error {
+	podContainerName, _ := m.GetPodContainerName(pod)
+	// check if container already exist
+	alreadyExists := m.Exists(pod)
+	if !alreadyExists {
+		// Create the pod container
+		containerConfig := &amp;CgroupConfig{
+			Name:               podContainerName,
+			ResourceParameters: ResourceConfigForPod(pod, m.enforceCPULimits, m.cpuCFSQuotaPeriod),
+		}
+		if utilfeature.DefaultFeatureGate.Enabled(kubefeatures.SupportPodPidsLimit) &amp;&amp; m.podPidsLimit &gt; 0 {
+			containerConfig.ResourceParameters.PidsLimit = &amp;m.podPidsLimit
+		}
+		if err := m.cgroupManager.Create(containerConfig); err != nil {
+			return fmt.Errorf(&#34;failed to create container for %v : %v&#34;, podContainerName, err)
+		}
+	}
+	// Apply appropriate resource limits on the pod container
+	// Top level qos containers limits are not updated
+	// until we figure how to maintain the desired state in the kubelet.
+	// Because maintaining the desired state is difficult without checkpointing.
+	if err := m.applyLimits(pod); err != nil {
+		return fmt.Errorf(&#34;failed to apply resource limits on container for %v : %v&#34;, podContainerName, err)
+	}
+	return nil
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
               
             </div>
           </div>
