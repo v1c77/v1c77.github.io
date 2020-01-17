@@ -977,7 +977,7 @@ type LinuxPodSandboxConfig struct {
   </table>
 </figure></p>
 <h2 id="写在最后">写在最后</h2>
-<p>libvirt 已经实现了完整的 cgroup 抽象， 但是缺少完整的 cgroup 管理流程，如果想要通过 cgroup将 vm  资源抽象 并与  Pod 的资源做统一管理， 我们在前端 （kubelet） 及  对应的 后端 （VRI） 设计完整的   cgroup 生命周期管理。</p>
+<p>libvirt 已经实现了完整的 cgroup 抽象， 但是缺少完整的 cgroup 管理流程，如果想要通过 cgroup将 vm  资源抽象 并与  Pod 的资源做统一管理， 我们在前端 （kubelet） 及  对应的 后端 （VRI） 设计完整的   cgroup 操作流程。</p>
 <h3 id="参考">参考:</h3>
 <ol>
 <li><a href="https://github.com/kubernetes/kubernetes">  k8s </a></li>
