@@ -2,10 +2,30 @@
 <html lang="zh-cn">
   <head>
     
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"http:\/\/blog.heyuhua.com",
+  "author": {
+    "@type": "Person",
+    "name": "vici",
+    
+    "image": "https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14"
+    
+  },
+  "name":"何育华的日记",
+  "description":"\u003cp\u003e本事借的钱，为什么要还？\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e此文章脱胎于我在stackoverflow的某回答\u003c\/p\u003e\n\u003c\/blockquote\u003e",
+  "url":"http:\/\/blog.heyuhua.com\/2016\/11\/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC\/",
+  "keywords":"[, vici, blog, heyuhua.com, 何育华, v1c77]"
+}
+
+</script>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="vici">
 <meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="本事借的钱，为什么要还？
@@ -67,12 +87,12 @@
 
 
 
-
-
-
-
   <meta property="og:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=640">
+
+
+
+
 
 
     <title>celery任务分发-术业有专攻的worker们</title>
@@ -85,12 +105,12 @@
     <link rel="canonical" href="http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     
-    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    <link rel="stylesheet" href="http://blog.heyuhua.com/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
     
     
 
@@ -117,12 +137,12 @@ if (!doNotTrack) {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="http://blog.heyuhua.com/">何育华的日记</a>
+    <a class="header-title-link" href="http://blog.heyuhua.com/" aria-label="去首页">何育华的日记</a>
   </div>
   
     
       <a class="header-right-icon st-search-show-outputs"
-         href="http://blog.heyuhua.com/#search">
+         href="http://blog.heyuhua.com/#search" aria-label="打开链接: /#search">
     
     
       <i class="fa fa-lg fa-search"></i>
@@ -136,7 +156,7 @@ if (!doNotTrack) {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="http://blog.heyuhua.com/#about">
+        <a href="http://blog.heyuhua.com/#about" aria-label="阅读有关作者的更多信息">
           <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
         </a>
         <h4 class="sidebar-profile-name">vici</h4>
@@ -149,7 +169,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="http://blog.heyuhua.com/">
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/" title="Home">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -159,7 +179,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="http://blog.heyuhua.com/categories">
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/categories" title="Categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -169,7 +189,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="http://blog.heyuhua.com/tags">
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/tags" title="Tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -179,7 +199,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="http://blog.heyuhua.com/archives">
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/archives" title="Archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -189,7 +209,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="http://blog.heyuhua.com/#about">
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/#about" title="About">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -203,7 +223,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/v1c77" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/v1c77" target="_blank" rel="noopener" title="GitHub">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -213,7 +233,7 @@ if (!doNotTrack) {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://stackoverflow.com/users/6382035/vi-ci" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/6382035/vi-ci" target="_blank" rel="noopener" title="Stack Overflow">
     
       <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
       
@@ -227,7 +247,7 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="http://blog.heyuhua.com/index.xml">
+      <a class="sidebar-button-link " href="http://blog.heyuhua.com/index.xml" title="RSS">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -246,19 +266,19 @@ if (!doNotTrack) {
         class="
                hasCoverMetaIn
                ">
-        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        <article class="post" id="top">
           
           
             <div class="post-header main-content-wrap text-left">
   
-    <h1 class="post-title" itemprop="headline">
+    <h1 class="post-title">
       celery任务分发-术业有专攻的worker们
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2016-11-29T00:00:00Z">
+      <time datetime="2016-11-29T00:00:00Z">
         
   十一月 29, 2016
 
@@ -277,7 +297,7 @@ if (!doNotTrack) {
 
 </div>
           
-          <div class="post-content markdown" itemprop="articleBody">
+          <div class="post-content markdown">
             <div class="main-content-wrap">
               <p>本事借的钱，为什么要还？</p>
 <blockquote>
@@ -337,6 +357,8 @@ def sub():
 </code></pre><p>通过这样的绑定即可实现worker的术业专攻，并通过上下文控制（with）独占资源的锁</p>
 <p>老哥稳！</p>
               
+
+
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
@@ -355,82 +377,73 @@ def sub():
                 
               
             
-            <div class="post-actions-wrap">
-  
-      <nav >
-        <ul class="post-actions post-action-nav">
-          
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" data-tooltip="vim使用技巧">
-              
-                  <i class="fa fa-angle-left"></i>
-                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-tooltip="为什么要开个人博客">
-              
-                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-          
-        </ul>
-      </nav>
-    <ul class="post-actions post-action-share" >
-      
-        <li class="post-action hide-lg hide-md hide-sm">
-          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-            <i class="fa fa-share-alt"></i>
-          </a>
-        </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        
-      
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
       
         <li class="post-action">
-          <a class="post-action-btn btn btn--default" href="#disqus_thread">
-            <i class="fa fa-comment-o"></i>
-          </a>
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" data-tooltip="vim使用技巧" aria-label="下一篇: vim使用技巧">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-tooltip="为什么要开个人博客" aria-label="上一篇: 为什么要开个人博客">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
         </li>
       
-      <li class="post-action">
-        
-          <a class="post-action-btn btn btn--default" href="#">
-        
-          <i class="fa fa-list"></i>
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fa-facebook-official" aria-hidden="true"></i>
         </a>
       </li>
-    </ul>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
   
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
 </div>
 
+
             
-              
-                <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-              
-            
+  
+
+
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
@@ -441,107 +454,104 @@ def sub():
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-        <div class="post-actions-wrap">
-  
-      <nav >
-        <ul class="post-actions post-action-nav">
-          
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" data-tooltip="vim使用技巧">
-              
-                  <i class="fa fa-angle-left"></i>
-                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-tooltip="为什么要开个人博客">
-              
-                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-          
-        </ul>
-      </nav>
-    <ul class="post-actions post-action-share" >
-      
-        <li class="post-action hide-lg hide-md hide-sm">
-          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-            <i class="fa fa-share-alt"></i>
-          </a>
-        </li>
         
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        
-      
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
       
         <li class="post-action">
-          <a class="post-action-btn btn btn--default" href="#disqus_thread">
-            <i class="fa fa-comment-o"></i>
-          </a>
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" data-tooltip="vim使用技巧" aria-label="下一篇: vim使用技巧">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="http://blog.heyuhua.com/2016/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-tooltip="为什么要开个人博客" aria-label="上一篇: 为什么要开个人博客">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
         </li>
       
-      <li class="post-action">
-        
-          <a class="post-action-btn btn btn--default" href="#">
-        
-          <i class="fa fa-list"></i>
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fa-facebook-official" aria-hidden="true"></i>
         </a>
       </li>
-    </ul>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.heyuhua.com/2016/11/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
   
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
 </div>
 
+
       </div>
-      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fblog.heyuhua.com%2F2016%2F11%2Fcelery%25E4%25BB%25BB%25E5%258A%25A1%25E5%2588%2586%25E5%258F%2591-%25E6%259C%25AF%25E4%25B8%259A%25E6%259C%2589%25E4%25B8%2593%25E6%2594%25BB%25E7%259A%2584worker%25E4%25BB%25AC%2F">
-          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fblog.heyuhua.com%2F2016%2F11%2Fcelery%25E4%25BB%25BB%25E5%258A%25A1%25E5%2588%2586%25E5%258F%2591-%25E6%259C%25AF%25E4%25B8%259A%25E6%259C%2589%25E4%25B8%2593%25E6%2594%25BB%25E7%259A%2584worker%25E4%25BB%25AC%2F" aria-label="分享到 Facebook">
+          <i class="fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fblog.heyuhua.com%2F2016%2F11%2Fcelery%25E4%25BB%25BB%25E5%258A%25A1%25E5%2588%2586%25E5%258F%2591-%25E6%259C%25AF%25E4%25B8%259A%25E6%259C%2589%25E4%25B8%2593%25E6%2594%25BB%25E7%259A%2584worker%25E4%25BB%25AC%2F">
-          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fblog.heyuhua.com%2F2016%2F11%2Fcelery%25E4%25BB%25BB%25E5%258A%25A1%25E5%2588%2586%25E5%258F%2591-%25E6%259C%25AF%25E4%25B8%259A%25E6%259C%2589%25E4%25B8%2593%25E6%2594%25BB%25E7%259A%2584worker%25E4%25BB%25AC%2F" aria-label="分享到 Twitter">
+          <i class="fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http%3A%2F%2Fblog.heyuhua.com%2F2016%2F11%2Fcelery%25E4%25BB%25BB%25E5%258A%25A1%25E5%2588%2586%25E5%258F%2591-%25E6%259C%25AF%25E4%25B8%259A%25E6%259C%2589%25E4%25B8%2593%25E6%2594%25BB%25E7%259A%2584worker%25E4%25BB%25AC%2F">
-          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http%3A%2F%2Fblog.heyuhua.com%2F2016%2F11%2Fcelery%25E4%25BB%25BB%25E5%258A%25A1%25E5%2588%2586%25E5%258F%2591-%25E6%259C%25AF%25E4%25B8%259A%25E6%259C%2589%25E4%25B8%2593%25E6%2594%25BB%25E7%259A%2584worker%25E4%25BB%25AC%2F" aria-label="分享到 Google&#43;">
+          <i class="fa-google-plus" aria-hidden="true"></i><span>分享到 Google&#43;</span>
         </a>
       </li>
     
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
+
+
     </div>
     
     <div id="about">
   <div id="about-card">
     <div id="about-btn-close">
-      <i class="fa fa-remove"></i>
+      <i class="fa fa-times"></i>
     </div>
     
       <img id="about-card-picture" src="https://www.gravatar.com/avatar/85d1ea47d48692ca0ade206fa656bd14?s=110" alt="作者的图片" />
@@ -559,7 +569,7 @@ def sub():
     
     
       <div id="about-card-location">
-        <i class="fa fa-map-marker"></i>
+        <i class="fa fa-map-marker-alt"></i>
         <br/>
         Shenzhen | Beijing | Shanghai
       </div>
@@ -576,34 +586,20 @@ def sub():
 
 
     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-<script src="http://blog.heyuhua.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+<script src="http://blog.heyuhua.com/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
 
 
   
     <script src="http://qiniu.heyuhua.com/highlight.pack.js"></script>
   
 
-<script lang="javascript">
-window.onload = updateMinWidth;
-window.onresize = updateMinWidth;
-document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
-function updateMinWidth() {
-  var sidebar = document.getElementById("sidebar");
-  var main = document.getElementById("main");
-  main.style.minWidth = "";
-  var w1 = getComputedStyle(main).getPropertyValue("min-width");
-  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
-  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
-  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
-}
-</script>
 
 <script>
 $(document).ready(function() {
@@ -616,33 +612,6 @@ $(document).ready(function() {
   });
 });
 </script>
-
-
-  
-    
-      <script>
-        var disqus_config = function () {
-          this.page.url = 'http:\/\/blog.heyuhua.com\/2016\/11\/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC\/';
-          
-            this.page.identifier = '\/2016\/11\/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC\/'
-          
-        };
-        (function() {
-          
-          
-          if (window.location.hostname == "localhost") {
-            return;
-          }
-          var d = document, s = d.createElement('script');
-          var disqus_shortname = 'vic1blog';
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      </script>
-    
-  
 
 
 

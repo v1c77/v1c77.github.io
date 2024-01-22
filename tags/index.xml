@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 何育华的日记</title>
+    <link>http://blog.heyuhua.com/tags/</link>
+    <description>Recent content in Tags on 何育华的日记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 09 Jan 2020 11:30:34 +0800</lastBuildDate>
+    <atom:link href="http://blog.heyuhua.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k8s</title>
+      <link>http://blog.heyuhua.com/tags/k8s/</link>
+      <pubDate>Thu, 09 Jan 2020 11:30:34 +0800</pubDate>
+      <guid>http://blog.heyuhua.com/tags/k8s/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>proposal</title>
+      <link>http://blog.heyuhua.com/tags/proposal/</link>
+      <pubDate>Thu, 09 Jan 2020 11:30:34 +0800</pubDate>
+      <guid>http://blog.heyuhua.com/tags/proposal/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>blog</title>
+      <link>http://blog.heyuhua.com/tags/blog/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/blog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>memo</title>
+      <link>http://blog.heyuhua.com/tags/memo/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/memo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>raspberrypi</title>
+      <link>http://blog.heyuhua.com/tags/raspberrypi/</link>
+      <pubDate>Mon, 14 Aug 2017 20:48:55 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/raspberrypi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>shortcuts</title>
+      <link>http://blog.heyuhua.com/tags/shortcuts/</link>
+      <pubDate>Mon, 07 Aug 2017 13:45:06 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/shortcuts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>python</title>
+      <link>http://blog.heyuhua.com/tags/python/</link>
+      <pubDate>Fri, 21 Jul 2017 16:28:18 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>go</title>
+      <link>http://blog.heyuhua.com/tags/go/</link>
+      <pubDate>Fri, 10 Mar 2017 16:20:49 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>docker</title>
+      <link>http://blog.heyuhua.com/tags/docker/</link>
+      <pubDate>Wed, 15 Feb 2017 16:20:14 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>postgre</title>
+      <link>http://blog.heyuhua.com/tags/postgre/</link>
+      <pubDate>Wed, 15 Feb 2017 16:20:14 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/postgre/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>postgre-xl</title>
+      <link>http://blog.heyuhua.com/tags/postgre-xl/</link>
+      <pubDate>Wed, 15 Feb 2017 16:20:14 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/postgre-xl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>aria2c</title>
+      <link>http://blog.heyuhua.com/tags/aria2c/</link>
+      <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/aria2c/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>vim</title>
+      <link>http://blog.heyuhua.com/tags/vim/</link>
+      <pubDate>Sun, 18 Dec 2016 20:55:14 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/vim/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>http://blog.heyuhua.com/tags/linux/</link>
+      <pubDate>Fri, 02 Dec 2016 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>shell</title>
+      <link>http://blog.heyuhua.com/tags/shell/</link>
+      <pubDate>Fri, 02 Dec 2016 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>git</title>
+      <link>http://blog.heyuhua.com/tags/git/</link>
+      <pubDate>Thu, 01 Dec 2016 19:09:25 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>celery</title>
+      <link>http://blog.heyuhua.com/tags/celery/</link>
+      <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/celery/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>test</title>
+      <link>http://blog.heyuhua.com/tags/test/</link>
+      <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/test/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>proxy</title>
+      <link>http://blog.heyuhua.com/tags/proxy/</link>
+      <pubDate>Mon, 28 Nov 2016 17:43:37 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/proxy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>work</title>
+      <link>http://blog.heyuhua.com/tags/work/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>http://blog.heyuhua.com/tags/work/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

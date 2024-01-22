@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>k8s on 何育华的日记</title>
+    <link>http://blog.heyuhua.com/tags/k8s/</link>
+    <description>Recent content in k8s on 何育华的日记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 09 Jan 2020 11:30:34 +0800</lastBuildDate>
+    <atom:link href="http://blog.heyuhua.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vertical Scaling of Pods | pod热缩放</title>
+      <link>http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/</link>
+      <pubDate>Thu, 09 Jan 2020 11:30:34 +0800</pubDate>
+      <guid>http://blog.heyuhua.com/2020/01/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/</guid>
+      <description>&lt;p&gt;这里缅怀 gonum社区的一位杰出贡献者.  Sonia Keys.&lt;/p&gt;&#xA;&lt;p&gt;Sonia 是一位 业余天文学家，在03年被授予太平洋天文学杰出贡献奖。Golang 狂热爱好者， golang社区 数学及图形相关项目作者。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;OCI 协议中定义了 update api，但是上层的 k8s 编排层却一直缺少了相关的 container 热更新机制。在新产品的 技术调研中， kyle发现了上述功能提案，这里详细概括之。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
