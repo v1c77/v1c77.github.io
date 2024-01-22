@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="vici">
 <meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&hellip;
@@ -25,7 +25,7 @@
 <meta name="twitter:title" content="python重修之旅（一）">
 <meta property="og:url" content="http://blog.heyuhua.com/2017/01/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%80/">
 <meta property="twitter:url" content="http://blog.heyuhua.com/2017/01/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%80/">
-<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:site_name" content="何育华的日记">
 <meta property="og:description" content="还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&hellip;
 本宝宝的第一个专题。第三次系统学习python。2017年计划之一。
 
@@ -94,7 +94,7 @@
 
     
       
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -106,7 +106,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     
     
   </head>
@@ -116,7 +115,7 @@ if (!doNotTrack) {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="http://blog.heyuhua.com/">vici&#39;blog</a>
+    <a class="header-title-link" href="http://blog.heyuhua.com/">何育华的日记</a>
   </div>
   
     
@@ -278,169 +277,169 @@ if (!doNotTrack) {
 <h2 id="一道面试题">一道面试题</h2>
 <h3 id="-问题平面上有若干个点点与点可以重合寻找一条直线使其能穿过最多的点好吧我承认这是我去面试时候的面试题">&gt; 问题：平面上有若干个点。点与点可以重合，寻找一条直线，使其能穿过最多的点。(好吧我承认这是我去面试时候的面试题。)</h3>
 <p>搬运答案。。。<a href="http://www.jiuzhang.com/solutions/max-points-on-a-line/#">这里</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">/</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span>
- <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">本</span><span style="color:#960050;background-color:#1e0010">代</span><span style="color:#960050;background-color:#1e0010">码</span><span style="color:#960050;background-color:#1e0010">由</span><span style="color:#960050;background-color:#1e0010">九</span><span style="color:#960050;background-color:#1e0010">章</span><span style="color:#960050;background-color:#1e0010">算</span><span style="color:#960050;background-color:#1e0010">法</span><span style="color:#960050;background-color:#1e0010">编</span><span style="color:#960050;background-color:#1e0010">辑</span><span style="color:#960050;background-color:#1e0010">提</span><span style="color:#960050;background-color:#1e0010">供</span><span style="color:#960050;background-color:#1e0010">。</span><span style="color:#960050;background-color:#1e0010">版</span><span style="color:#960050;background-color:#1e0010">权</span><span style="color:#960050;background-color:#1e0010">所</span><span style="color:#960050;background-color:#1e0010">有</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">转</span><span style="color:#960050;background-color:#1e0010">发</span><span style="color:#960050;background-color:#1e0010">请</span><span style="color:#960050;background-color:#1e0010">注</span><span style="color:#960050;background-color:#1e0010">明</span><span style="color:#960050;background-color:#1e0010">出</span><span style="color:#960050;background-color:#1e0010">处</span><span style="color:#960050;background-color:#1e0010">。</span>
- <span style="color:#f92672">*</span> <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">九</span><span style="color:#960050;background-color:#1e0010">章</span><span style="color:#960050;background-color:#1e0010">算</span><span style="color:#960050;background-color:#1e0010">法</span><span style="color:#960050;background-color:#1e0010">致</span><span style="color:#960050;background-color:#1e0010">力</span><span style="color:#960050;background-color:#1e0010">于</span><span style="color:#960050;background-color:#1e0010">帮</span><span style="color:#960050;background-color:#1e0010">助</span><span style="color:#960050;background-color:#1e0010">更</span><span style="color:#960050;background-color:#1e0010">多</span><span style="color:#960050;background-color:#1e0010">中</span><span style="color:#960050;background-color:#1e0010">国</span><span style="color:#960050;background-color:#1e0010">人</span><span style="color:#960050;background-color:#1e0010">找</span><span style="color:#960050;background-color:#1e0010">到</span><span style="color:#960050;background-color:#1e0010">好</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">工</span><span style="color:#960050;background-color:#1e0010">作</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">教</span><span style="color:#960050;background-color:#1e0010">师</span><span style="color:#960050;background-color:#1e0010">团</span><span style="color:#960050;background-color:#1e0010">队</span><span style="color:#960050;background-color:#1e0010">均</span><span style="color:#960050;background-color:#1e0010">来</span><span style="color:#960050;background-color:#1e0010">自</span><span style="color:#960050;background-color:#1e0010">硅</span><span style="color:#960050;background-color:#1e0010">谷</span><span style="color:#960050;background-color:#1e0010">和</span><span style="color:#960050;background-color:#1e0010">国</span><span style="color:#960050;background-color:#1e0010">内</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">一</span><span style="color:#960050;background-color:#1e0010">线</span><span style="color:#960050;background-color:#1e0010">大</span><span style="color:#960050;background-color:#1e0010">公</span><span style="color:#960050;background-color:#1e0010">司</span><span style="color:#960050;background-color:#1e0010">在</span><span style="color:#960050;background-color:#1e0010">职</span><span style="color:#960050;background-color:#1e0010">工</span><span style="color:#960050;background-color:#1e0010">程</span><span style="color:#960050;background-color:#1e0010">师</span><span style="color:#960050;background-color:#1e0010">。</span>
- <span style="color:#f92672">*</span> <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">现</span><span style="color:#960050;background-color:#1e0010">有</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">面</span><span style="color:#960050;background-color:#1e0010">试</span><span style="color:#960050;background-color:#1e0010">培</span><span style="color:#960050;background-color:#1e0010">训</span><span style="color:#960050;background-color:#1e0010">课</span><span style="color:#960050;background-color:#1e0010">程</span><span style="color:#960050;background-color:#1e0010">包</span><span style="color:#960050;background-color:#1e0010">括</span><span style="color:#960050;background-color:#1e0010">：</span><span style="color:#960050;background-color:#1e0010">九</span><span style="color:#960050;background-color:#1e0010">章</span><span style="color:#960050;background-color:#1e0010">算</span><span style="color:#960050;background-color:#1e0010">法</span><span style="color:#960050;background-color:#1e0010">班</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">系</span><span style="color:#960050;background-color:#1e0010">统</span><span style="color:#960050;background-color:#1e0010">设</span><span style="color:#960050;background-color:#1e0010">计</span><span style="color:#960050;background-color:#1e0010">班</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">算</span><span style="color:#960050;background-color:#1e0010">法</span><span style="color:#960050;background-color:#1e0010">强</span><span style="color:#960050;background-color:#1e0010">化</span><span style="color:#960050;background-color:#1e0010">班</span><span style="color:#960050;background-color:#1e0010">，</span>Java入门与基础算法班<span style="color:#960050;background-color:#1e0010">，</span>Android <span style="color:#960050;background-color:#1e0010">项</span><span style="color:#960050;background-color:#1e0010">目</span><span style="color:#960050;background-color:#1e0010">实</span><span style="color:#960050;background-color:#1e0010">战</span><span style="color:#960050;background-color:#1e0010">班</span><span style="color:#960050;background-color:#1e0010">，</span>Big Data <span style="color:#960050;background-color:#1e0010">项</span><span style="color:#960050;background-color:#1e0010">目</span><span style="color:#960050;background-color:#1e0010">实</span><span style="color:#960050;background-color:#1e0010">战</span><span style="color:#960050;background-color:#1e0010">班</span><span style="color:#960050;background-color:#1e0010">，</span>
- <span style="color:#f92672">*</span> <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">更</span><span style="color:#960050;background-color:#1e0010">多</span><span style="color:#960050;background-color:#1e0010">详</span><span style="color:#960050;background-color:#1e0010">情</span><span style="color:#960050;background-color:#1e0010">请</span><span style="color:#960050;background-color:#1e0010">见</span><span style="color:#960050;background-color:#1e0010">官</span><span style="color:#960050;background-color:#1e0010">方</span><span style="color:#960050;background-color:#1e0010">网</span><span style="color:#960050;background-color:#1e0010">站</span><span style="color:#960050;background-color:#1e0010">：</span>http:<span style="color:#f92672">/</span><span style="color:#f92672">/</span>www<span style="color:#f92672">.</span>jiuzhang<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">?</span>source<span style="color:#f92672">=</span>code
- <span style="color:#f92672">*</span><span style="color:#f92672">/</span>
-
-<span style="color:#75715e"># Definition for a point.</span>
-<span style="color:#75715e"># class Point:</span>
-<span style="color:#75715e">#     def __init__(self, a=0, b=0):</span>
-<span style="color:#75715e">#         self.x = a</span>
-<span style="color:#75715e">#         self.y = b</span>
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
-    <span style="color:#75715e"># @param {int[]} points an array of point</span>
-    <span style="color:#75715e"># @return {int} an integer</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">maxPoints</span>(self, points):
-        <span style="color:#75715e"># Write your code here</span>
-        len_points <span style="color:#f92672">=</span> len(points)
-        <span style="color:#66d9ef">if</span> len_points <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>:
-            <span style="color:#66d9ef">return</span> len_points
-        max_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">for</span> index1 <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len_points):
-            p1 <span style="color:#f92672">=</span> points[index1]
-            gradients <span style="color:#f92672">=</span> {}
-            infinite_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-            duplicate_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-            <span style="color:#66d9ef">for</span> index2 <span style="color:#f92672">in</span> range(index1, len_points):
-                p2 <span style="color:#f92672">=</span> points[index2]
-                dx <span style="color:#f92672">=</span> p2<span style="color:#f92672">.</span>x <span style="color:#f92672">-</span> p1<span style="color:#f92672">.</span>x
-                dy <span style="color:#f92672">=</span> p2<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> p1<span style="color:#f92672">.</span>y
-                <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> dx <span style="color:#f92672">and</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> dy:
-                    duplicate_count <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-                <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> dx:
-                    infinite_count <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-                <span style="color:#66d9ef">else</span>:
-                    g <span style="color:#f92672">=</span> float(dy) <span style="color:#f92672">/</span> dx
-                    gradients[g] <span style="color:#f92672">=</span> (gradients[g] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> gradients<span style="color:#f92672">.</span>has_key(g) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">1</span>)
-            <span style="color:#66d9ef">if</span> infinite_count <span style="color:#f92672">&gt;</span> max_count:
-                max_count <span style="color:#f92672">=</span> infinite_count
-            <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> gradients<span style="color:#f92672">.</span>items():
-                v <span style="color:#f92672">+</span><span style="color:#f92672">=</span> duplicate_count
-                <span style="color:#66d9ef">if</span> v <span style="color:#f92672">&gt;</span> max_count:
-                    max_count <span style="color:#f92672">=</span> v
-        <span style="color:#66d9ef">return</span> max_count
-</code></pre></div><h2 id="图的python实现">图的python实现</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> fractions <span style="color:#f92672">import</span> Fraction
-<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> deque
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Vertex</span>(object):
-    <span style="color:#75715e"># 原生点 对象</span>
-    <span style="color:#66d9ef">def</span> __init__(self, x, y):
-        self<span style="color:#f92672">.</span>x <span style="color:#f92672">=</span> x
-        self<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> y
-
-    <span style="color:#66d9ef">def</span> __repr__(self):
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">({}, {})</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>x, self<span style="color:#f92672">.</span>y)
-
-    __str__ <span style="color:#f92672">=</span> __repr__
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Edge</span>(tuple):
-    <span style="color:#75715e"># 继承自建tuple类型并重写new方法</span>
-    <span style="color:#66d9ef">def</span> __new__(cls, e1, e2):
-        <span style="color:#66d9ef">return</span> tuple<span style="color:#f92672">.</span>__new__(cls, (e1, e2))
-
-    <span style="color:#66d9ef">def</span> __repr__(self):
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Edge(</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (repr(self[<span style="color:#ae81ff">0</span>]), repr(self[<span style="color:#ae81ff">1</span>]))
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Graph</span>(dict):
-
-    <span style="color:#66d9ef">def</span> __init__(self, vs<span style="color:#f92672">=</span>[], es<span style="color:#f92672">=</span>[]):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 建立一个新的图，(vs)为顶点vertices列表，(es)为边缘edges列表 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> vs:
-            self<span style="color:#f92672">.</span>add_vertex(v)
-        <span style="color:#66d9ef">for</span> e <span style="color:#f92672">in</span> es:
-            self<span style="color:#f92672">.</span>add_edge(e)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_vertex</span>(self, v):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 添加顶点 v:  使用字典结构</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        self[v] <span style="color:#f92672">=</span> {}
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_edge</span>(self, e):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 添加边缘 e: e 为一个元组(v,w)</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">            在两个顶点 w 和 v 之间添加成员e ，如果两个顶点之间已有边缘，则替换之 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        v, w <span style="color:#f92672">=</span> e
-        <span style="color:#75715e"># 由于一条边会产生两个项目，因此该实现代表了一个无向图</span>
-        self[v][w] <span style="color:#f92672">=</span> e
-        self[w][v] <span style="color:#f92672">=</span> e
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_edge</span>(self, v1, v2):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 接收两个顶点，则返回这条边，否则返回None </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">try</span>:
-            <span style="color:#66d9ef">return</span> self[v1][v2]
-        <span style="color:#66d9ef">except</span>:
-            <span style="color:#66d9ef">return</span> None
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">vertices</span>(self):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 返回图中所有顶点的列表 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>keys()
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edges</span>(self):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 返回图中边的列表 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        es <span style="color:#f92672">=</span> set()  <span style="color:#75715e"># 为了避免返回重复的边，设为集合</span>
-        <span style="color:#66d9ef">for</span> v1 <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>vertices():
-            <span style="color:#66d9ef">for</span> v2 <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>vertices():
-                es<span style="color:#f92672">.</span>add(self<span style="color:#f92672">.</span>get_edge(v2, v1))
-
-        es<span style="color:#f92672">.</span>discard(None)  <span style="color:#75715e"># 若集合中存在None元素,则删除 无向图可以不用写这步</span>
-        <span style="color:#66d9ef">return</span> list(es)
-
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_all_edges</span>(self, vs<span style="color:#f92672">=</span>None):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 从一个无边的图开始，通过在各个顶点间添加边来生成一个完全图</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">            输入为目标顶点的列表，如果为None,则对所有的点进行全联结 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">if</span> vs <span style="color:#f92672">is</span> None:
-            vs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>vertices()
-        <span style="color:#66d9ef">for</span> v1 <span style="color:#f92672">in</span> vs:
-            <span style="color:#66d9ef">for</span> v2 <span style="color:#f92672">in</span> vs:
-                <span style="color:#66d9ef">if</span> v1 <span style="color:#f92672">is</span> v2:
-                    <span style="color:#66d9ef">continue</span>  <span style="color:#75715e"># 假设不存在单顶点连通</span>
-                self<span style="color:#f92672">.</span>add_edge(Edge(v1, v2))
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bfs</span>(self):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">        广度优先搜索</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#75715e"># parents 记录所有可达节点与对应的父节点，这里是一个字典，我们将其 可达节点 作为 key，而将其 父节点 作为 value</span>
-        <span style="color:#75715e"># query_queue 是用来存放待探索节点的 to-do 列表，这里是一个 FIFO</span>
-
-
-        node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>vertices()[<span style="color:#ae81ff">0</span>]
-        parents, query_queue <span style="color:#f92672">=</span> {node: None}, deque([node])
-
-        <span style="color:#66d9ef">while</span> query_queue:
-            <span style="color:#75715e"># 总是从 FIFO 的左侧弹出待探索的节点</span>
-            q_node <span style="color:#f92672">=</span> query_queue<span style="color:#f92672">.</span>popleft()
-
-            <span style="color:#66d9ef">for</span> neighbor <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>out_vertices(q_node):
-                <span style="color:#66d9ef">if</span> neighbor <span style="color:#f92672">in</span> parents:
-                    <span style="color:#66d9ef">continue</span>
-
-                <span style="color:#75715e"># 记录探索到的邻居节点及其父节点</span>
-                parents[neighbor] <span style="color:#f92672">=</span> q_node
-
-                <span style="color:#75715e"># 将其邻居节点推入 to-do 列表</span>
-                query_queue<span style="color:#f92672">.</span>append(neighbor)
-
-        <span style="color:#75715e">#如果想只得到点的话 可以</span>
-        <span style="color:#75715e"># return prints.key()</span>
-
-        <span style="color:#66d9ef">return</span> parents
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">out_vertices</span>(self, v):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 接受一个Vertex并返回邻近顶点（通过一条边连接到给定节点的节点）的列表 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">return</span> self[v]<span style="color:#f92672">.</span>keys()
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">out_edges</span>(self, v):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 接受一个Vertex并返回连接到给定节点的边的列表 </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">return</span> self[v]<span style="color:#f92672">.</span>values()
-</code></pre></div><h2 id="socket">socket</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">/**</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> 本代码由九章算法编辑提供<span style="color:#960050;background-color:#1e0010">。</span>版权所有<span style="color:#960050;background-color:#1e0010">，</span>转发请注明出处<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span> 九章算法致力于帮助更多中国人找到好的工作<span style="color:#960050;background-color:#1e0010">，</span>教师团队均来自硅谷和国内的一线大公司在职工程师<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span> 现有的面试培训课程包括<span style="color:#960050;background-color:#1e0010">：</span>九章算法班<span style="color:#960050;background-color:#1e0010">，</span>系统设计班<span style="color:#960050;background-color:#1e0010">，</span>算法强化班<span style="color:#960050;background-color:#1e0010">，</span>Java入门与基础算法班<span style="color:#960050;background-color:#1e0010">，</span>Android 项目实战班<span style="color:#960050;background-color:#1e0010">，</span>Big Data 项目实战班<span style="color:#960050;background-color:#1e0010">，</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span> 更多详情请见官方网站<span style="color:#960050;background-color:#1e0010">：</span>http:<span style="color:#f92672">//</span>www<span style="color:#f92672">.</span>jiuzhang<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">?</span>source<span style="color:#f92672">=</span>code
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Definition for a point.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># class Point:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     def __init__(self, a=0, b=0):</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         self.x = a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         self.y = b</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># @param {int[]} points an array of point</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># @return {int} an integer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">maxPoints</span>(self, points):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Write your code here</span>
+</span></span><span style="display:flex;"><span>        len_points <span style="color:#f92672">=</span> len(points)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len_points <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> len_points
+</span></span><span style="display:flex;"><span>        max_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> index1 <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len_points):
+</span></span><span style="display:flex;"><span>            p1 <span style="color:#f92672">=</span> points[index1]
+</span></span><span style="display:flex;"><span>            gradients <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>            infinite_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            duplicate_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> index2 <span style="color:#f92672">in</span> range(index1, len_points):
+</span></span><span style="display:flex;"><span>                p2 <span style="color:#f92672">=</span> points[index2]
+</span></span><span style="display:flex;"><span>                dx <span style="color:#f92672">=</span> p2<span style="color:#f92672">.</span>x <span style="color:#f92672">-</span> p1<span style="color:#f92672">.</span>x
+</span></span><span style="display:flex;"><span>                dy <span style="color:#f92672">=</span> p2<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> p1<span style="color:#f92672">.</span>y
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> dx <span style="color:#f92672">and</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> dy:
+</span></span><span style="display:flex;"><span>                    duplicate_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> dx:
+</span></span><span style="display:flex;"><span>                    infinite_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    g <span style="color:#f92672">=</span> float(dy) <span style="color:#f92672">/</span> dx
+</span></span><span style="display:flex;"><span>                    gradients[g] <span style="color:#f92672">=</span> (gradients[g] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> gradients<span style="color:#f92672">.</span>has_key(g) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> infinite_count <span style="color:#f92672">&gt;</span> max_count:
+</span></span><span style="display:flex;"><span>                max_count <span style="color:#f92672">=</span> infinite_count
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> gradients<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>                v <span style="color:#f92672">+=</span> duplicate_count
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> v <span style="color:#f92672">&gt;</span> max_count:
+</span></span><span style="display:flex;"><span>                    max_count <span style="color:#f92672">=</span> v
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> max_count
+</span></span></code></pre></div><h2 id="图的python实现">图的python实现</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> fractions <span style="color:#f92672">import</span> Fraction
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> deque
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Vertex</span>(object):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 原生点 对象</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, x, y):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>x <span style="color:#f92672">=</span> x
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __repr__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;(</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">)&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>x, self<span style="color:#f92672">.</span>y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    __str__ <span style="color:#f92672">=</span> __repr__
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Edge</span>(tuple):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 继承自建tuple类型并重写new方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __new__(cls, e1, e2):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tuple<span style="color:#f92672">.</span>__new__(cls, (e1, e2))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __repr__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Edge(</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#34;</span> <span style="color:#f92672">%</span> (repr(self[<span style="color:#ae81ff">0</span>]), repr(self[<span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Graph</span>(dict):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, vs<span style="color:#f92672">=</span>[], es<span style="color:#f92672">=</span>[]):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 建立一个新的图，(vs)为顶点vertices列表，(es)为边缘edges列表 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> vs:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>add_vertex(v)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> e <span style="color:#f92672">in</span> es:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>add_edge(e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_vertex</span>(self, v):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 添加顶点 v:  使用字典结构&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        self[v] <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_edge</span>(self, e):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 添加边缘 e: e 为一个元组(v,w)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            在两个顶点 w 和 v 之间添加成员e ，如果两个顶点之间已有边缘，则替换之 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        v, w <span style="color:#f92672">=</span> e
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 由于一条边会产生两个项目，因此该实现代表了一个无向图</span>
+</span></span><span style="display:flex;"><span>        self[v][w] <span style="color:#f92672">=</span> e
+</span></span><span style="display:flex;"><span>        self[w][v] <span style="color:#f92672">=</span> e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_edge</span>(self, v1, v2):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 接收两个顶点，则返回这条边，否则返回None &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self[v1][v2]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">vertices</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 返回图中所有顶点的列表 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>keys()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edges</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 返回图中边的列表 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        es <span style="color:#f92672">=</span> set()  <span style="color:#75715e"># 为了避免返回重复的边，设为集合</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> v1 <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>vertices():
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> v2 <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>vertices():
+</span></span><span style="display:flex;"><span>                es<span style="color:#f92672">.</span>add(self<span style="color:#f92672">.</span>get_edge(v2, v1))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        es<span style="color:#f92672">.</span>discard(<span style="color:#66d9ef">None</span>)  <span style="color:#75715e"># 若集合中存在None元素,则删除 无向图可以不用写这步</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> list(es)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_all_edges</span>(self, vs<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 从一个无边的图开始，通过在各个顶点间添加边来生成一个完全图
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            输入为目标顶点的列表，如果为None,则对所有的点进行全联结 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> vs <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>            vs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>vertices()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> v1 <span style="color:#f92672">in</span> vs:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> v2 <span style="color:#f92672">in</span> vs:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> v1 <span style="color:#f92672">is</span> v2:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">continue</span>  <span style="color:#75715e"># 假设不存在单顶点连通</span>
+</span></span><span style="display:flex;"><span>                self<span style="color:#f92672">.</span>add_edge(Edge(v1, v2))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bfs</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        广度优先搜索
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># parents 记录所有可达节点与对应的父节点，这里是一个字典，我们将其 可达节点 作为 key，而将其 父节点 作为 value</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># query_queue 是用来存放待探索节点的 to-do 列表，这里是一个 FIFO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>vertices()[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        parents, query_queue <span style="color:#f92672">=</span> {node: <span style="color:#66d9ef">None</span>}, deque([node])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> query_queue:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 总是从 FIFO 的左侧弹出待探索的节点</span>
+</span></span><span style="display:flex;"><span>            q_node <span style="color:#f92672">=</span> query_queue<span style="color:#f92672">.</span>popleft()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> neighbor <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>out_vertices(q_node):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> neighbor <span style="color:#f92672">in</span> parents:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># 记录探索到的邻居节点及其父节点</span>
+</span></span><span style="display:flex;"><span>                parents[neighbor] <span style="color:#f92672">=</span> q_node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># 将其邻居节点推入 to-do 列表</span>
+</span></span><span style="display:flex;"><span>                query_queue<span style="color:#f92672">.</span>append(neighbor)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#如果想只得到点的话 可以</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># return prints.key()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> parents
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">out_vertices</span>(self, v):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 接受一个Vertex并返回邻近顶点（通过一条边连接到给定节点的节点）的列表 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self[v]<span style="color:#f92672">.</span>keys()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">out_edges</span>(self, v):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34; 接受一个Vertex并返回连接到给定节点的边的列表 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self[v]<span style="color:#f92672">.</span>values()
+</span></span></code></pre></div><h2 id="socket">socket</h2>
 <h2 id="threadprocess">thread／process</h2>
 <blockquote>
 <p>文字部分详见小明明 线程篇 和进程篇</p>
@@ -449,377 +448,376 @@ if (!doNotTrack) {
 <blockquote>
 <p>当前代码版本&mdash;&ndash;》<a href="https://github.com/woailuoli993/test/blob/660297df0614925307bb3272dde6eace19284cf0/dosth/testthread.py">这里</a></p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
-<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
-<span style="color:#75715e"># Created by vici on 22/01/2017</span>
-<span style="color:#f92672">import</span> threading
-<span style="color:#f92672">import</span> platform
-<span style="color:#f92672">import</span> time
-<span style="color:#f92672">import</span> logging
-<span style="color:#f92672">from</span> Queue <span style="color:#f92672">import</span> Queue
-<span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
-
-__doc__ <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 抄董伟明,官方文档，廖雪峰 bogo  。。。。 threading 实验结果记录</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-
-logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>DEBUG,
-                    format<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">%(threadName)-9s</span><span style="color:#e6db74">) |||| </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#39;</span>,)
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timeit</span>(func):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">一个简单的函数时间装饰器</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#f92672">import</span> time
-        start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
-        func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} COST: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(func<span style="color:#f92672">.</span>__name__, end<span style="color:#f92672">-</span>start))
-    <span style="color:#66d9ef">return</span> wrapper
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_thread_itself</span>(arg):
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">threading {} is running! </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>getName()))
-
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">5</span>):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Thread {} &gt;&gt;&gt; {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>getName(), i))
-        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Thread {} end</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>getName()))
-
-    <span style="color:#66d9ef">pass</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
-    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
-        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
-
-
-<span style="color:#a6e22e">@timeit</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nothread</span>():
-    fib(<span style="color:#ae81ff">34</span>)
-    fib(<span style="color:#ae81ff">34</span>)
-
-
-<span style="color:#a6e22e">@timeit</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">withthread</span>():
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">2</span>):
-        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>fib, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">34</span>,))
-        t<span style="color:#f92672">.</span>start()
-
-    main_thread <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
-
-    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> threading<span style="color:#f92672">.</span>enumerate():
-        <span style="color:#66d9ef">if</span> t <span style="color:#f92672">is</span> main_thread:
-            <span style="color:#66d9ef">continue</span>
-        t<span style="color:#f92672">.</span>join()
-
-
-balance <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
-lock <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_balance</span>():
-    <span style="color:#66d9ef">global</span> balance
-    balance <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
-    balance <span style="color:#f92672">-</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">money_laundering</span>(num):
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(num):
-        change_balance()
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">money_laundering_priveate</span>(num):
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(num):
-        lock<span style="color:#f92672">.</span>acquire()
-        <span style="color:#66d9ef">try</span>:
-            change_balance()
-        <span style="color:#66d9ef">finally</span>:
-            lock<span style="color:#f92672">.</span>release()
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lock_is_important</span>():
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    这里的lock是一种互斥的 可重获的 锁 在一个加锁thread进行完之后将会释放。</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    lock 相当于信号量（Sempahore） 为 1</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    <span style="color:#a6e22e">@timeit</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test1</span>():
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Before i go to bank ,I have {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(balance))
-        t1 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2000000</span>,))
-        t2 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4000000</span>,))
-        t1<span style="color:#f92672">.</span>start()
-        t2<span style="color:#f92672">.</span>start()
-        t1<span style="color:#f92672">.</span>join()
-        t2<span style="color:#f92672">.</span>join()
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">after two public_money_laundering, I have {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(balance))
-
-    <span style="color:#a6e22e">@timeit</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test2</span>():
-        <span style="color:#66d9ef">global</span> balance
-        balance <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Before i go to a new bank ,I have {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(balance))
-        t3 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering_priveate, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3000000</span>,))
-        t4 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering_priveate, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3000000</span>,))
-        t3<span style="color:#f92672">.</span>start()
-        t4<span style="color:#f92672">.</span>start()
-        t3<span style="color:#f92672">.</span>join()
-        t4<span style="color:#f92672">.</span>join()
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">after two private money_launderingm I have {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(balance))
-
-    test1()
-    test2()
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer_producer</span>():
-    condition <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Condition()
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>(cond):
-
-        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} start , and waiting for proc</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">.</span>name))
-
-        <span style="color:#66d9ef">with</span> cond:
-            cond<span style="color:#f92672">.</span>wait()
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} making resource avaiable to consumer</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">.</span>name))
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>(cond):
-        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
-
-        <span style="color:#66d9ef">with</span> cond:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} producer acaiable !</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">.</span>name))
-            cond<span style="color:#f92672">.</span>notifyAll() <span style="color:#75715e"># 激活条件</span>
-
-    c1 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cons1</span><span style="color:#e6db74">&#39;</span>, target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(condition,))
-    c2 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">cons2</span><span style="color:#e6db74">&#39;</span>, target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(condition,))
-    p <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">prod</span><span style="color:#e6db74">&#39;</span>, target<span style="color:#f92672">=</span>producer, args<span style="color:#f92672">=</span>(condition,))
-    c1<span style="color:#f92672">.</span>start()
-    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-    c2<span style="color:#f92672">.</span>start()
-    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-    p<span style="color:#f92672">.</span>start()
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumber_producer_event</span>():
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">一个线程发送事件，其他的线程等待事件的触发  生产者消费者模型</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    <span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
-
-    TIMEOUT <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-    eve <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
-    ll <span style="color:#f92672">=</span> []
-    threads <span style="color:#f92672">=</span> []
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>(event, l):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">消费者</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        mt <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>currentThread()
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            event_is_set <span style="color:#f92672">=</span> event<span style="color:#f92672">.</span>wait(TIMEOUT)
-            <span style="color:#66d9ef">if</span> event_is_set:
-                <span style="color:#66d9ef">try</span>:
-                    integer <span style="color:#f92672">=</span> l<span style="color:#f92672">.</span>pop()
-                    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} pop from list by {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(integer, mt<span style="color:#f92672">.</span>name))
-                    event<span style="color:#f92672">.</span>clear()  <span style="color:#75715e"># 重制事件状态</span>
-                <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IndexError</span>:
-                    <span style="color:#66d9ef">pass</span>  <span style="color:#75715e"># 刚启动时容错。</span>
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>(event, l):
-        mt <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>currentThread()
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            integer <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">100</span>)
-            l<span style="color:#f92672">.</span>append(integer)
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} is append to list by {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(integer, mt<span style="color:#f92672">.</span>name))
-            event<span style="color:#f92672">.</span>set()
-            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-
-        <span style="color:#66d9ef">pass</span>
-
-    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">consumer1</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">consumer2</span><span style="color:#e6db74">&#39;</span>):
-        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span>name, target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(eve, ll))
-        t<span style="color:#f92672">.</span>start()
-        threads<span style="color:#f92672">.</span>append(t)
-
-    p <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">producer</span><span style="color:#e6db74">&#39;</span>, target<span style="color:#f92672">=</span>producer, args<span style="color:#f92672">=</span>(eve, ll))
-    p<span style="color:#f92672">.</span>start()
-    threads<span style="color:#f92672">.</span>append(p)
-    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> threads:
-        t<span style="color:#f92672">.</span>join()
-
-    <span style="color:#66d9ef">pass</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer_producer_queue</span>():
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> 有两种模式 priority 优先级模式 LIFOqueue后进先出模式。</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    <span style="color:#75715e"># priority 模式</span>
-    <span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> random
-    <span style="color:#f92672">from</span> Queue <span style="color:#f92672">import</span> PriorityQueue, LifoQueue
-
-    q <span style="color:#f92672">=</span> PriorityQueue()
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(num):
-        <span style="color:#66d9ef">return</span> num <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>():
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            wt <span style="color:#f92672">=</span> random()
-            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">put</span><span style="color:#e6db74">&#39;</span>, wt)
-            q<span style="color:#f92672">.</span>put((double, wt))
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>():
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            task, arg <span style="color:#f92672">=</span> q<span style="color:#f92672">.</span>get()
-            <span style="color:#66d9ef">print</span> arg, task(arg)
-            q<span style="color:#f92672">.</span>task_done()
-
-    <span style="color:#66d9ef">for</span> target <span style="color:#f92672">in</span> (producer, consumer):
-        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>target)
-        t<span style="color:#f92672">.</span>start()
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer_producer_priqueue</span>():
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">priority 优先级队列</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    <span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
-    <span style="color:#f92672">from</span> Queue <span style="color:#f92672">import</span> PriorityQueue
-
-    pri_q <span style="color:#f92672">=</span> PriorityQueue()
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">triple</span>(n):
-        <span style="color:#66d9ef">return</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>():
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            <span style="color:#66d9ef">if</span> pri_q<span style="color:#f92672">.</span>empty():
-                <span style="color:#66d9ef">break</span>
-            pri, target, arg <span style="color:#f92672">=</span> pri_q<span style="color:#f92672">.</span>get()
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">[PRI: {}], {} * 3 = {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(pri, arg, target(arg)))
-            pri_q<span style="color:#f92672">.</span>task_done()
-            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-
-        <span style="color:#66d9ef">pass</span>
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>():
-        count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            <span style="color:#66d9ef">if</span> count <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50</span>:
-                <span style="color:#66d9ef">break</span>
-            pri <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">100</span>)
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">put priority {} </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(pri))
-            pri_q<span style="color:#f92672">.</span>put((pri, triple, pri))
-            count <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">pass</span>
-
-    <span style="color:#66d9ef">for</span> targ <span style="color:#f92672">in</span> (producer, consumer):
-        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>targ)
-        t<span style="color:#f92672">.</span>start()
-        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">daemon_and_not_daemon</span>():
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nd</span>():
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">start!</span><span style="color:#e6db74">&#34;</span>)
-        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">6</span>)
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">end!</span><span style="color:#e6db74">&#34;</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">d</span>():
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">start</span><span style="color:#e6db74">&#34;</span>)
-        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">end</span><span style="color:#e6db74">&#34;</span>)
-
-    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>d, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">deamon</span><span style="color:#e6db74">&#34;</span>)
-    nt <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>nd, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">no-deamon</span><span style="color:#e6db74">&#39;</span>)
-    t<span style="color:#f92672">.</span>setDaemon(True)
-    t<span style="color:#f92672">.</span>start()
-
-    nt<span style="color:#f92672">.</span>start()
-    <span style="color:#75715e"># 论join 的重要性。</span>
-    t<span style="color:#f92672">.</span>join()
-
-
-<span style="color:#75715e"># threading pool &amp;&amp; threading module programing</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quadra</span>(strings):
-    <span style="color:#66d9ef">return</span> str(strings) <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Worker</span>(threading<span style="color:#f92672">.</span>Thread):
-    <span style="color:#66d9ef">def</span> __init__(self, queue):
-        super(Worker, self)<span style="color:#f92672">.</span>__init__()
-        self<span style="color:#f92672">.</span>_q <span style="color:#f92672">=</span> queue
-        self<span style="color:#f92672">.</span>daemon <span style="color:#f92672">=</span> True
-        self<span style="color:#f92672">.</span>start()
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
-        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
-            f, args, kwargs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>get()
-
-            <span style="color:#66d9ef">try</span>:
-                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">USE {} </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
-                <span style="color:#66d9ef">print</span>(f(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs))
-            <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
-                <span style="color:#66d9ef">print</span> e
-            self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>task_done()
-    <span style="color:#66d9ef">pass</span>
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadingPool</span>(object):
-
-    <span style="color:#66d9ef">def</span> __init__(self, num_con<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>):
-        self<span style="color:#f92672">.</span>_q <span style="color:#f92672">=</span> Queue(num_con)
-        <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> xrange(num_con):
-            Worker(self<span style="color:#f92672">.</span>_q)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_task</span>(self, f, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>put((f, args, kwargs))
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_complete</span>(self):
-        self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>join()
-    <span style="color:#66d9ef">pass</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_threading_pool</span>():
-    pool <span style="color:#f92672">=</span> ThreadingPool(<span style="color:#ae81ff">10</span>)
-    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">1000</span>):
-        wt <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>)
-        pool<span style="color:#f92672">.</span>add_task(quadra, wt)
-        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-    pool<span style="color:#f92672">.</span>wait_complete()
-
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-    <span style="color:#75715e"># nothread()</span>
-    <span style="color:#75715e"># withthread(）</span>
-    <span style="color:#75715e"># ----------------- no threading vs use treading-------------------------</span>
-    <span style="color:#75715e"># show_thread_itself(&#39;no muti&#39;)</span>
-    <span style="color:#75715e"># print(&#39;threading is running! thraead name is {}&#39;.format(threading.current_thread().getName()))</span>
-    <span style="color:#75715e"># t = threading.Thread(target=show_thread_itself, args=(123,), name=&#39;Do yourself&#39;)</span>
-    <span style="color:#75715e"># t.start()</span>
-    <span style="color:#75715e"># t.join()</span>
-    <span style="color:#75715e"># print(&#39;threading {} end.&#39;.format(threading.current_thread().getName()))</span>
-    <span style="color:#75715e"># ------------------ problem on thread lock ---------------------------</span>
-    <span style="color:#75715e"># lock_is_important()</span>
-    <span style="color:#75715e"># ------------------ cunsumer / producter model with condition -----------------------</span>
-    <span style="color:#75715e"># consumer_producer()</span>
-    <span style="color:#75715e"># ------------------ cumsumer/ producter model with event -----------------</span>
-    <span style="color:#75715e"># consumber_producer_event()</span>
-    <span style="color:#75715e"># --------   deamon and not deamon threading   ------------------------</span>
-    <span style="color:#75715e"># daemon_and_not_daemon()</span>
-    <span style="color:#75715e"># ------------------ cunsumer / producter model with Queue -----------------------</span>
-    <span style="color:#75715e"># consumer_producer_queue() # 普通队列</span>
-    <span style="color:#75715e"># consumer_producer_priqueue()  # 优先级队列</span>
-    <span style="color:#75715e"># ------------------ threadingpool ------------</span>
-    test_threading_pool()
-
-    <span style="color:#66d9ef">pass</span>
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">python version is {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(platform<span style="color:#f92672">.</span>python_version()))
-    main()
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">done!</span><span style="color:#e6db74">&#34;</span>)
-
-</code></pre></div><h3 id="multiprocessing-进程部分">multiprocessing 进程部分</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Created by vici on 22/01/2017</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> threading
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> platform
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> logging
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Queue <span style="color:#f92672">import</span> Queue
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>__doc__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34; 抄董伟明,官方文档，廖雪峰 bogo  。。。。 threading 实验结果记录
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>DEBUG,
+</span></span><span style="display:flex;"><span>                    format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;(</span><span style="color:#e6db74">%(threadName)-9s</span><span style="color:#e6db74">) |||| </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#39;</span>,)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timeit</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;一个简单的函数时间装饰器&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>        start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> COST: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(func<span style="color:#f92672">.</span>__name__, end<span style="color:#f92672">-</span>start))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_thread_itself</span>(arg):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;threading </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> is running! &#34;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>getName()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Thread </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> &gt;&gt;&gt; </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>getName(), i))
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Thread </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> end&#34;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>getName()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@timeit</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nothread</span>():
+</span></span><span style="display:flex;"><span>    fib(<span style="color:#ae81ff">34</span>)
+</span></span><span style="display:flex;"><span>    fib(<span style="color:#ae81ff">34</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@timeit</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">withthread</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">2</span>):
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>fib, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">34</span>,))
+</span></span><span style="display:flex;"><span>        t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    main_thread <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> threading<span style="color:#f92672">.</span>enumerate():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> t <span style="color:#f92672">is</span> main_thread:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        t<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>balance <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>lock <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_balance</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> balance
+</span></span><span style="display:flex;"><span>    balance <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    balance <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">money_laundering</span>(num):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(num):
+</span></span><span style="display:flex;"><span>        change_balance()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">money_laundering_priveate</span>(num):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> xrange(num):
+</span></span><span style="display:flex;"><span>        lock<span style="color:#f92672">.</span>acquire()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            change_balance()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>            lock<span style="color:#f92672">.</span>release()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lock_is_important</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    这里的lock是一种互斥的 可重获的 锁 在一个加锁thread进行完之后将会释放。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    lock 相当于信号量（Sempahore） 为 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@timeit</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test1</span>():
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Before i go to bank ,I have </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(balance))
+</span></span><span style="display:flex;"><span>        t1 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2000000</span>,))
+</span></span><span style="display:flex;"><span>        t2 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4000000</span>,))
+</span></span><span style="display:flex;"><span>        t1<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>        t2<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>        t1<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>        t2<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;after two public_money_laundering, I have </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(balance))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@timeit</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test2</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">global</span> balance
+</span></span><span style="display:flex;"><span>        balance <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Before i go to a new bank ,I have </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(balance))
+</span></span><span style="display:flex;"><span>        t3 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering_priveate, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3000000</span>,))
+</span></span><span style="display:flex;"><span>        t4 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>money_laundering_priveate, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3000000</span>,))
+</span></span><span style="display:flex;"><span>        t3<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>        t4<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>        t3<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>        t4<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;after two private money_launderingm I have </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(balance))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    test1()
+</span></span><span style="display:flex;"><span>    test2()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer_producer</span>():
+</span></span><span style="display:flex;"><span>    condition <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Condition()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>(cond):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> start , and waiting for proc&#39;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">.</span>name))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> cond:
+</span></span><span style="display:flex;"><span>            cond<span style="color:#f92672">.</span>wait()
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> making resource avaiable to consumer&#39;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">.</span>name))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>(cond):
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> cond:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> producer acaiable !&#39;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">.</span>name))
+</span></span><span style="display:flex;"><span>            cond<span style="color:#f92672">.</span>notifyAll() <span style="color:#75715e"># 激活条件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    c1 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cons1&#39;</span>, target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(condition,))
+</span></span><span style="display:flex;"><span>    c2 <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cons2&#39;</span>, target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(condition,))
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;prod&#39;</span>, target<span style="color:#f92672">=</span>producer, args<span style="color:#f92672">=</span>(condition,))
+</span></span><span style="display:flex;"><span>    c1<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    c2<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumber_producer_event</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;一个线程发送事件，其他的线程等待事件的触发  生产者消费者模型&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    TIMEOUT <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    eve <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+</span></span><span style="display:flex;"><span>    ll <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    threads <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>(event, l):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;消费者&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        mt <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>currentThread()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            event_is_set <span style="color:#f92672">=</span> event<span style="color:#f92672">.</span>wait(TIMEOUT)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> event_is_set:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                    integer <span style="color:#f92672">=</span> l<span style="color:#f92672">.</span>pop()
+</span></span><span style="display:flex;"><span>                    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> pop from list by </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(integer, mt<span style="color:#f92672">.</span>name))
+</span></span><span style="display:flex;"><span>                    event<span style="color:#f92672">.</span>clear()  <span style="color:#75715e"># 重制事件状态</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IndexError</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">pass</span>  <span style="color:#75715e"># 刚启动时容错。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>(event, l):
+</span></span><span style="display:flex;"><span>        mt <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>currentThread()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            integer <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>            l<span style="color:#f92672">.</span>append(integer)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> is append to list by </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(integer, mt<span style="color:#f92672">.</span>name))
+</span></span><span style="display:flex;"><span>            event<span style="color:#f92672">.</span>set()
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;consumer1&#39;</span>, <span style="color:#e6db74">&#39;consumer2&#39;</span>):
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span>name, target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(eve, ll))
+</span></span><span style="display:flex;"><span>        t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>        threads<span style="color:#f92672">.</span>append(t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;producer&#39;</span>, target<span style="color:#f92672">=</span>producer, args<span style="color:#f92672">=</span>(eve, ll))
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    threads<span style="color:#f92672">.</span>append(p)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> threads:
+</span></span><span style="display:flex;"><span>        t<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer_producer_queue</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; 有两种模式 priority 优先级模式 LIFOqueue后进先出模式。&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># priority 模式</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> Queue <span style="color:#f92672">import</span> PriorityQueue, LifoQueue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> PriorityQueue()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(num):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> num <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            wt <span style="color:#f92672">=</span> random()
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;put&#39;</span>, wt)
+</span></span><span style="display:flex;"><span>            q<span style="color:#f92672">.</span>put((double, wt))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            task, arg <span style="color:#f92672">=</span> q<span style="color:#f92672">.</span>get()
+</span></span><span style="display:flex;"><span>            print arg, task(arg)
+</span></span><span style="display:flex;"><span>            q<span style="color:#f92672">.</span>task_done()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> target <span style="color:#f92672">in</span> (producer, consumer):
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>target)
+</span></span><span style="display:flex;"><span>        t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer_producer_priqueue</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;priority 优先级队列&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> Queue <span style="color:#f92672">import</span> PriorityQueue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pri_q <span style="color:#f92672">=</span> PriorityQueue()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">triple</span>(n):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> pri_q<span style="color:#f92672">.</span>empty():
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            pri, target, arg <span style="color:#f92672">=</span> pri_q<span style="color:#f92672">.</span>get()
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;[PRI: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">], </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> * 3 = </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(pri, arg, target(arg)))
+</span></span><span style="display:flex;"><span>            pri_q<span style="color:#f92672">.</span>task_done()
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>():
+</span></span><span style="display:flex;"><span>        count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> count <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            pri <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;put priority </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> &#39;</span><span style="color:#f92672">.</span>format(pri))
+</span></span><span style="display:flex;"><span>            pri_q<span style="color:#f92672">.</span>put((pri, triple, pri))
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> targ <span style="color:#f92672">in</span> (producer, consumer):
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>targ)
+</span></span><span style="display:flex;"><span>        t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">daemon_and_not_daemon</span>():
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nd</span>():
+</span></span><span style="display:flex;"><span>        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;start!&#34;</span>)
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;end!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">d</span>():
+</span></span><span style="display:flex;"><span>        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;start&#34;</span>)
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;end&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>d, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;deamon&#34;</span>)
+</span></span><span style="display:flex;"><span>    nt <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>nd, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;no-deamon&#39;</span>)
+</span></span><span style="display:flex;"><span>    t<span style="color:#f92672">.</span>setDaemon(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    nt<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 论join 的重要性。</span>
+</span></span><span style="display:flex;"><span>    t<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># threading pool &amp;&amp; threading module programing</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quadra</span>(strings):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> str(strings) <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Worker</span>(threading<span style="color:#f92672">.</span>Thread):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, queue):
+</span></span><span style="display:flex;"><span>        super(Worker, self)<span style="color:#f92672">.</span>__init__()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_q <span style="color:#f92672">=</span> queue
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>daemon <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            f, args, kwargs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>get()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#39;USE </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> &#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
+</span></span><span style="display:flex;"><span>                print(f(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>                print e
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>task_done()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadingPool</span>(object):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, num_con<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_q <span style="color:#f92672">=</span> Queue(num_con)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> xrange(num_con):
+</span></span><span style="display:flex;"><span>            Worker(self<span style="color:#f92672">.</span>_q)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_task</span>(self, f, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>put((f, args, kwargs))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_complete</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_q<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_threading_pool</span>():
+</span></span><span style="display:flex;"><span>    pool <span style="color:#f92672">=</span> ThreadingPool(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> xrange(<span style="color:#ae81ff">1000</span>):
+</span></span><span style="display:flex;"><span>        wt <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>        pool<span style="color:#f92672">.</span>add_task(quadra, wt)
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    pool<span style="color:#f92672">.</span>wait_complete()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># nothread()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># withthread(）</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ----------------- no threading vs use treading-------------------------</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># show_thread_itself(&#39;no muti&#39;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># print(&#39;threading is running! thraead name is {}&#39;.format(threading.current_thread().getName()))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># t = threading.Thread(target=show_thread_itself, args=(123,), name=&#39;Do yourself&#39;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># t.start()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># t.join()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># print(&#39;threading {} end.&#39;.format(threading.current_thread().getName()))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ------------------ problem on thread lock ---------------------------</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># lock_is_important()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ------------------ cunsumer / producter model with condition -----------------------</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># consumer_producer()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ------------------ cumsumer/ producter model with event -----------------</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># consumber_producer_event()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --------   deamon and not deamon threading   ------------------------</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># daemon_and_not_daemon()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ------------------ cunsumer / producter model with Queue -----------------------</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># consumer_producer_queue() # 普通队列</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># consumer_producer_priqueue()  # 优先级队列</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ------------------ threadingpool ------------</span>
+</span></span><span style="display:flex;"><span>    test_threading_pool()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;python version is </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(platform<span style="color:#f92672">.</span>python_version()))
+</span></span><span style="display:flex;"><span>    main()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;done!&#34;</span>)
+</span></span></code></pre></div><h3 id="multiprocessing-进程部分">multiprocessing 进程部分</h3>
 <h4 id="mapreduce-with-multiprocess">mapreduce with multiprocess</h4>
 <blockquote>
 <p><a href="https://pymotw.com/2/multiprocessing/mapreduce.html">文章搬运</a>, <a href="https://github.com/woailuoli993/test/blob/master/dosth/testmapreducemultiprocess.py">代码拷贝</a></p>
@@ -921,7 +919,7 @@ lock <span style="color:#f92672">=</span> threading<span style="color:#f92672">.
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2020 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
+    &copy; 2024 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
   </span>
 </footer>
 

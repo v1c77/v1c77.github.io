@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="vici">
 <meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="aria2 配置笔记">
 <meta property="og:url" content="http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/">
 <meta property="twitter:url" content="http://blog.heyuhua.com/2017/01/aria2-%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/">
-<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:site_name" content="何育华的日记">
 <meta property="og:description" content="这里的天堂天空的颜色犹如地狱之火，但它仍然是天堂。&mdash;Lolita
 
 注意：此文很可能只适用于mac ！！！&mdash;&gt; 更新于某一天，现在因为用了docker 可能还是用于别的环境的。。。。
@@ -96,7 +96,7 @@
 
     
       
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -108,7 +108,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     
     
   </head>
@@ -118,7 +117,7 @@ if (!doNotTrack) {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="http://blog.heyuhua.com/">vici&#39;blog</a>
+    <a class="header-title-link" href="http://blog.heyuhua.com/">何育华的日记</a>
   </div>
   
     
@@ -293,7 +292,7 @@ if (!doNotTrack) {
 2.配置。（之前copy了个几个貌似很权威的配置文件，结果能不能用 ）乖乖看了遍文档，照着几个大佬的配置文档自己写了一个，勉强能用了。
 <a href="./aria2.conf">aria2.conf</a>内容如下。</li>
 </ol>
-<pre><code># 文件保存路径。
+<pre tabindex="0"><code># 文件保存路径。
 dir=/Users/vici/Downloads
 # 为了启动后继续下载之前的文件 承接 save-session
 input-file=/Users/vici/.aria2/session.dat
@@ -379,11 +378,11 @@ referer=http://pan.baidu.com/disk/home
 <ul>
 <li>在里面写入如下信息。</li>
 </ul>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+<pre tabindex="0"><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;
 
 
-&lt;plist version=&quot;1.0&quot;&gt;
+&lt;plist version=&#34;1.0&#34;&gt;
 &lt;dict&gt;
 &lt;key&gt;RunAtLoad&lt;/key&gt;
 &lt;true/&gt;
@@ -405,70 +404,69 @@ referer=http://pan.baidu.com/disk/home
 <ol>
 <li>拉源码，进入工作目录</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/ziahamza/webui-aria2.git
-cd webui-aria2
-</code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/ziahamza/webui-aria2.git
+</span></span><span style="display:flex;"><span>cd webui-aria2
+</span></span></code></pre></div><ol start="2">
 <li>如果你想将webui的默认语言改为中文。。。 而且像我一样找不到配置文件的套路（第二次更新）
 可以在index.html的最后添加：</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">
-<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
-  window.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
-    <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;.flag-icon-cn&#34;</span>).<span style="color:#a6e22e">click</span>()
-  }
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-
-</code></pre></div><ol start="3">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  window.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;.flag-icon-cn&#34;</span>).<span style="color:#a6e22e">click</span>()
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><ol start="3">
 <li>修改Dockerfile （其实就改了一行。。。将 goreman setup 中的aria2启动部分做一些修改）</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> debian:8</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># less priviledge user, the id should map the user the downloaded files belongs to</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> groupadd -r dummy <span style="color:#f92672">&amp;&amp;</span> useradd -r -g dummy dummy -u <span style="color:#ae81ff">1000</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># webui + aria2</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> apt-get install -y aria2 busybox curl <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> . /webui-aria2<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># gosu install latest</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/tianon/gosu&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> LATEST<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -s  $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/latest&#34;</span> | grep -Eo <span style="color:#e6db74">&#34;[0-9].[0-9]*&#34;</span><span style="color:#e6db74">`</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> curl -L $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/download/&#34;</span>$LATEST<span style="color:#e6db74">&#34;/gosu-amd64&#34;</span> &gt; /usr/local/bin/gosu <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> chmod +x /usr/local/bin/gosu<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># goreman supervisor install latest</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/mattn/goreman&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> LATEST<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -s  $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/latest&#34;</span> | grep -Eo <span style="color:#e6db74">&#34;v[0-9]*.[0-9]*.[0-9]*&#34;</span><span style="color:#e6db74">`</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> curl -L $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/download/&#34;</span>$LATEST<span style="color:#e6db74">&#34;/goreman_linux_amd64.tar.gz&#34;</span> &gt; goreman.tar.gz <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> tar -xvzf goreman.tar.gz <span style="color:#f92672">&amp;&amp;</span> mv /goreman_linux_amd64/goreman /usr/local/bin/goreman <span style="color:#f92672">&amp;&amp;</span> rm -R goreman*<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># goreman setup</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#34;web: gosu dummy /bin/busybox httpd -f -p 8080 -h /webui-aria2\nbackend: gosu dummy /usr/bin/aria2c --conf-path=/data/.aria2/aria2.conf&#34;</span> &gt; Procfile<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># aria2 downloads directory</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">VOLUME</span><span style="color:#e6db74"> /data</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># aria2 RPC port, map as-is or reconfigure webui</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 6800/tcp</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># webui static content web server, map wherever is convenient</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080/tcp</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;start&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/goreman&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><ol start="4">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> debian:8</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># less priviledge user, the id should map the user the downloaded files belongs to</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> groupadd -r dummy <span style="color:#f92672">&amp;&amp;</span> useradd -r -g dummy dummy -u <span style="color:#ae81ff">1000</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># webui + aria2</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> apt-get install -y aria2 busybox curl <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> . /webui-aria2<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># gosu install latest</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/tianon/gosu&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> LATEST<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -s  $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/latest&#34;</span> | grep -Eo <span style="color:#e6db74">&#34;[0-9].[0-9]*&#34;</span><span style="color:#e6db74">`</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> curl -L $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/download/&#34;</span>$LATEST<span style="color:#e6db74">&#34;/gosu-amd64&#34;</span> &gt; /usr/local/bin/gosu <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> chmod +x /usr/local/bin/gosu<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># goreman supervisor install latest</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/mattn/goreman&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> LATEST<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -s  $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/latest&#34;</span> | grep -Eo <span style="color:#e6db74">&#34;v[0-9]*.[0-9]*.[0-9]*&#34;</span><span style="color:#e6db74">`</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> curl -L $GITHUB_REPO<span style="color:#e6db74">&#34;/releases/download/&#34;</span>$LATEST<span style="color:#e6db74">&#34;/goreman_linux_amd64.tar.gz&#34;</span> &gt; goreman.tar.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> tar -xvzf goreman.tar.gz <span style="color:#f92672">&amp;&amp;</span> mv /goreman_linux_amd64/goreman /usr/local/bin/goreman <span style="color:#f92672">&amp;&amp;</span> rm -R goreman*<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># goreman setup</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#34;web: gosu dummy /bin/busybox httpd -f -p 8080 -h /webui-aria2\nbackend: gosu dummy /usr/bin/aria2c --conf-path=/data/.aria2/aria2.conf&#34;</span> &gt; Procfile<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># aria2 downloads directory</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">VOLUME</span><span style="color:#e6db74"> /data</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># aria2 RPC port, map as-is or reconfigure webui</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 6800/tcp</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># webui static content web server, map wherever is convenient</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080/tcp</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;start&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/usr/local/bin/goreman&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ol start="4">
 <li>生成镜像。</li>
 </ol>
-<pre><code># 从dockerfile生成镜像
+<pre tabindex="0"><code># 从dockerfile生成镜像
 docker build -t yourname/webui-aria2 .
 </code></pre><ol start="5">
 <li>准备数据卷
 趁着生成镜像的时候 你可以开一个新的terminal，在 你的用户目录 新建一个aria2文件夹，及子文件，结构如下：</li>
 </ol>
-<pre><code>aria2
+<pre tabindex="0"><code>aria2
 └── .aria2
     ├── aria2.conf
     ├── aria2.log
@@ -477,12 +475,12 @@ docker build -t yourname/webui-aria2 .
 <li>并且修改配置文件 <code>aria2.conf</code></li>
 </ol>
 <p>文档中说明了几个重要文件在容器中的存放地点。</p>
-<pre><code>/data/.aria2/session.txt  (空文件。存放未下载完成的任务)
+<pre tabindex="0"><code>/data/.aria2/session.txt  (空文件。存放未下载完成的任务)
 /data/.aria2/aria2.log    (空文件，记录日志)
 /data/.aria2/aria2.conf   (aria2的日志)
 /data/.downloads/        (文件下载地址。)
 </code></pre><p>所以对原来的配置做了一点点改动来适应docker( <a href="./aria2-docker.conf">这个</a>可以直接用 )</p>
-<pre><code># 文件保存路径。
+<pre tabindex="0"><code># 文件保存路径。
 dir=/data/.downloads
 # 为了启动后继续下载之前的文件 承接 save-session
 input-file=/data/.aria2/session.txt
@@ -558,7 +556,7 @@ referer=http://pan.baidu.com/disk/home
 </code></pre><ol start="7">
 <li>生成容器(需要改路径！)</li>
 </ol>
-<pre><code>docker run --restart=always -d -v /Users/vici/aria2/:/data -v /Users/vici/Downloads/aria2_dl:/data/.downloads -p 6800-6802:6800-6802 -p 9100:8080 --name=&quot;webui-aria2&quot; vici/webui-aria2-debain
+<pre tabindex="0"><code>docker run --restart=always -d -v /Users/vici/aria2/:/data -v /Users/vici/Downloads/aria2_dl:/data/.downloads -p 6800-6802:6800-6802 -p 9100:8080 --name=&#34;webui-aria2&#34; vici/webui-aria2-debain
 </code></pre><p>其中 <code>Users/vici/Downloads/aria2_dl</code>为我下载文件的存放地址。<code>/Users/vici/aria2</code>为之前新建的相关文件目录（记得改）。</p>
 <p>成果应该是这样子滴：
 <img src="http://qiniu.heyuhua.com/2017-01-19%2014webui-aria2.png" alt="webui-aria2"></p>
@@ -568,7 +566,7 @@ referer=http://pan.baidu.com/disk/home
 <ol>
 <li>前期测试: 查看版本 试运行  打开浏览器 http://localhost</li>
 </ol>
-<pre><code># 查看版本
+<pre tabindex="0"><code># 查看版本
 sudo apachectl -v
 # 启动
 sudo apachectl start
@@ -591,7 +589,7 @@ open http://localhost
 <p>运行 <code>sudo vi /etc/apache2/extra/httpd-vhosts.conf</code></p>
 </li>
 </ul>
-<p>你会看到两段配置信息 类似'&lt;VirtuaHost *:80&gt;&hellip;.&lsquo;什么的。这两个主机是不存在的。所以此时访问localhost会提示403错误：<code>Forbidden You don't have permission to access /index.php on this server</code>. 网上的大佬说用# 注释掉就好。</p>
+<p>你会看到两段配置信息 类似&rsquo;&lt;VirtuaHost *:80&gt;&hellip;.&lsquo;什么的。这两个主机是不存在的。所以此时访问localhost会提示403错误：<code>Forbidden You don't have permission to access /index.php on this server</code>. 网上的大佬说用# 注释掉就好。</p>
 <blockquote>
 <p>事实证明apache 的方法真的是很lowb。什么 user Root 乱七八糟的搞了半天，丢雷楼某黑。 是我想多了。还是乖乖的用docker。</p>
 </blockquote>
@@ -696,7 +694,7 @@ open http://localhost
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2020 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
+    &copy; 2024 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
   </span>
 </footer>
 

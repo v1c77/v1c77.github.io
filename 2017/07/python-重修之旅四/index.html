@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="vici">
 <meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="
@@ -21,7 +21,7 @@
 <meta name="twitter:title" content="python 重修之旅（四）">
 <meta property="og:url" content="http://blog.heyuhua.com/2017/07/python-%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E5%9B%9B/">
 <meta property="twitter:url" content="http://blog.heyuhua.com/2017/07/python-%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E5%9B%9B/">
-<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:site_name" content="何育华的日记">
 <meta property="og:description" content="
 我有一万个理由不用vim&amp;emacs
 ">
@@ -90,7 +90,7 @@
 
     
       
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -102,7 +102,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     
     
   </head>
@@ -112,7 +111,7 @@ if (!doNotTrack) {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="http://blog.heyuhua.com/">vici&#39;blog</a>
+    <a class="header-title-link" href="http://blog.heyuhua.com/">何育华的日记</a>
   </div>
   
     
@@ -299,34 +298,34 @@ if (!doNotTrack) {
 <p>ChainMap 可以快速的对多个传入的dict 或map 进行 链接link，返回一个可以当作单一单元的对象。</p>
 <p>当没有映射被传入时，ChainMap会默认返回空dict。</p>
 <p>所有传入的映射都会被储存在一个列表中，可以使用ChainMap的<code>maps</code>  属性进行查看和编辑。如果该列表中的元素被更改， chainmap由于对该属性的依赖，其展示内容也会相应改变。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Collection <span style="color:#f92672">import</span> ChainMap
-b <span style="color:#f92672">=</span> ChainMap(locals(), globals())
-b<span style="color:#f92672">.</span>new_child() <span style="color:#f92672">==</span> ChainMap({}, <span style="color:#f92672">*</span>b<span style="color:#f92672">.</span>maps)  <span style="color:#75715e"># True</span>
-</code></pre></div><p>​</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Collection <span style="color:#f92672">import</span> ChainMap
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> ChainMap(locals(), globals())
+</span></span><span style="display:flex;"><span>b<span style="color:#f92672">.</span>new_child() <span style="color:#f92672">==</span> ChainMap({}, <span style="color:#f92672">*</span>b<span style="color:#f92672">.</span>maps)  <span style="color:#75715e"># True</span>
+</span></span></code></pre></div><p>​</p>
 <h3 id="2-counter计数器">2. Counter（计数器）</h3>
 <p>有时候你会觉得找工作的时候面试官问的问题都特别简单，比如说问到文件的词频统计，可能只会想到用dict或者collections.defaultdict 来维护一个计数字典。</p>
 <p>The pythonic way should be：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
-<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> Counter
-<span style="color:#75715e"># 哈姆莱特戏剧的词频</span>
-words <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">\</span><span style="color:#e6db74">w+</span><span style="color:#e6db74">&#39;</span>, open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hamlet.txt</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>lower())
-<span style="color:#66d9ef">assert</span> Counter(words)<span style="color:#f92672">.</span>most_common(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">==</span> \
-[(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">the</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">1143</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">and</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">966</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">to</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">762</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">of</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">669</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">i</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">631</span>),
- (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">you</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">554</span>),  (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">546</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">my</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">514</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hamlet</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">471</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">in</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">451</span>)]
-</code></pre></div><p>Counter的dict接口设计在请求访问不存在key对应value时并不会抛出KeyError异常，而是会返回<code>0</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">counts <span style="color:#f92672">=</span> Counter([<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span>])
-<span style="color:#66d9ef">assert</span> counts[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># True</span>
-</code></pre></div><p>三个实用方法 python3.1+。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> Counter
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 哈姆莱特戏剧的词频</span>
+</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\w+&#39;</span>, open(<span style="color:#e6db74">&#39;hamlet.txt&#39;</span>)<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>lower())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> Counter(words)<span style="color:#f92672">.</span>most_common(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">==</span> \
+</span></span><span style="display:flex;"><span>[(<span style="color:#e6db74">&#39;the&#39;</span>, <span style="color:#ae81ff">1143</span>), (<span style="color:#e6db74">&#39;and&#39;</span>, <span style="color:#ae81ff">966</span>), (<span style="color:#e6db74">&#39;to&#39;</span>, <span style="color:#ae81ff">762</span>), (<span style="color:#e6db74">&#39;of&#39;</span>, <span style="color:#ae81ff">669</span>), (<span style="color:#e6db74">&#39;i&#39;</span>, <span style="color:#ae81ff">631</span>),
+</span></span><span style="display:flex;"><span> (<span style="color:#e6db74">&#39;you&#39;</span>, <span style="color:#ae81ff">554</span>),  (<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">546</span>), (<span style="color:#e6db74">&#39;my&#39;</span>, <span style="color:#ae81ff">514</span>), (<span style="color:#e6db74">&#39;hamlet&#39;</span>, <span style="color:#ae81ff">471</span>), (<span style="color:#e6db74">&#39;in&#39;</span>, <span style="color:#ae81ff">451</span>)]
+</span></span></code></pre></div><p>Counter的dict接口设计在请求访问不存在key对应value时并不会抛出KeyError异常，而是会返回<code>0</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span>counts <span style="color:#f92672">=</span> Counter([<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> counts[<span style="color:#e6db74">&#39;c&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># True</span>
+</span></span></code></pre></div><p>三个实用方法 python3.1+。</p>
 <p><code>most_common(n)</code> 返回频度最高的前n个计数对象，及频数。</p>
 <p><code>elements()</code>会返回一个迭代器，如果将迭代器转化成list， 每个counter记录的元素都会在list中出现其对应的频数次数，而且无序。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> Counter(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-</code></pre></div><p><code>c</code>.elements() 可能是 abb， 也可能是 bba， 还可能是 bab。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>c <span style="color:#f92672">=</span> Counter(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p><code>c</code>.elements() 可能是 abb， 也可能是 bba， 还可能是 bab。</p>
 <p><code>subtract()</code>  方法接收可迭代对象或映射，在原有counter对象上进行相应的减法操作。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> Counter(a<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, d<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
-d <span style="color:#f92672">=</span> Counter(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, d<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
-c<span style="color:#f92672">.</span>subtract(d)
-<span style="color:#75715e"># c update to Counter({&#39;a&#39;: 3, &#39;b&#39;: 0, &#39;c&#39;: -3, &#39;d&#39;: -6})</span>
-</code></pre></div><p>Counter 实现了大部分的dict接口，except：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>c <span style="color:#f92672">=</span> Counter(a<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, d<span style="color:#f92672">=-</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> Counter(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, d<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>c<span style="color:#f92672">.</span>subtract(d)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># c update to Counter({&#39;a&#39;: 3, &#39;b&#39;: 0, &#39;c&#39;: -3, &#39;d&#39;: -6})</span>
+</span></span></code></pre></div><p>Counter 实现了大部分的dict接口，except：</p>
 <ul>
 <li>
 <p><code>fromkeys()</code>  并没有被实现</p>
@@ -353,57 +352,56 @@ c<span style="color:#f92672">.</span>subtract(d)
 <p><code>rotate()</code> 轮转</p>
 <p>一些官方使用实例：</p>
 <p>Linux tail 的最简实现。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">log_file <span style="color:#f92672">=</span> open(path_to_file)
-tail <span style="color:#f92672">=</span> deque(log_file, <span style="color:#ae81ff">10</span>)  <span style="color:#75715e"># 得到了文件的最后十行。</span>
-</code></pre></div><p>求滑动平均／移动平均（拓展到求卷积什么的。。）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">moving_average</span>(iterable, n<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
-    <span style="color:#75715e"># moving_average([40, 30, 50, 46, 39, 44]) --&gt; 40.0 42.0 45.0 43.0</span>
-    <span style="color:#75715e"># http://en.wikipedia.org/wiki/Moving_average</span>
-    it <span style="color:#f92672">=</span> iter(iterable) <span style="color:#75715e"># 转换为迭代类型</span>
-    d <span style="color:#f92672">=</span> deque(itertools<span style="color:#f92672">.</span>islice(it, n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))  <span style="color:#75715e"># 初始化 deque([40, 30])</span>
-    d<span style="color:#f92672">.</span>appendleft(<span style="color:#ae81ff">0</span>) <span style="color:#75715e"># 填充空数据。 deque([0, 40, 30])</span>
-    s <span style="color:#f92672">=</span> sum(d)
-    <span style="color:#66d9ef">for</span> elem <span style="color:#f92672">in</span> it: <span style="color:#75715e"># it = iter([50, 46, 39, 44])</span>
-        s <span style="color:#f92672">+</span><span style="color:#f92672">=</span> elem <span style="color:#f92672">-</span> d<span style="color:#f92672">.</span>popleft()
-        d<span style="color:#f92672">.</span>append(elem)
-        <span style="color:#66d9ef">yield</span> s <span style="color:#f92672">/</span> float(n)
-</code></pre></div><h3 id="4-defaultdict-字典工厂">4. defaultdict （字典工厂）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>log_file <span style="color:#f92672">=</span> open(path_to_file)
+</span></span><span style="display:flex;"><span>tail <span style="color:#f92672">=</span> deque(log_file, <span style="color:#ae81ff">10</span>)  <span style="color:#75715e"># 得到了文件的最后十行。</span>
+</span></span></code></pre></div><p>求滑动平均／移动平均（拓展到求卷积什么的。。）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">moving_average</span>(iterable, n<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># moving_average([40, 30, 50, 46, 39, 44]) --&gt; 40.0 42.0 45.0 43.0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># http://en.wikipedia.org/wiki/Moving_average</span>
+</span></span><span style="display:flex;"><span>    it <span style="color:#f92672">=</span> iter(iterable) <span style="color:#75715e"># 转换为迭代类型</span>
+</span></span><span style="display:flex;"><span>    d <span style="color:#f92672">=</span> deque(itertools<span style="color:#f92672">.</span>islice(it, n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))  <span style="color:#75715e"># 初始化 deque([40, 30])</span>
+</span></span><span style="display:flex;"><span>    d<span style="color:#f92672">.</span>appendleft(<span style="color:#ae81ff">0</span>) <span style="color:#75715e"># 填充空数据。 deque([0, 40, 30])</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> sum(d)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> elem <span style="color:#f92672">in</span> it: <span style="color:#75715e"># it = iter([50, 46, 39, 44])</span>
+</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">+=</span> elem <span style="color:#f92672">-</span> d<span style="color:#f92672">.</span>popleft()
+</span></span><span style="display:flex;"><span>        d<span style="color:#f92672">.</span>append(elem)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> s <span style="color:#f92672">/</span> float(n)
+</span></span></code></pre></div><h3 id="4-defaultdict-字典工厂">4. defaultdict （字典工厂）</h3>
 <p>一个内建数据类型 dict 的子类， 在dict的基础上重构了一个内建方法， 并添加了一个可编辑的实例变量。</p>
 <p>some cookies</p>
 <p>利用 defaultdict of list 将一个key-value 序列分组。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">sol <span style="color:#f92672">=</span> [(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">男</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">vici</span><span style="color:#e6db74">&#39;</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">女</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Rancho</span><span style="color:#e6db74">&#39;</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">中性</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Littlekey</span><span style="color:#e6db74">&#39;</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">男</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Guido</span><span style="color:#e6db74">&#39;</span>), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">女</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">某徐某xuan</span><span style="color:#e6db74">&#39;</span>)]
-d <span style="color:#f92672">=</span> defaultdict(list)
-<span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> sol:
-  d[k]<span style="color:#f92672">.</span>append(v)
-<span style="color:#66d9ef">assert</span> sorted(d<span style="color:#f92672">.</span>items()) <span style="color:#f92672">==</span> [(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">中性</span><span style="color:#e6db74">&#39;</span>, [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Littlekey</span><span style="color:#e6db74">&#39;</span>]), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">女</span><span style="color:#e6db74">&#39;</span>, [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Rancho</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">某徐某xuan</span><span style="color:#e6db74">&#39;</span>]), (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">男</span><span style="color:#e6db74">&#39;</span>, [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">vici</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Guido</span><span style="color:#e6db74">&#39;</span>])]
-</code></pre></div><p>当dict中的某个键不存在且被调用时，defaultdict会使用默认工厂进行初始化， 比如上面的例子在进行遍历sol中的第一个元素时， d[k] 操作会生成一个空list与相应的k形成映射。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span>sol <span style="color:#f92672">=</span> [(<span style="color:#e6db74">&#39;男&#39;</span>, <span style="color:#e6db74">&#39;vici&#39;</span>), (<span style="color:#e6db74">&#39;女&#39;</span>, <span style="color:#e6db74">&#39;Rancho&#39;</span>), (<span style="color:#e6db74">&#39;中性&#39;</span>, <span style="color:#e6db74">&#39;Littlekey&#39;</span>), (<span style="color:#e6db74">&#39;男&#39;</span>, <span style="color:#e6db74">&#39;Guido&#39;</span>), (<span style="color:#e6db74">&#39;女&#39;</span>, <span style="color:#e6db74">&#39;某徐某xuan&#39;</span>)]
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> defaultdict(list)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> sol:
+</span></span><span style="display:flex;"><span>  d[k]<span style="color:#f92672">.</span>append(v)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> sorted(d<span style="color:#f92672">.</span>items()) <span style="color:#f92672">==</span> [(<span style="color:#e6db74">&#39;中性&#39;</span>, [<span style="color:#e6db74">&#39;Littlekey&#39;</span>]), (<span style="color:#e6db74">&#39;女&#39;</span>, [<span style="color:#e6db74">&#39;Rancho&#39;</span>, <span style="color:#e6db74">&#39;某徐某xuan&#39;</span>]), (<span style="color:#e6db74">&#39;男&#39;</span>, [<span style="color:#e6db74">&#39;vici&#39;</span>, <span style="color:#e6db74">&#39;Guido&#39;</span>])]
+</span></span></code></pre></div><p>当dict中的某个键不存在且被调用时，defaultdict会使用默认工厂进行初始化， 比如上面的例子在进行遍历sol中的第一个元素时， d[k] 操作会生成一个空list与相应的k形成映射。</p>
 <p>承接一下Counter的部分，本宝宝之前做文件字数统计用的就是defaultdict。。。</p>
 <h3 id="5-namedtuple命名元组工厂">5. namedtuple（命名元组工厂）</h3>
 <p>快速实现简单结构体的不二之选。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">People <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">People</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name age birth school</span><span style="color:#e6db74">&#39;</span>)
-p <span style="color:#f92672">=</span> People(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">vici</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">17</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0701</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WHUT</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#66d9ef">assert</span> p <span style="color:#f92672">==</span> People(name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">vici</span><span style="color:#e6db74">&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>, birth<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">0701</span><span style="color:#e6db74">&#39;</span>, school<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WHUT</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#66d9ef">assert</span> p<span style="color:#f92672">.</span>school <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">WHUT</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#66d9ef">assert</span> p<span style="color:#f92672">.</span>age <span style="color:#f92672">==</span> <span style="color:#ae81ff">17</span>
-name, age, <span style="color:#f92672">*</span>_ <span style="color:#f92672">=</span> p
-<span style="color:#66d9ef">assert</span> name
-</code></pre></div><p>当然是用带空格的字符串来区分named_field 只是为了展示 python的强大语法糖，文档推荐使用<code>[name, age, birth, school]</code>的传参方式创建工厂。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>People <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#39;People&#39;</span>, <span style="color:#e6db74">&#39;name age birth school&#39;</span>)
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> People(<span style="color:#e6db74">&#39;vici&#39;</span>, <span style="color:#ae81ff">17</span>, <span style="color:#e6db74">&#39;0701&#39;</span>, <span style="color:#e6db74">&#39;WHUT&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> p <span style="color:#f92672">==</span> People(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vici&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>, birth<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0701&#39;</span>, school<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;WHUT&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> p<span style="color:#f92672">.</span>school <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;WHUT&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> p<span style="color:#f92672">.</span>age <span style="color:#f92672">==</span> <span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>name, age, <span style="color:#f92672">*</span>_ <span style="color:#f92672">=</span> p
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> name
+</span></span></code></pre></div><p>当然是用带空格的字符串来区分named_field 只是为了展示 python的强大语法糖，文档推荐使用<code>[name, age, birth, school]</code>的传参方式创建工厂。</p>
 <p>nametuple很适合做一些结构化数据，类似sql查询，csv，sqlite3等等。</p>
 <p>直接抄袭文档实例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">EmployeeRecord <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">EmployeeRecord</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">name, age, title, department, paygrade</span><span style="color:#e6db74">&#39;</span>)
-
-<span style="color:#f92672">import</span> csv
-<span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> map(EmployeeRecord<span style="color:#f92672">.</span>_make, csv<span style="color:#f92672">.</span>reader(open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">employees.csv</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rb</span><span style="color:#e6db74">&#34;</span>))):
-    <span style="color:#66d9ef">print</span>(emp<span style="color:#f92672">.</span>name, emp<span style="color:#f92672">.</span>title)
-
-<span style="color:#f92672">import</span> sqlite3
-conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/companydata</span><span style="color:#e6db74">&#39;</span>)
-cursor <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
-cursor<span style="color:#f92672">.</span>execute(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SELECT name, age, title, department, paygrade FROM employees</span><span style="color:#e6db74">&#39;</span>)
-<span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> map(EmployeeRecord<span style="color:#f92672">.</span>_make, cursor<span style="color:#f92672">.</span>fetchall()):
-    <span style="color:#66d9ef">print</span>(emp<span style="color:#f92672">.</span>name, emp<span style="color:#f92672">.</span>title)
-
-</code></pre></div><p>这里用到了一个classmethod <code>_make(iterable)</code>：从一个 iterable对象新建实例，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>EmployeeRecord <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#39;EmployeeRecord&#39;</span>, <span style="color:#e6db74">&#39;name, age, title, department, paygrade&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> csv
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> map(EmployeeRecord<span style="color:#f92672">.</span>_make, csv<span style="color:#f92672">.</span>reader(open(<span style="color:#e6db74">&#34;employees.csv&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>))):
+</span></span><span style="display:flex;"><span>    print(emp<span style="color:#f92672">.</span>name, emp<span style="color:#f92672">.</span>title)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sqlite3
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;/companydata&#39;</span>)
+</span></span><span style="display:flex;"><span>cursor <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+</span></span><span style="display:flex;"><span>cursor<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;SELECT name, age, title, department, paygrade FROM employees&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> map(EmployeeRecord<span style="color:#f92672">.</span>_make, cursor<span style="color:#f92672">.</span>fetchall()):
+</span></span><span style="display:flex;"><span>    print(emp<span style="color:#f92672">.</span>name, emp<span style="color:#f92672">.</span>title)
+</span></span></code></pre></div><p>这里用到了一个classmethod <code>_make(iterable)</code>：从一个 iterable对象新建实例，</p>
 <p>其他实例方法；</p>
 <p><code>_asdist()</code> 返回一个 orderedDict，存放字段名及其对应value.</p>
 <p><code>_replace()</code>修改tumple值。</p>
@@ -526,7 +524,7 @@ cursor<span style="color:#f92672">.</span>execute(<span style="color:#e6db74"></
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2020 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
+    &copy; 2024 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
   </span>
 </footer>
 

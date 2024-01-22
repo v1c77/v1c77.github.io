@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="vici">
 <meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="禅师寻一鸡，系绳于其足。拉绳，鸡倒而复起，如此有八。吾问：汝教我锲而不舍？答曰：No, 拉鸡八倒。">
@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="某工程师的工作（经验）总结">
 <meta property="og:url" content="http://blog.heyuhua.com/2016/11/%E6%9F%90%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
 <meta property="twitter:url" content="http://blog.heyuhua.com/2016/11/%E6%9F%90%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
-<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:site_name" content="何育华的日记">
 <meta property="og:description" content="禅师寻一鸡，系绳于其足。拉绳，鸡倒而复起，如此有八。吾问：汝教我锲而不舍？答曰：No, 拉鸡八倒。">
 <meta name="twitter:description" content="禅师寻一鸡，系绳于其足。拉绳，鸡倒而复起，如此有八。吾问：汝教我锲而不舍？答曰：No, 拉鸡八倒。">
 <meta property="og:locale" content="zh-cn">
@@ -82,7 +82,7 @@
 
     
       
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -94,7 +94,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     
     
   </head>
@@ -104,7 +103,7 @@ if (!doNotTrack) {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="http://blog.heyuhua.com/">vici&#39;blog</a>
+    <a class="header-title-link" href="http://blog.heyuhua.com/">何育华的日记</a>
   </div>
   
     
@@ -279,15 +278,15 @@ if (!doNotTrack) {
 <p>###　接口设计尽量灵活
 栗子：
 如果有函数需要传入保存日志的地址</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(<span style="color:#f92672">*</span>args, logpath<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">&#39;</span>):
-    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isdir(logpath):
-        <span style="color:#75715e"># 从args 获取参数保存</span>
-        <span style="color:#66d9ef">pass</span>
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#75715e"># 尽量处理 不存在目录，相对路径 给定文件名（带后缀）的情况</span>
-        <span style="color:#66d9ef">pass</span>
-</code></pre></div><h3 id="其他">其他</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(<span style="color:#f92672">*</span>args, logpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.&#39;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isdir(logpath):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 从args 获取参数保存</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 尽量处理 不存在目录，相对路径 给定文件名（带后缀）的情况</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><h3 id="其他">其他</h3>
 <ul>
 <li>exception 尽量不要输出变量内容</li>
 <li>interface 设计的默认参数尽量不要设为null 或者其他无意义的值</li>
@@ -403,7 +402,7 @@ Android 源码的苦行僧。但是对底层的过度熟悉会带来一些好玩
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2020 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
+    &copy; 2024 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
   </span>
 </footer>
 

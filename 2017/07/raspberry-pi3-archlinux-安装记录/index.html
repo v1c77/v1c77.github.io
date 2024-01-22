@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.62.2 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.121.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="vici">
 <meta name="keywords" content=", vici, blog, heyuhua.com, 何育华, v1c77">
 <meta name="description" content="
@@ -21,7 +21,7 @@
 <meta name="twitter:title" content="raspberry pi3 ArchLinux 安装记录">
 <meta property="og:url" content="http://blog.heyuhua.com/2017/07/raspberry-pi3-archlinux-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">
 <meta property="twitter:url" content="http://blog.heyuhua.com/2017/07/raspberry-pi3-archlinux-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">
-<meta property="og:site_name" content="vici&#39;blog">
+<meta property="og:site_name" content="何育华的日记">
 <meta property="og:description" content="
 前言
 某同事说：“Arch 操作系统的一大特点就是其pacman系统更新模块采用的是滚动更新模式（也就是说Arch理论上来说只有一个LTS版本）。只要你的操作得当，甚至可以从最古老的arch版本 升级到最新版，从linux 1.0内核升级到4.x内核。” 同事向我无脑推荐Arch之后不负责任的溜了。">
@@ -90,7 +90,7 @@
 
     
       
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -102,7 +102,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     
     
   </head>
@@ -112,7 +111,7 @@ if (!doNotTrack) {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="http://blog.heyuhua.com/">vici&#39;blog</a>
+    <a class="header-title-link" href="http://blog.heyuhua.com/">何育华的日记</a>
   </div>
   
     
@@ -316,21 +315,21 @@ if (!doNotTrack) {
 <blockquote>
 <p>首先把sd卡插到读卡器里，然后把读卡器插到电脑上&hellip;&hellip;..</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$lsblk
-NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-sda           8:0    <span style="color:#ae81ff">1</span> 29.8G  <span style="color:#ae81ff">0</span> disk
-├─sda2        8:2    <span style="color:#ae81ff">1</span>   28G  <span style="color:#ae81ff">0</span> part
-├─sda3        8:3    <span style="color:#ae81ff">1</span>  1.7G  <span style="color:#ae81ff">0</span> part
-└─sda1        8:1    <span style="color:#ae81ff">1</span>  100M  <span style="color:#ae81ff">0</span> part
-mmcblk0     179:0    <span style="color:#ae81ff">0</span>   29G  <span style="color:#ae81ff">0</span> disk
-├─mmcblk0p2 179:2    <span style="color:#ae81ff">0</span> 28.9G  <span style="color:#ae81ff">0</span> part /
-└─mmcblk0p1 179:1    <span style="color:#ae81ff">0</span> 41.7M  <span style="color:#ae81ff">0</span> part /boot
-</code></pre></div><p>列出你当前的磁盘。 显然sda磁盘没有挂载，正是我们要烧录的sd card。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo su
-</code></pre></div><p>确保你的当前工作目录没有后顾之忧后可以开启管理员模式。（这个工作目录最好放置着预先下载好的<a href="http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz">arch操作系统</a>，并且保证有足够大的预留空间）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$lsblk
+</span></span><span style="display:flex;"><span>NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+</span></span><span style="display:flex;"><span>sda           8:0    <span style="color:#ae81ff">1</span> 29.8G  <span style="color:#ae81ff">0</span> disk
+</span></span><span style="display:flex;"><span>├─sda2        8:2    <span style="color:#ae81ff">1</span>   28G  <span style="color:#ae81ff">0</span> part
+</span></span><span style="display:flex;"><span>├─sda3        8:3    <span style="color:#ae81ff">1</span>  1.7G  <span style="color:#ae81ff">0</span> part
+</span></span><span style="display:flex;"><span>└─sda1        8:1    <span style="color:#ae81ff">1</span>  100M  <span style="color:#ae81ff">0</span> part
+</span></span><span style="display:flex;"><span>mmcblk0     179:0    <span style="color:#ae81ff">0</span>   29G  <span style="color:#ae81ff">0</span> disk
+</span></span><span style="display:flex;"><span>├─mmcblk0p2 179:2    <span style="color:#ae81ff">0</span> 28.9G  <span style="color:#ae81ff">0</span> part /
+</span></span><span style="display:flex;"><span>└─mmcblk0p1 179:1    <span style="color:#ae81ff">0</span> 41.7M  <span style="color:#ae81ff">0</span> part /boot
+</span></span></code></pre></div><p>列出你当前的磁盘。 显然sda磁盘没有挂载，正是我们要烧录的sd card。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ sudo su
+</span></span></code></pre></div><p>确保你的当前工作目录没有后顾之忧后可以开启管理员模式。（这个工作目录最好放置着预先下载好的<a href="http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz">arch操作系统</a>，并且保证有足够大的预留空间）</p>
 <p>开始给sd卡分区</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Shell" data-lang="Shell"><span style="color:#75715e"># fdisk /dev/sda</span>
-</code></pre></div><p>fdisk 有十分详细的引导教程，第一次安装可以尽可能详细的看一下其提示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#75715e"># fdisk /dev/sda</span>
+</span></span></code></pre></div><p>fdisk 有十分详细的引导教程，第一次安装可以尽可能详细的看一下其提示。</p>
 <h5 id="一-首先要做的是删除旧分区创建新分区">一. 首先要做的是删除旧分区，创建新分区：</h5>
 <ol>
 <li>键入 <code>o</code> ,清空原有分区表。</li>
@@ -341,44 +340,44 @@ mmcblk0     179:0    <span style="color:#ae81ff">0</span>   29G  <span style="co
 <li>最后，键入<code>w</code> 以保存分区表并退出 fdisk</li>
 </ol>
 <h5 id="二-创建并挂载fat文件系统">二. 创建并挂载FAT文件系统。</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkfs.vfat /dev/sda1
-mkdir boot
-mount /dec/sda1 boot
-</code></pre></div><h5 id="三-创建并挂载ext4文件系统">三. 创建并挂载ext4文件系统</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkfs.ext4 /dev/sda2
-mkdir root
-mount /dev/sda2 root
-</code></pre></div><p>这里的步骤可能需要等待，比如弹出<code>Writing superblocks and filesystem accounting information:</code> 时。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkfs.vfat /dev/sda1
+</span></span><span style="display:flex;"><span>mkdir boot
+</span></span><span style="display:flex;"><span>mount /dec/sda1 boot
+</span></span></code></pre></div><h5 id="三-创建并挂载ext4文件系统">三. 创建并挂载ext4文件系统</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkfs.ext4 /dev/sda2
+</span></span><span style="display:flex;"><span>mkdir root
+</span></span><span style="display:flex;"><span>mount /dev/sda2 root
+</span></span></code></pre></div><p>这里的步骤可能需要等待，比如弹出<code>Writing superblocks and filesystem accounting information:</code> 时。</p>
 <h5 id="四-提取root系统文件">四. 提取root系统文件</h5>
 <blockquote>
 <p>如果你现在还没有进入 root权限模式，这是最后的机会了。</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bsdtar -xpf ArchLinuxARM-rpi-3-latest.tar.gz -C root
-sync
-</code></pre></div><h5 id="五-填充boot">五. 填充boot</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mv root/boot/* boot
-</code></pre></div><h5 id="六-弹出sd卡">六. 弹出sd卡</h5>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">umount boot root
-</code></pre></div><h5 id="七-将sd卡装入树莓派插电网线连路由器或者其他什么办法只要你能弄到ip">七. 将sd卡装入树莓派，插电，网线连路由器（或者其他什么办法只要你能弄到ip）</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bsdtar -xpf ArchLinuxARM-rpi-3-latest.tar.gz -C root
+</span></span><span style="display:flex;"><span>sync
+</span></span></code></pre></div><h5 id="五-填充boot">五. 填充boot</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv root/boot/* boot
+</span></span></code></pre></div><h5 id="六-弹出sd卡">六. 弹出sd卡</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>umount boot root
+</span></span></code></pre></div><h5 id="七-将sd卡装入树莓派插电网线连路由器或者其他什么办法只要你能弄到ip">七. 将sd卡装入树莓派，插电，网线连路由器（或者其他什么办法只要你能弄到ip）</h5>
 <h5 id="八-从你的电脑上用ssh连接树莓派">八. 从你的电脑上用ssh连接树莓派</h5>
 <p>附初始用户表：</p>
 <table>
 <thead>
 <tr>
-<th align="left">初始用户</th>
-<th align="left">用户名</th>
+<th style="text-align:left">初始用户</th>
+<th style="text-align:left">用户名</th>
 <th>密码</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">alarm（普通用户，可远程登录）</td>
-<td align="left">alarm</td>
+<td style="text-align:left">alarm（普通用户，可远程登录）</td>
+<td style="text-align:left">alarm</td>
 <td>alarm</td>
 </tr>
 <tr>
-<td align="left">管理员（无ssh权限）</td>
-<td align="left">root</td>
+<td style="text-align:left">管理员（无ssh权限）</td>
+<td style="text-align:left">root</td>
 <td>root</td>
 </tr>
 </tbody>
@@ -387,7 +386,7 @@ sync
 <p>arch默认不提供对dns的主机发布功能，即默认条件下无法使用 <a href="mailto:user@raspberrypi.local">user@raspberrypi.local</a> 连接树莓派。如有需求，<a href="https://wiki.archlinux.org/index.php/Avahi">移步</a>。</p>
 </blockquote>
 <p>附带国内Archarm 加速镜像文件，覆盖 /etc/pacman.d/mirrorlist 文件即可</p>
-<pre><code># Server list generated by rankmirrors on 2017-07-27
+<pre tabindex="0"><code># Server list generated by rankmirrors on 2017-07-27
 #
 ## China
 Server = https://mirrors.ustc.edu.cn/archlinuxarm/$arch/$repo
@@ -495,7 +494,7 @@ Server = http://mirrors.163.com/archlinuxarm/$arch/$repo
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2020 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
+    &copy; 2024 <a href="https://github.com/v1c77">v1c77</a><br><a href="http://beian.miit.gov.cn">粤ICP备19031392号</a>. All Rights Reserved
   </span>
 </footer>
 
