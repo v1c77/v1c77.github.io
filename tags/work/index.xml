@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>work on 我的日记</title><link>http://blog.heyuhua.com/tags/work/</link><description>Recent content in work on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Wed, 02 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/work/index.xml" rel="self" type="application/rss+xml"/><item><title>某工程师的工作（经验）总结</title><link>http://blog.heyuhua.com/p/%E6%9F%90%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</link><pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/%E6%9F%90%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</guid><description>&lt;p>禅师寻一鸡，系绳于其足。拉绳，鸡倒而复起，如此有八。吾问：汝教我锲而不舍？答曰：No, 拉鸡八倒。&lt;/p>
+&lt;h2 id="如果你是一个高端全栈工程师并且负责某产品的研发">如果你是一个&lt;code>高端&lt;/code>全栈工程师并且负责某产品的研发&lt;/h2>
+&lt;ul>
+&lt;li>写后端api就不要想着前端怎么调用方便&lt;/li>
+&lt;li>写前端就不要想后端怎么写方便&lt;/li>
+&lt;li>以上两条起码会保证你的接口足够的simple.&lt;/li>
+&lt;li>永远不要为了方便把任何model 放在view 模块&lt;/li>
+&lt;li>改队友的代码一定要给ticket&lt;/li>
+&lt;li>跪求某大神做review&lt;/li>
+&lt;/ul>
+&lt;p>###　接口设计尽量灵活
+栗子：
+如果有函数需要传入保存日志的地址&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">foo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">logpath&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;.&amp;#39;&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">isdir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">logpath&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># 从args 获取参数保存&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">pass&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># 尽量处理 不存在目录，相对路径 给定文件名（带后缀）的情况&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">pass&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="其他">其他&lt;/h3>
+&lt;ul>
+&lt;li>exception 尽量不要输出变量内容&lt;/li>
+&lt;li>interface 设计的默认参数尽量不要设为null 或者其他无意义的值&lt;/li>
+&lt;/ul>
+&lt;h2 id="跟大屌们一起工作的注意事项">跟大屌们一起工作的注意事项&lt;/h2>
+&lt;blockquote>
+&lt;p>工作在传统安全行业一线的工程师们都有些怪毛病，他们可能熟读linux kernel源码，精通windows 驱动，还有很多老罗（罗升阳）一样研究
+Android 源码的苦行僧。但是对底层的过度熟悉会带来一些好玩的事情。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>写汇编c 出身的大哥们会质疑python解释器，如果它们让你们查错，记得想想python和c的区别&lt;/li>
+&lt;/ul>
+&lt;p>对面大哥甚至在python强行添加context级别的&lt;code>goto&lt;/code>语法&lt;/p>
+&lt;p>keep your self.&lt;/p>
+&lt;h2 id="当你是一个team中developer的时候于2017-11-30">当你是一个team中developer的时候（于2017-11-30）&lt;/h2>
+&lt;blockquote>
+&lt;p>当好一颗螺丝钉&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

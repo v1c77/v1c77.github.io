@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux on 我的日记</title><link>http://blog.heyuhua.com/tags/linux/</link><description>Recent content in linux on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Fri, 02 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>linux shell 实用技巧</title><link>http://blog.heyuhua.com/p/linux-shell-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</link><pubDate>Fri, 02 Dec 2016 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/linux-shell-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</guid><description>&lt;p>linux忽悠原则： 一切皆文件， 通信皆管道， 不管闲事，不说废话.(只能信50%)&lt;/p>
+&lt;h2 id="统计常用命令-使用次数最多的10条命令">统计常用命令 （使用次数最多的10条命令）&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">history&lt;/span> &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{print $2}&amp;#39;&lt;/span> &lt;span class="p">|&lt;/span> sort &lt;span class="p">|&lt;/span> uniq -c &lt;span class="p">|&lt;/span> sort -k1,1nr &lt;span class="p">|&lt;/span> head -10n
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>Tips: ohmyzsh扩大了history 记录行数到2000，大概索引宝宝平时一个月的命令 ，可以按需求修改 &lt;code>~zshrc&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="批量修改文件名rename">批量修改文件名（rename）&lt;/h2>
+&lt;blockquote>
+&lt;p>rename 在各发行版语法不同，写通用脚本宁可用 &lt;code>mv&lt;/code> &amp;hellip; 示例运行在ubuntu16.04&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>修改当前目录下的所有&lt;code>.log&lt;/code> 文件为&lt;code>.json&lt;/code> 格式&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rename &lt;span class="s1">&amp;#39;s/.log$/.json/&amp;#39;&lt;/span> *.log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="递归删除匹配到的文件">递归删除匹配到的文件&lt;/h2>
+&lt;blockquote>
+&lt;p>首先需要知道的是在bash／zsh 环境中， 不加引号的语句会首先被zsh 或者 bash 解析
+所以 类似 &lt;code>rm -r *.pyc&lt;/code> 这种语句是错误的（并不会像你想象的那样删除所有子目录下的pyc 文件）&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>stackoverflow上评分最高的两个答案：
+&lt;ol>
+&lt;li>&lt;code>find . -name &amp;quot;*.pyc&amp;quot; -exec rm -rf {} \;&lt;/code>&lt;/li>
+&lt;li>&lt;code>find . -name '*.pyc' -delete&lt;/code> 这种显然看上去更为安全一些。毕竟看到 &lt;code>rm -rf&lt;/code> 这样的东东总是感觉很害怕。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="命令行reformat-log-文件">命令行reformat log 文件&lt;/h2>
+&lt;p>比如说将log中的回车显式表示。&lt;code>sed -e ’s/#012/\n/g’&lt;/code>&lt;/p></description></item><item><title>使用内网环境下的代理讨论</title><link>http://blog.heyuhua.com/p/%E4%BD%BF%E7%94%A8%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E4%BB%A3%E7%90%86%E8%AE%A8%E8%AE%BA/</link><pubDate>Mon, 28 Nov 2016 17:43:37 +0000</pubDate><guid>http://blog.heyuhua.com/p/%E4%BD%BF%E7%94%A8%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E4%BB%A3%E7%90%86%E8%AE%A8%E8%AE%BA/</guid><description>&lt;p>我有一身绝佳的溜门撬锁技巧&lt;/p>
+&lt;h2 id="环境">环境&lt;/h2>
+&lt;ul>
+&lt;li>host: win10 ip:192.168.223.102 with shadowsocks 服务端口 1080&lt;/li>
+&lt;li>guest: centos7(vm虚拟机) ip:192.168.223.118&lt;/li>
+&lt;li>桥接网络。。。。。。。。。。。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>如果是nat转发，则可以把下文的代理地址替换为host的nat网关ip 类似 10.0.15.1&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="问题">问题&lt;/h2>
+&lt;blockquote>
+&lt;p>host 已经配置sock5 代理 在 1080 端口，如何让guest虚拟机能够使用host代理？&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="方案">方案&lt;/h2>
+&lt;h3 id="方案1-----proxychains">方案1 &amp;mdash; proxychains&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">yum install gcc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget --no-check-certificate https://github.com/pypa/pip/archive/1.5.5.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tar zvxf 1.5.5.tar.gz &lt;span class="c1">#解压文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> pip-1.5.5/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">python setup.py install
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yum install -y git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /opt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/haad/proxychains
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> proxychains/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./configure --sysconfdir&lt;span class="o">=&lt;/span>/usr/local/etc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make &lt;span class="p">&amp;amp;&lt;/span>amp&lt;span class="p">;&amp;amp;&lt;/span>amp&lt;span class="p">;&lt;/span> make install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>配置文件位于 /opt/proxychains/src/proxychains.conf 需要拷贝
+&lt;code>cp /opt/proxychains/src/proxychains.conf /etc/proxychains.conf&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;ul>
+&lt;li>
+&lt;p>配置: 在上述文件末尾修改 代理配置 （eg: &lt;code>socks5 192.168.223.2 1080&lt;/code>）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>调用方法: &lt;code>proxychains4&lt;/code> + 命令&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="方案2-----添加环境变量代理">方案2 &amp;mdash; 添加环境变量代理&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">vi ~/.bash_profile &lt;span class="c1"># or .bashrc or .zshrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 末尾添加如下内容&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">http_proxy&lt;/span>&lt;span class="o">=&lt;/span>http://192.168.223.102:1080/ &lt;span class="c1"># host的shadowsocks服务支持http&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果使用代理的环境复杂还可以按需添加如下变量&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">https_proxy&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$http_proxy&lt;/span> &lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">ftp_proxy&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$http_proxy&lt;/span> &lt;span class="c1"># 内网常用ftp时最好不要加,有大坑&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">rsync_proxy&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$http_proxy&lt;/span> &lt;span class="c1"># 不懂&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">no_proxy&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;localhost,127.0.0.1,localaddress,.localdomain.com&amp;#34;&lt;/span> &lt;span class="c1"># 不需要代理的东东&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 退出 vi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使应用生效(若不生效则重启shell 或者注销当前用户 或 sudo reboot)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.bash_profile &lt;span class="c1"># 参见第一行&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

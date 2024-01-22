@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog on 我的日记</title><link>http://blog.heyuhua.com/tags/blog/</link><description>Recent content in blog on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>mac开发环境的一些配置</title><link>http://blog.heyuhua.com/p/mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/</link><pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>开平衡车的人都会走残疾人通道。| 做人要谦逊。&lt;/p>
+&lt;blockquote>
+&lt;p>从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="正题在mac上配置远程开发环境">正题：在mac上配置远程开发环境&lt;/h2>
+&lt;pre>&lt;code>&amp;gt; 事出有因，在公司工程机上的开发环境是ubuntu16.04，现在要统统挪到本宝宝的mac上。
+&lt;/code>&lt;/pre>
+&lt;h3 id="远程桌面环境">远程桌面环境。&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>连windows 直接安装应用&lt;code>windows remote desktop beta&lt;/code>, 超级好用。beta版支持分屏，文件拖拽。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>连ubuntu16.04 全色域 unity桌面环境 2k分辨率。&lt;/p>
+&lt;p>注意事项：&lt;/p>
+&lt;ul>
+&lt;li>目前只在ubuntu16.04 LTS 版本测试过，服务器版本或其他开发版版本暂无解决方案。&lt;/li>
+&lt;li>此方法要求网络环境及其良好，如内网环境中；&lt;/li>
+&lt;li>要求工程机性能达到一定程度，否则会卡顿；&lt;/li>
+&lt;li>大部分内容搬运自 &lt;a class="link" href="https://www.hiroom2.com/2016/08/28/ubuntu-16-04-remote-connect-to-unity-with-vnc-xrdp/" target="_blank" rel="noopener"
+>这里&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="1-安装tigervnc">1. 安装tigervnc&lt;/h4>
+&lt;p>下面是大佬写好的install.sh 文件内容。
+创建好文件后 直接 &lt;code>chmod +x install.sh &amp;amp; ./install.sh&lt;/code>&lt;/p>
+&lt;p>或者你也可以逐条复制粘贴。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 更新 repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt update -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># install git and devscript.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y git devscript
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Remove vnc4server.（或者其它同类vncserver，一定要删除！！！）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt remove -y vnc4server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create working directory.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir tigervnc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> tigervnc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Download source code.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/TigerVNC/tigervnc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> tigervnc/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Avoid compiler error.（记得切换版本。胆子大的可以试试不切换，）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout ff872614b507d0aa8bfbd09ef41550390cfe658a
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Prepare to build package.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ln -s contrib/packages/deb/ubuntu-xenial/debian
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chmod a+x debian/rules
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y -o &lt;span class="s1">&amp;#39;apt::install-recommends=true&amp;#39;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> &lt;span class="sb">`&lt;/span>dpkg-checkbuilddeps 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="p">|&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>sed -e &lt;span class="s1">&amp;#39;s/.*build dependencies://g&amp;#39;&lt;/span> -e &lt;span class="s1">&amp;#39;s/([^)]*)//g&amp;#39;&lt;/span>&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Build package. (大概一杯咖啡的时间)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fakeroot debian/rules binary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ..
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Install package with resolving dependent package.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo dpkg -i *.deb &lt;span class="o">||&lt;/span> &lt;span class="o">(&lt;/span>sudo apt-get -f install -y &lt;span class="p">;&lt;/span> sudo dpkg -i *.deb &lt;span class="o">||&lt;/span> &lt;span class="nb">exit&lt;/span> 1&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ..
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="2-创建-xession-文件">2. 创建 &lt;code>~/.xession&lt;/code> 文件&lt;/h4>
+&lt;p>文件内容：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/usr/lib/gnome-session/gnome-session-binary --session=ubuntu &amp;amp;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/usr/lib/x86_64-linux-gnu/unity/unity-panel-service &amp;amp;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/usr/lib/unity-settings-daemon/unity-settings-daemon &amp;amp;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">for indicator in /usr/lib/x86_64-linux-gnu/indicator-*; do
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> basename=`basename ${indicator}`
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dirname=`dirname ${indicator}`
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> service=${dirname}/${basename}/${basename}-service
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${service} &amp;amp;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">done
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unity
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="3-添加-gnome-control-center">3. 添加 &lt;code>gnome-control-center&lt;/code>&lt;/h4>
+&lt;p>如果显示文件已存在， 就可以跳过了。（比如说之前做过个性化设置什么的）&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo ln -s /usr/bin/unity-control-center /usr/bin/gnome-control-center
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="4-运行vncserver">4. 运行vncserver&lt;/h4>
+&lt;p>创建vnc密码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ vncpasswd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Password:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Verify:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Would you like to enter a view-only password &lt;span class="o">(&lt;/span>y/n&lt;span class="o">)&lt;/span>? n
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行vncserver，端口号为 5900 + 序号， 下面的端口就是： 5900 + 1 = 5901
+同时还指定了分辨率为1920*1080&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ vncserver -geimetry 1920x1080
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New &lt;span class="s1">&amp;#39;ubuntu-16:1 (hiroom2)&amp;#39;&lt;/span> desktop is ubuntu-16:1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Starting applications specified in /home/hiroom2/.vnc/xstartup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Log file is /home/hiroom2/.vnc/ubuntu-16:1.log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>你也可以在~/vnc/startup 里设置分辨率。&lt;/p>
+&lt;h4 id="5-mac连接">5. mac连接　　&lt;/h4>
+&lt;p>在 mac桌面环境下 使用快捷键&lt;code>⌘（command）+ k&lt;/code> 呼出连接器
+输入 你的vnc服务器 &lt;code>vnc://ip:port&lt;/code> 连接&lt;/p>
+&lt;p>&lt;img src="http://qiniu.heyuhua.com/2017-01-16contovnc1.png"
+loading="lazy"
+alt="连接窗口"
+>
+&lt;img src="http://qiniu.heyuhua.com/2017-01-16contovnc2.png"
+loading="lazy"
+alt="输入密码"
+>
+&lt;img src="http://qiniu.heyuhua.com/2017-01-16contovnc3.png"
+loading="lazy"
+alt="效果"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="使用pycharm做远程开发">使用pycharm做远程开发&lt;/h3>
+&lt;blockquote>
+&lt;p>配置方面借鉴了 &amp;ndash;&amp;gt; &lt;a class="link" href="http://yidao620c.github.io/2016/05/26/python/pycharm-remote.html" target="_blank" rel="noopener"
+>那年八月的博客&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="杂项">杂项&lt;/h3>
+&lt;ul>
+&lt;li>使用 GNU commandTool替换默认版本&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>注意到这个事情是因为 默认的 &lt;code>grep&lt;/code> 太诡异。教程-&amp;gt; &lt;a class="link" href="http://www.nyx.net/~mlu/pages/computing/installing_and_configuring/installing_and_configuring_command-line_utilities/#.WHzKw7Z96sw" target="_blank" rel="noopener"
+>传送门&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>代理的配置（不得不说的是今天 看到百度首页的title 居然是 我爱你中国 ）
+&lt;ul>
+&lt;li>如果使用shadowshocks， 最好把端口改成1080 而不是默认的1086（因为之前做了一些配置文件云同步东东）&lt;/li>
+&lt;li>proxifier 负责全局调度（google_photo_backup &amp;amp; bropbox &amp;amp; 不支持socks5的可以很轻松的搞定）&lt;/li>
+&lt;li>github 什么的需要额外配置 &lt;code>git config --global http.proxy ....&lt;/code>&lt;/li>
+&lt;li>漏网之鱼用proxychains4&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>为什么要开个人博客</title><link>http://blog.heyuhua.com/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link><pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid><description>&lt;blockquote>
+&lt;p>副标题+ 内容缩略：好看的皮囊千篇一律，有趣的人200多斤。想变的有趣还是得多吃多睡。。。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-mysql" data-lang="mysql">&lt;span class="line">&lt;span class="cl">&lt;span class="n">ChangeLog&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="err">「&lt;/span>&lt;span class="mi">2017&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="err">」&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">生成框架迁移到&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">`&lt;/span>&lt;span class="n">hugo&lt;/span>&lt;span class="o">`&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="err">「&lt;/span>&lt;span class="mi">2017&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="err">」&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">主题迁移到&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">hugo&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tranquilpeak&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">theme&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="为什么要开这个博客">为什么要开这个博客&lt;/h2>
+&lt;ul>
+&lt;li>之前有在csdn 和cnblog 写过博客，作为一个永远18岁的小正太，它们无法跟我一起保持青春&lt;/li>
+&lt;li>写了很多工作笔记存在印象，在考虑一点一点把它们公开，而且我很有先见之明的留下了markdown底稿&lt;/li>
+&lt;li>我想证明一件事：你永远都会觉得“1年前的我是个sb.” 而不是老的时候觉得”我年轻的时候就像个sb.”&lt;/li>
+&lt;li>副标题为随机Unicode编码组合，由本人随机生成。&lt;/li>
+&lt;/ul></description></item></channel></rss>

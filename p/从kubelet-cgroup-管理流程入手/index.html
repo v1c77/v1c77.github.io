@@ -1,0 +1,658 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="新年第一个flag: 春节期间《缺氧》能解决气体和液体供应问题。
+"><meta name=keywords content="k8s,kubelet,cgroup"><title>从kubelet Cgroup 管理流程入手</title>
+<link rel=canonical href=http://blog.heyuhua.com/p/%E4%BB%8Ekubelet-cgroup-%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E5%85%A5%E6%89%8B/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="从kubelet Cgroup 管理流程入手"><meta property="og:description" content="新年第一个flag: 春节期间《缺氧》能解决气体和液体供应问题。
+"><meta property="og:url" content="http://blog.heyuhua.com/p/%E4%BB%8Ekubelet-cgroup-%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E5%85%A5%E6%89%8B/"><meta property="og:site_name" content="我的日记"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2020-01-14T11:35:58+08:00"><meta property="article:modified_time" content="2020-01-14T11:35:58+08:00"><meta name=twitter:title content="从kubelet Cgroup 管理流程入手"><meta name=twitter:description content="新年第一个flag: 春节期间《缺氧》能解决气体和液体供应问题。
+"><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/mxbc_love_hu84bcc3680e7c4ed0b569d38fde18a01e_187938_300x0_resize_box_1.gif width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🫥</span></figure><div class=site-meta><h1 class=site-name><a href=/>我的日记</a></h1><h2 class=site-description>drafts.....</h2></div></header><ol class=social-menu><li><a href=https://github.com/v1c77 target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://stackoverflow.com/users/6382035/vi-ci target=_blank title="Stack Overflow" rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-stackoverflow" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1"/><path d="M8 16h8"/><path d="M8.322 12.582l7.956.836"/><path d="M8.787 9.168l7.826 1.664"/><path d="M10.096 5.764l7.608 2.472"/></svg></a></li><li><a href=https://t.me/v1c77 target=_blank title=telegram rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言寻找可能性------混编-vm-与-pod-cgroup>前言：寻找可能性 &mdash;- 混编 VM 与 Pod cgroup</a></li><li><a href=#kubelet-的-cgroup-管理模型>kubelet 的 Cgroup 管理模型</a><ol><li><a href=#node-level>Node level</a></li><li><a href=#qos-level>QOS level</a></li><li><a href=#pod-level>Pod level</a></li><li><a href=#container-level>Container level</a></li></ol></li><li><a href=#其他相关特性>其他相关特性</a><ol><li><a href=#cpuset>CPUSet</a><ol><li><a href=#cpu-manager工作流>CPU Manager工作流</a></li><li><a href=#discovering-cpu-topology>Discovering CPU topology</a></li><li><a href=#创建容器>创建容器</a></li></ol></li></ol></li><li><a href=#写在最后>写在最后</a><ol><li><a href=#参考>参考:</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/develop/>develop</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E4%BB%8Ekubelet-cgroup-%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E5%85%A5%E6%89%8B/>从kubelet Cgroup 管理流程入手</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 14, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 10 分钟</time></div></footer></div></header><section class=article-content><p>新年第一个flag: 春节期间《缺氧》能解决气体和液体供应问题。</p><blockquote><p>本文基于 k8s 近期 release, git: commit 70132b0f130acc0bed193d9ba59dd186f0e634cf (HEAD, tag: v1.17.0)</p></blockquote><h2 id=前言寻找可能性------混编-vm-与-pod-cgroup>前言：寻找可能性 &mdash;- 混编 VM 与 Pod cgroup</h2><p>想象 k8s 可以同时管理 VM 资源了
+如何将 vm 资源的cpu，内存配置抽象成 cgroup 并使用 kubelet CgroupManager 统一管理?</p><h2 id=kubelet-的-cgroup-管理模型>kubelet 的 Cgroup 管理模型</h2><p>kubelet 作为 k8s 系统中各个节点的“话事者”，其 <code>ContainerManger</code> 模块包揽了所有的 cgroup 管理工作。
+ContainerManager 将 Pod 的 cgroup 模型做了层次分离： container -> Pod -> Qos -> Node。</p><h3 id=node-level>Node level</h3><p>节点层面 主要聚焦于 cgroup 横向分配， 通过隔离不同类型 的 cgroup 进行抽象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>                        Node Capacity
+</span></span><span class=line><span class=cl>                    ---------------------------
+</span></span><span class=line><span class=cl>                    |     kube-reserved       |
+</span></span><span class=line><span class=cl>                    |-------------------------|
+</span></span><span class=line><span class=cl>                    |     system-reserved     |
+</span></span><span class=line><span class=cl>                    |-------------------------|
+</span></span><span class=line><span class=cl>                    |    eviction-threshold   |
+</span></span><span class=line><span class=cl>                    |-------------------------|
+</span></span><span class=line><span class=cl>                    |                         |
+</span></span><span class=line><span class=cl>                    |      allocatable        |
+</span></span><span class=line><span class=cl>                    |   (available for pods)  |
+</span></span><span class=line><span class=cl>                    |                         |
+</span></span><span class=line><span class=cl>                    |                         |
+</span></span><span class=line><span class=cl>                    ---------------------------
+</span></span></code></pre></td></tr></table></div></div><p>默认情况下 节点粒度的管理 分配了 k8s 服务组件的 cgroup， 系统非内核 进程 cgroup， 还有 pod 资源的 cgroup.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=nx>kubeDeps</span><span class=p>.</span><span class=nx>ContainerManager</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>cm</span><span class=p>.</span><span class=nf>NewContainerManager</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>kubeDeps</span><span class=p>.</span><span class=nx>Mounter</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>kubeDeps</span><span class=p>.</span><span class=nx>CAdvisorInterface</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cm</span><span class=p>.</span><span class=nx>NodeConfig</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>RuntimeCgroupsName</span><span class=p>:</span>    <span class=nx>s</span><span class=p>.</span><span class=nx>RuntimeCgroups</span><span class=p>,</span> <span class=c1>// `runtime-cghroups`  配置, 创建和运行容器运行时的 cgroup 的绝对名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>SystemCgroupsName</span><span class=p>:</span>     <span class=nx>s</span><span class=p>.</span><span class=nx>SystemCgroups</span><span class=p>,</span> <span class=c1>// cgroup 的绝对名称，用于所有尚未放置在根目录下某 cgroup 内的非内核进程。空值表示不指定 cgroup。回滚该参数需要重启机器。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>KubeletCgroupsName</span><span class=p>:</span>    <span class=nx>s</span><span class=p>.</span><span class=nx>KubeletCgroups</span><span class=p>,</span> <span class=c1>// 用于创建和运行 kubelet 的 cgroup 的绝对名称。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>ContainerRuntime</span><span class=p>:</span>      <span class=nx>s</span><span class=p>.</span><span class=nx>ContainerRuntime</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>CgroupsPerQOS</span><span class=p>:</span>         <span class=nx>s</span><span class=p>.</span><span class=nx>CgroupsPerQOS</span><span class=p>,</span>  <span class=c1>// 将 Pod 按照不同的 QOS 优先级进行 cgroup 拆分。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>CgroupRoot</span><span class=p>:</span>            <span class=nx>s</span><span class=p>.</span><span class=nx>CgroupRoot</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>CgroupDriver</span><span class=p>:</span>          <span class=nx>s</span><span class=p>.</span><span class=nx>CgroupDriver</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>KubeletRootDir</span><span class=p>:</span>        <span class=nx>s</span><span class=p>.</span><span class=nx>RootDirectory</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>ProtectKernelDefaults</span><span class=p>:</span> <span class=nx>s</span><span class=p>.</span><span class=nx>ProtectKernelDefaults</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>NodeAllocatableConfig</span><span class=p>:</span> <span class=nx>cm</span><span class=p>.</span><span class=nx>NodeAllocatableConfig</span><span class=p>{</span> <span class=c1>// 节点可分配 resource 计算结构体
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>KubeReservedCgroupName</span><span class=p>:</span>   <span class=nx>s</span><span class=p>.</span><span class=nx>KubeReservedCgroup</span><span class=p>,</span>   <span class=c1>// k8s 自身服务 所在 cgroup
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>SystemReservedCgroupName</span><span class=p>:</span> <span class=nx>s</span><span class=p>.</span><span class=nx>SystemReservedCgroup</span><span class=p>,</span> <span class=c1>// 操作系统非内核进程外的其他进程所在cgroup
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>EnforceNodeAllocatable</span><span class=p>:</span>   <span class=nx>sets</span><span class=p>.</span><span class=nf>NewString</span><span class=p>(</span><span class=nx>s</span><span class=p>.</span><span class=nx>EnforceNodeAllocatable</span><span class=o>...</span><span class=p>),</span> <span class=c1>// `enforce-node-allocatable` 参数设置，
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>KubeReserved</span><span class=p>:</span>             <span class=nx>kubeReserved</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>SystemReserved</span><span class=p>:</span>           <span class=nx>systemReserved</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>ReservedSystemCPUs</span><span class=p>:</span>       <span class=nx>reservedSystemCPUs</span><span class=p>,</span> <span class=c1>// 预留给节点其他无关进程的 cpu.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>HardEvictionThresholds</span><span class=p>:</span>   <span class=nx>hardEvictionThresholds</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>QOSReserved</span><span class=p>:</span>                           <span class=o>*</span><span class=nx>experimentalQOSReserved</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>ExperimentalCPUManagerPolicy</span><span class=p>:</span>          <span class=nx>s</span><span class=p>.</span><span class=nx>CPUManagerPolicy</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>ExperimentalCPUManagerReconcilePeriod</span><span class=p>:</span> <span class=nx>s</span><span class=p>.</span><span class=nx>CPUManagerReconcilePeriod</span><span class=p>.</span><span class=nx>Duration</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>ExperimentalPodPidsLimit</span><span class=p>:</span>              <span class=nx>s</span><span class=p>.</span><span class=nx>PodPidsLimit</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>EnforceCPULimits</span><span class=p>:</span>                      <span class=nx>s</span><span class=p>.</span><span class=nx>CPUCFSQuota</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>CPUCFSQuotaPeriod</span><span class=p>:</span>                     <span class=nx>s</span><span class=p>.</span><span class=nx>CPUCFSQuotaPeriod</span><span class=p>.</span><span class=nx>Duration</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>ExperimentalTopologyManagerPolicy</span><span class=p>:</span>     <span class=nx>s</span><span class=p>.</span><span class=nx>TopologyManagerPolicy</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>s</span><span class=p>.</span><span class=nx>FailSwapOn</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>devicePluginEnabled</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>kubeDeps</span><span class=p>.</span><span class=nx>Recorder</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过如上 模块设计， Pod 的 allocatable resource 可以通过简单的减法运算得出</p><blockquote><p><code>allocatable = NodeCapacity - [kube-reserved] - [system-reserved] - [eviction-threshold]</code></p></blockquote><p>我们的测试集群目前配置如下：</p><ul><li>CgroupDriver : systemd</li><li>SystemCgroups: /system.slice</li><li>KubeletCgroups: /system.slice</li><li>SystemReservedCgroups: /system.slice</li><li>KubeReservedCgroups: /system.slice/kubelet.service</li></ul><p>额外的：</p><ul><li>VM 相关 cgroup 配置位于 /system.slice/machine.slice， 需要纳入 node的 统一管理。</li></ul><h3 id=qos-level>QOS level</h3><p>在上一节 Node 相关配置中， <code>--cgroup-per-qos</code> 配置（默认为 true） 会生成该层级的 Cgroup 配置。</p><p>目前 QOS 共分为 3 种。</p><p>qos 级别</p><ul><li>Guaranteed【老板（我要的都是我的）】：pod 里每个容器都必须设定 <code>request</code> 和 <code>limit</code>，并且值必须相同</li><li>Burstable 【洗碗工（底薪+提成）】：pod 里至少有一个容器的 cpu 或者 memory 设置了 <code>request</code> 值</li><li>BestEffort【切格瓦拉（能偷到的都是我的）】：POD 的所有容器都没有指定CPU和内存的 <code>request</code> 和 <code>limit</code></li></ul><p>初始化过程发生在 <code>kl.containerLogManager.Start() > setupNode</code> 过程：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl>	<span class=c1>// Setup top level qos containers only if CgroupsPerQOS flag is specified as true
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>cm</span><span class=p>.</span><span class=nx>NodeConfig</span><span class=p>.</span><span class=nx>CgroupsPerQOS</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cm</span><span class=p>.</span><span class=nf>createNodeAllocatableCgroups</span><span class=p>();</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>err</span> <span class=p>=</span> <span class=nx>cm</span><span class=p>.</span><span class=nx>qosContainerManager</span><span class=p>.</span><span class=nf>Start</span><span class=p>(</span><span class=nx>cm</span><span class=p>.</span><span class=nx>getNodeAllocatableAbsolute</span><span class=p>,</span> <span class=nx>activePods</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;failed to initialize top level QOS containers: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>createNodeAllocatableCgroups</code> 会初始化 一个 <code>system.slice/kubepods.slice</code> cgroup, 用于放置 pod 资源</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl>	<span class=c1>// Top level for Qos containers are created only for Burstable
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// and Best Effort classes
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>qosClasses</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSClass</span><span class=p>]</span><span class=nx>CgroupName</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBurstable</span><span class=p>:</span>  <span class=nf>NewCgroupName</span><span class=p>(</span><span class=nx>rootContainer</span><span class=p>,</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>ToLower</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBurstable</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>		<span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBestEffort</span><span class=p>:</span> <span class=nf>NewCgroupName</span><span class=p>(</span><span class=nx>rootContainer</span><span class=p>,</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>ToLower</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBestEffort</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Store the top level qos container names
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>m</span><span class=p>.</span><span class=nx>qosContainersInfo</span> <span class=p>=</span> <span class=nx>QOSContainersInfo</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>Guaranteed</span><span class=p>:</span> <span class=nx>rootContainer</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nx>Burstable</span><span class=p>:</span>  <span class=nx>qosClasses</span><span class=p>[</span><span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBurstable</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>		<span class=nx>BestEffort</span><span class=p>:</span> <span class=nx>qosClasses</span><span class=p>[</span><span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBestEffort</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>初始化后 <code>Burstable</code> 和 <code>BestEffort</code>类型的pod cgroup 会被生成在， <code>/system.slice/kubepods.slice</code> 下。</p><p>而 <code>guaranteed</code> 类型 pod 会直接 运行在 /system.slice/kubepods.slice 下.</p><p>这里发生了 kubelet 层的第一次 cgroup 设置： <code>BestEffort</code>其中的 cpu.shares 被设置为minShares(=2).</p><p>表示 在 cpu高负载情况下， BestEffort. Pod 将会享有 pod中最少的的cpu时间段。</p><p>同时，在containerManager start 之后， 还会有一个常驻go程 循环执行 <code>UpdateCgroups()</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>m</span> <span class=o>*</span><span class=nx>qosContainerManagerImpl</span><span class=p>)</span> <span class=nf>UpdateCgroups</span><span class=p>()</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>m</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>m</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>qosConfigs</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSClass</span><span class=p>]</span><span class=o>*</span><span class=nx>CgroupConfig</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBurstable</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>Name</span><span class=p>:</span>               <span class=nx>m</span><span class=p>.</span><span class=nx>qosContainersInfo</span><span class=p>.</span><span class=nx>Burstable</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nx>ResourceParameters</span><span class=p>:</span> <span class=o>&amp;</span><span class=nx>ResourceConfig</span><span class=p>{},</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=nx>v1</span><span class=p>.</span><span class=nx>PodQOSBestEffort</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>Name</span><span class=p>:</span>               <span class=nx>m</span><span class=p>.</span><span class=nx>qosContainersInfo</span><span class=p>.</span><span class=nx>BestEffort</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nx>ResourceParameters</span><span class=p>:</span> <span class=o>&amp;</span><span class=nx>ResourceConfig</span><span class=p>{},</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// update the qos level cgroup settings for cpu shares
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>m</span><span class=p>.</span><span class=nf>setCPUCgroupConfig</span><span class=p>(</span><span class=nx>qosConfigs</span><span class=p>);</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// update the qos level cgroup settings for huge pages (ensure they remain unbounded)
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>m</span><span class=p>.</span><span class=nf>setHugePagesConfig</span><span class=p>(</span><span class=nx>qosConfigs</span><span class=p>);</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>utilfeature</span><span class=p>.</span><span class=nx>DefaultFeatureGate</span><span class=p>.</span><span class=nf>Enabled</span><span class=p>(</span><span class=nx>kubefeatures</span><span class=p>.</span><span class=nx>QOSReserved</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>resource</span><span class=p>,</span> <span class=nx>percentReserve</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>m</span><span class=p>.</span><span class=nx>qosReserved</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>switch</span> <span class=nx>resource</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>case</span> <span class=nx>v1</span><span class=p>.</span><span class=nx>ResourceMemory</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>				<span class=nx>m</span><span class=p>.</span><span class=nf>setMemoryReserve</span><span class=p>(</span><span class=nx>qosConfigs</span><span class=p>,</span> <span class=nx>percentReserve</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=nx>updateSuccess</span> <span class=o>:=</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>config</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>qosConfigs</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>err</span> <span class=o>:=</span> <span class=nx>m</span><span class=p>.</span><span class=nx>cgroupManager</span><span class=p>.</span><span class=nf>Update</span><span class=p>(</span><span class=nx>config</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>updateSuccess</span> <span class=p>=</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>updateSuccess</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>klog</span><span class=p>.</span><span class=nf>V</span><span class=p>(</span><span class=mi>4</span><span class=p>).</span><span class=nf>Infof</span><span class=p>(</span><span class=s>&#34;[ContainerManager]: Updated QoS cgroup configuration&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=c1>// If the resource can adjust the ResourceConfig to increase likelihood of
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// success, call the adjustment function here.  Otherwise, the Update() will
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// be called again with the same values.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=nx>resource</span><span class=p>,</span> <span class=nx>percentReserve</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>m</span><span class=p>.</span><span class=nx>qosReserved</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>switch</span> <span class=nx>resource</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>case</span> <span class=nx>v1</span><span class=p>.</span><span class=nx>ResourceMemory</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>				<span class=nx>m</span><span class=p>.</span><span class=nf>retrySetMemoryReserve</span><span class=p>(</span><span class=nx>qosConfigs</span><span class=p>,</span> <span class=nx>percentReserve</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>config</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>qosConfigs</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>err</span> <span class=o>:=</span> <span class=nx>m</span><span class=p>.</span><span class=nx>cgroupManager</span><span class=p>.</span><span class=nf>Update</span><span class=p>(</span><span class=nx>config</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>klog</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;[ContainerManager]: Failed to update QoS cgroup configuration&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>klog</span><span class=p>.</span><span class=nf>V</span><span class=p>(</span><span class=mi>4</span><span class=p>).</span><span class=nf>Infof</span><span class=p>(</span><span class=s>&#34;[ContainerManager]: Updated QoS cgroup configuration&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该流程保证了 kubepod 相关meta配置不被串改。</p><h3 id=pod-level>Pod level</h3><p>上两层的 cgroup 配置 大多属于模块划分相关的内容， Pod level 的 cgroup 配置 则更接近于 k8s 需要着重了解的一层。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Create Cgroups for the pod and apply resource parameters
+</span></span><span class=line><span class=cl>// to them if cgroups-per-qos flag is enabled.
+</span></span><span class=line><span class=cl>// TODO(yuhua): pod cgroup 创建
+</span></span><span class=line><span class=cl>pcm := kl.containerManager.NewPodContainerManager()
+</span></span><span class=line><span class=cl>// If pod has already been terminated then we need not create
+</span></span><span class=line><span class=cl>// or update the pod&#39;s cgroup
+</span></span><span class=line><span class=cl>if !kl.podIsTerminated(pod) {
+</span></span><span class=line><span class=cl>   // When the kubelet is restarted with the cgroups-per-qos
+</span></span><span class=line><span class=cl>   // flag enabled, all the pod&#39;s running containers
+</span></span><span class=line><span class=cl>   // should be killed intermittently and brought back up
+</span></span><span class=line><span class=cl>   // under the qos cgroup hierarchy.
+</span></span><span class=line><span class=cl>   // Check if this is the pod&#39;s first sync
+</span></span><span class=line><span class=cl>   firstSync := true
+</span></span><span class=line><span class=cl>   for _, containerStatus := range apiPodStatus.ContainerStatuses {
+</span></span><span class=line><span class=cl>      if containerStatus.State.Running != nil {
+</span></span><span class=line><span class=cl>         firstSync = false
+</span></span><span class=line><span class=cl>         break
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>   }
+</span></span><span class=line><span class=cl>   // Don&#39;t kill containers in pod if pod&#39;s cgroups already
+</span></span><span class=line><span class=cl>   // exists or the pod is running for the first time
+</span></span><span class=line><span class=cl>   podKilled := false
+</span></span><span class=line><span class=cl>   if !pcm.Exists(pod) &amp;&amp; !firstSync {
+</span></span><span class=line><span class=cl>      if err := kl.killPod(pod, nil, podStatus, nil); err == nil {
+</span></span><span class=line><span class=cl>         podKilled = true
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>   }
+</span></span><span class=line><span class=cl>   // Create and Update pod&#39;s Cgroups
+</span></span><span class=line><span class=cl>   // Don&#39;t create cgroups for run once pod if it was killed above
+</span></span><span class=line><span class=cl>   // The current policy is not to restart the run once pods when
+</span></span><span class=line><span class=cl>   // the kubelet is restarted with the new flag as run once pods are
+</span></span><span class=line><span class=cl>   // expected to run only once and if the kubelet is restarted then
+</span></span><span class=line><span class=cl>   // they are not expected to run again.
+</span></span><span class=line><span class=cl>   // We don&#39;t create and apply updates to cgroup if its a run once pod and was killed above
+</span></span><span class=line><span class=cl>   if !(podKilled &amp;&amp; pod.Spec.RestartPolicy == v1.RestartPolicyNever) {
+</span></span><span class=line><span class=cl>      if !pcm.Exists(pod) {
+</span></span><span class=line><span class=cl>         if err := kl.containerManager.UpdateQOSCgroups(); err != nil {
+</span></span><span class=line><span class=cl>            klog.V(2).Infof(&#34;Failed to update QoS cgroups while syncing pod: %v&#34;, err)
+</span></span><span class=line><span class=cl>         }
+</span></span><span class=line><span class=cl>         if err := pcm.EnsureExists(pod); err != nil {
+</span></span><span class=line><span class=cl>            kl.recorder.Eventf(pod, v1.EventTypeWarning, events.FailedToCreatePodContainer, &#34;unable to ensure pod container exists: %v&#34;, err)
+</span></span><span class=line><span class=cl>            return fmt.Errorf(&#34;failed to ensure that the pod: %v cgroups exist and are correctly applied: %v&#34;, pod.UID, err)
+</span></span><span class=line><span class=cl>         }
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>   }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>上述流程我们需要关注的是 如下几个流程</p><blockquote><p>syncPod -> kl.containerManager.NewPodContainerManager() -> pcm.Exists(pod) -> kl.containerManager.UpdateQOSCgroups()</p></blockquote><p><code>NewPodContainerManager</code> 并没有实质性的cgroup操作，紧跟着的判断 <code>Exists(pod)</code>-> <code>GetPodContainerName</code>函数调用会尝试获取 当前 pod应当存在的 cgroup路径。并检查 pod 对应cgroup的存在。</p><p>如果发现不存在 对应cgroup 则进入创建流程 【创建cgroup 发生在 pod其他资源创建前】， 即 <code>UpdateQOSChroups</code>:</p><p>还函数会进行：</p><ul><li><code>setCPUCgroupConfig</code> 比如说保证 BestEffort pod cpu share =2; 计算 Burst.slice 路径 cpu shares 设置应该为 <strong>所有 burstable_pod_CPU_request</strong> 的和。</li></ul><ul><li><code>setMemoryReserve</code> 取决于是否开启了特性功能 <strong>QOSReserved</strong>, 该功能会为 <strong>Burstable</strong> 和 <strong>BestEffort</strong> pod slice 设置 可用内存上限， 基于实时计算的各个类型的 pod的 内存使用状况。 【暂定默认关闭】</li><li><code>setHugePagesConfig</code> 根据功能开关设置 hugepage 用量。【暂定默认关闭】</li></ul><p>上述动作完成后 将会执行 pod 粒度 的 cgroup 创建， 更新操作 <code>EnsureExists</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>EnsureExists</span> <span class=n>takes</span> <span class=n>a</span> <span class=n>pod</span> <span class=n>as</span> <span class=n>argument</span> <span class=ow>and</span> <span class=n>makes</span> <span class=n>sure</span> <span class=n>that</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>pod</span> <span class=n>cgroup</span> <span class=n>exists</span> <span class=k>if</span> <span class=n>qos</span> <span class=n>cgroup</span> <span class=n>hierarchy</span> <span class=n>flag</span> <span class=n>is</span> <span class=n>enabled</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>If</span> <span class=n>the</span> <span class=n>pod</span> <span class=n>level</span> <span class=n>container</span> <span class=n>doesn</span><span class=s1>&#39;t already exist it is created.</span>
+</span></span><span class=line><span class=cl><span class=k>func</span> <span class=p>(</span><span class=n>m</span> <span class=o>*</span><span class=n>podContainerManagerImpl</span><span class=p>)</span> <span class=n>EnsureExists</span><span class=p>(</span><span class=n>pod</span> <span class=o>*</span><span class=n>v1</span><span class=o>.</span><span class=n>Pod</span><span class=p>)</span> <span class=n>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>podContainerName</span><span class=p>,</span> <span class=n>_</span> <span class=p>:</span><span class=o>=</span> <span class=n>m</span><span class=o>.</span><span class=n>GetPodContainerName</span><span class=p>(</span><span class=n>pod</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=o>//</span> <span class=n>check</span> <span class=k>if</span> <span class=n>container</span> <span class=n>already</span> <span class=n>exist</span>
+</span></span><span class=line><span class=cl>	<span class=n>alreadyExists</span> <span class=p>:</span><span class=o>=</span> <span class=n>m</span><span class=o>.</span><span class=n>Exists</span><span class=p>(</span><span class=n>pod</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=o>!</span><span class=n>alreadyExists</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=o>//</span> <span class=n>Create</span> <span class=n>the</span> <span class=n>pod</span> <span class=n>container</span>
+</span></span><span class=line><span class=cl>		<span class=n>containerConfig</span> <span class=p>:</span><span class=o>=</span> <span class=o>&amp;</span><span class=n>CgroupConfig</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=n>Name</span><span class=p>:</span>               <span class=n>podContainerName</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=n>ResourceParameters</span><span class=p>:</span> <span class=n>ResourceConfigForPod</span><span class=p>(</span><span class=n>pod</span><span class=p>,</span> <span class=n>m</span><span class=o>.</span><span class=n>enforceCPULimits</span><span class=p>,</span> <span class=n>m</span><span class=o>.</span><span class=n>cpuCFSQuotaPeriod</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=n>utilfeature</span><span class=o>.</span><span class=n>DefaultFeatureGate</span><span class=o>.</span><span class=n>Enabled</span><span class=p>(</span><span class=n>kubefeatures</span><span class=o>.</span><span class=n>SupportPodPidsLimit</span><span class=p>)</span> <span class=o>&amp;&amp;</span> <span class=n>m</span><span class=o>.</span><span class=n>podPidsLimit</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=n>containerConfig</span><span class=o>.</span><span class=n>ResourceParameters</span><span class=o>.</span><span class=n>PidsLimit</span> <span class=o>=</span> <span class=o>&amp;</span><span class=n>m</span><span class=o>.</span><span class=n>podPidsLimit</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=n>err</span> <span class=p>:</span><span class=o>=</span> <span class=n>m</span><span class=o>.</span><span class=n>cgroupManager</span><span class=o>.</span><span class=n>Create</span><span class=p>(</span><span class=n>containerConfig</span><span class=p>);</span> <span class=n>err</span> <span class=o>!=</span> <span class=n>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=n>fmt</span><span class=o>.</span><span class=n>Errorf</span><span class=p>(</span><span class=s2>&#34;failed to create container for %v : %v&#34;</span><span class=p>,</span> <span class=n>podContainerName</span><span class=p>,</span> <span class=n>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=o>//</span> <span class=n>Apply</span> <span class=n>appropriate</span> <span class=n>resource</span> <span class=n>limits</span> <span class=n>on</span> <span class=n>the</span> <span class=n>pod</span> <span class=n>container</span>
+</span></span><span class=line><span class=cl>	<span class=o>//</span> <span class=n>Top</span> <span class=n>level</span> <span class=n>qos</span> <span class=n>containers</span> <span class=n>limits</span> <span class=n>are</span> <span class=ow>not</span> <span class=n>updated</span>
+</span></span><span class=line><span class=cl>	<span class=o>//</span> <span class=n>until</span> <span class=n>we</span> <span class=n>figure</span> <span class=n>how</span> <span class=n>to</span> <span class=n>maintain</span> <span class=n>the</span> <span class=n>desired</span> <span class=n>state</span> <span class=ow>in</span> <span class=n>the</span> <span class=n>kubelet</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>	<span class=o>//</span> <span class=n>Because</span> <span class=n>maintaining</span> <span class=n>the</span> <span class=n>desired</span> <span class=n>state</span> <span class=n>is</span> <span class=n>difficult</span> <span class=n>without</span> <span class=n>checkpointing</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=n>err</span> <span class=p>:</span><span class=o>=</span> <span class=n>m</span><span class=o>.</span><span class=n>applyLimits</span><span class=p>(</span><span class=n>pod</span><span class=p>);</span> <span class=n>err</span> <span class=o>!=</span> <span class=n>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=n>fmt</span><span class=o>.</span><span class=n>Errorf</span><span class=p>(</span><span class=s2>&#34;failed to apply resource limits on container for %v : %v&#34;</span><span class=p>,</span> <span class=n>podContainerName</span><span class=p>,</span> <span class=n>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=n>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上述代码中 <code>m.cgroupManager.Create(containerConfig</code> 可以完成 pod 级别的 cgroup创建， 至此我们的 pod cgroup container 已经初具雏形。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>root@node1<span class=o>]</span><span class=c1># tree /sys/fs/cgroup/cpu -d</span>
+</span></span><span class=line><span class=cl>/sys/fs/cgroup/cpu
+</span></span><span class=line><span class=cl>├── kubepods
+</span></span><span class=line><span class=cl>│   ├── besteffort
+</span></span><span class=line><span class=cl>│   │   ├── pode098d78945a4d359594f9c27066aa202
+</span></span><span class=line><span class=cl>│   │   │   ├── 5fca7a73d4b5c7e7a6c35415e2bfeb5533c5fc1d1b4aa80bc4cb641213ee29a3
+</span></span><span class=line><span class=cl>│   │   │   └── b10831a7a2cf4e96ff6b186396e9e393e5b02aa8c447e988cc6cca5172fc5c89
+</span></span><span class=line><span class=cl>│   │   └── podfc7fbc35-bb79-4a33-80a0-371d438f221e
+</span></span><span class=line><span class=cl>│   │       ├── 07703a4a76b926c8432c3a8ab50b69b8dfd2891733a09d830fc1a08f8a8e0a1c
+</span></span><span class=line><span class=cl>│   │       └── 3a7550ae2bd7784bc7f74fa0288d361e6d569595a0ba237bb63cdd5468073316
+</span></span><span class=line><span class=cl>│   └── burstable
+</span></span><span class=line><span class=cl>│       ├── pod420984c2d6d62f72216bba6857bc368b
+</span></span><span class=line><span class=cl>│       │   ├── 5f734d0677fb4dd0f3e3dd3647be6ad19ec728fd3e28860c6023ea6efb7fc331
+</span></span><span class=line><span class=cl>│       │   └── 93cd418eaddf86be58b200c109674a36cc04fee0eccfae4a7838a1b0e6a4f978
+</span></span><span class=line><span class=cl>│       ├── pod4ebb633e-f8ba-43ee-94c7-1cf8c9105555
+</span></span><span class=line><span class=cl>│       │   └── 1bc40d00174d3ea84f4fce14d734a45115e72e4af394bd7d684d9691e7749995
+</span></span><span class=line><span class=cl>│       ├── podcd4bc68a-faf3-4c08-8d07-57d25a68ee1b
+</span></span><span class=line><span class=cl>│       │   ├── 62ba8b7c6e1afc62d16b65e0d0ae9f82254260815025ecb6c863fa82c9ea5e8e
+</span></span><span class=line><span class=cl>│       │   └── c7aca0c0fdf230a6378e3325f03242ff561ec95e7f62b3b852f2877af0235792
+</span></span><span class=line><span class=cl>│       ├── podd4f2a7d434e44edd8e4a0960111bda9f
+</span></span><span class=line><span class=cl>│       │   ├── 08d95544fcd3a5631c5a6a550d42bcddf8319cfb1fbe7f2482d969fc19356466
+</span></span><span class=line><span class=cl>│       │   └── a7a39f33fddce54c64c4a6d0bf4b499fe3d6b3d7c7f5fc0d54445ade5cad24b1
+</span></span><span class=line><span class=cl>│       ├── pode8486b59c2c8408b07026a560746b02c
+</span></span><span class=line><span class=cl>│       │   ├── b9fb9af9f1c5991786c6457f5b33c90ee8e33a3d68605d409b7a2c30d5565699
+</span></span><span class=line><span class=cl>│       │   └── f7f6773069032faa45ef3fc62fe337127fe40795ebc3758d03e149376d18d3da
+</span></span><span class=line><span class=cl>│       ├── pode86c3e73-a96e-4ae8-9ff6-fd401cf5c9aa
+</span></span><span class=line><span class=cl>│       │   ├── 4ad31b5ea0ad5743eeb67628c3bf9275d2131f2132a4bbe7081c05f63c6604ea
+</span></span><span class=line><span class=cl>│       │   └── 5f31deed41c58dbc0a0530b964926968d272e846cf9d91452c40797ace7fb90a
+</span></span><span class=line><span class=cl>│       └── podf27baf8c-6c71-4f3a-9445-0c63eb33d586
+</span></span><span class=line><span class=cl>│           ├── 1ae1d0d1fb0d44652c8ad8ef2d782628ec04a7b0e6e5718ea6788af178505ba2
+</span></span><span class=line><span class=cl>│           └── 5e898be28b1cb5ccb7f9f52eddee06c114d7d42b951b256da5544128093216be
+</span></span><span class=line><span class=cl>├── machine.slice
+</span></span><span class=line><span class=cl>│   └── machine-qemu<span class=se>\\</span>x2d18<span class=se>\\</span>x2dvm123.scope
+</span></span><span class=line><span class=cl>│       ├── emulator
+</span></span><span class=line><span class=cl>│       └── vcpu0
+</span></span><span class=line><span class=cl>├── system.slice
+</span></span><span class=line><span class=cl>└── user.slice
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><code>machine.slice</code> 是 libvirt 针对每个 qemu 进程生成的 cgroup管理空间. 我们意在将其纳入 k8s cgoup 统计范围内。</p></blockquote><h3 id=container-level>Container level</h3><p>上述 Node level 发生在 kubelet 的 SyncPod 函数执行过程中， 同样的， container 相关的 cgroup创建 也是在这之后。</p><p>故事仍然要从pod 创建请求开始， 从 入口处的 kubelet <code>syncLoop</code> -> <code>syncLoopIteration</code> -> <code>HandlePodAddtions</code> -> <code>dispatchWork</code> -> <code>UpdatePod</code> -> <code>managePodLoop</code> -> <code>SyncPod</code> -> <code>kl.containerRuntime.SyncPod</code></p><p>进入 真正创建 container流程，</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>SyncPod</span> <span class=n>syncs</span> <span class=n>the</span> <span class=n>running</span> <span class=n>pod</span> <span class=n>into</span> <span class=n>the</span> <span class=n>desired</span> <span class=n>pod</span> <span class=n>by</span> <span class=n>executing</span> <span class=n>following</span> <span class=n>steps</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>1.</span> <span class=n>Compute</span> <span class=n>sandbox</span> <span class=ow>and</span> <span class=n>container</span> <span class=n>changes</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>2.</span> <span class=n>Kill</span> <span class=n>pod</span> <span class=n>sandbox</span> <span class=k>if</span> <span class=n>necessary</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>3.</span> <span class=n>Kill</span> <span class=n>any</span> <span class=n>containers</span> <span class=n>that</span> <span class=n>should</span> <span class=ow>not</span> <span class=n>be</span> <span class=n>running</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>4.</span> <span class=n>Create</span> <span class=n>sandbox</span> <span class=k>if</span> <span class=n>necessary</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>5.</span> <span class=n>Create</span> <span class=n>ephemeral</span> <span class=n>containers</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>6.</span> <span class=n>Create</span> <span class=n>init</span> <span class=n>containers</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span>  <span class=mf>7.</span> <span class=n>Create</span> <span class=n>normal</span> <span class=n>containers</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>TODO</span><span class=p>(</span><span class=n>yuhua</span><span class=p>):</span> <span class=err>创建</span><span class=n>container</span> <span class=err>之处。</span>
+</span></span><span class=line><span class=cl><span class=k>func</span> <span class=p>(</span><span class=n>m</span> <span class=o>*</span><span class=n>kubeGenericRuntimeManager</span><span class=p>)</span> <span class=n>SyncPod</span><span class=p>(</span><span class=n>pod</span> <span class=o>*</span><span class=n>v1</span><span class=o>.</span><span class=n>Pod</span><span class=p>,</span> <span class=n>podStatus</span> <span class=o>*</span><span class=n>kubecontainer</span><span class=o>.</span><span class=n>PodStatus</span><span class=p>,</span> <span class=n>pullSecrets</span> <span class=p>[]</span><span class=n>v1</span><span class=o>.</span><span class=n>Secret</span><span class=p>,</span> <span class=n>backOff</span> <span class=o>*</span><span class=n>flowcontrol</span><span class=o>.</span><span class=n>Backoff</span><span class=p>)</span> <span class=p>(</span><span class=n>result</span> <span class=n>kubecontainer</span><span class=o>.</span><span class=n>PodSyncResult</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>containerRuntime.SyncPod 主要内容涉及到 如下几个步骤</p><ul><li>计算 sandbox 和 container 变化</li><li>删除无用sandbox</li><li>删除无用 容器</li><li>创建沙箱</li><li>创建 一次性容器</li><li>创建 初始化容器</li><li>创建 其他容器。</li></ul><p>上述前4步都与 cgroup无关，这里最后的三个创建步骤 都使用了 一些公用逻辑。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Helper containing boilerplate common to starting all types of containers.
+</span></span><span class=line><span class=cl>// typeName is a label used to describe this type of container in log messages,
+</span></span><span class=line><span class=cl>// currently: &#34;container&#34;, &#34;init container&#34; or &#34;ephemeral container&#34;
+</span></span><span class=line><span class=cl>start := func(typeName string, container *v1.Container) error {
+</span></span><span class=line><span class=cl>	startContainerResult := kubecontainer.NewSyncResult(kubecontainer.StartContainer, container.Name)
+</span></span><span class=line><span class=cl>	result.AddSyncResult(startContainerResult)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>isInBackOff, msg, err := m.doBackOff(pod, container, podStatus, backOff)
+</span></span><span class=line><span class=cl>if isInBackOff {
+</span></span><span class=line><span class=cl>	startContainerResult.Fail(err, msg)
+</span></span><span class=line><span class=cl>	klog.V(4).Infof(&#34;Backing Off restarting %v %+v in pod %v&#34;, typeName, container, format.Pod(pod))
+</span></span><span class=line><span class=cl>	return err
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>klog.V(4).Infof(&#34;Creating %v %+v in pod %v&#34;, typeName, container, format.Pod(pod))
+</span></span><span class=line><span class=cl>// NOTE (aramase) podIPs are populated for single stack and dual stack clusters. Send only podIPs.
+</span></span><span class=line><span class=cl>if msg, err := m.startContainer(podSandboxID, podSandboxConfig, container, pod, podStatus, pullSecrets, podIP, podIPs); err != nil {
+</span></span><span class=line><span class=cl>	startContainerResult.Fail(err, msg)
+</span></span><span class=line><span class=cl>	// known errors that are logged in other places are logged at higher levels here to avoid
+</span></span><span class=line><span class=cl>	// repetitive log spam
+</span></span><span class=line><span class=cl>	switch {
+</span></span><span class=line><span class=cl>	case err == images.ErrImagePullBackOff:
+</span></span><span class=line><span class=cl>		klog.V(3).Infof(&#34;%v start failed: %v: %s&#34;, typeName, err, msg)
+</span></span><span class=line><span class=cl>	default:
+</span></span><span class=line><span class=cl>		utilruntime.HandleError(fmt.Errorf(&#34;%v start failed: %v: %s&#34;, typeName, err, msg))
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	return err
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>这里只需要关注 <code>startContainer</code> 相关逻辑：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>startContainer</span> <span class=n>starts</span> <span class=n>a</span> <span class=n>container</span> <span class=ow>and</span> <span class=n>returns</span> <span class=n>a</span> <span class=n>message</span> <span class=n>indicates</span> <span class=n>why</span> <span class=n>it</span> <span class=n>is</span> <span class=n>failed</span> <span class=n>on</span> <span class=n>error</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>It</span> <span class=n>starts</span> <span class=n>the</span> <span class=n>container</span> <span class=n>through</span> <span class=n>the</span> <span class=n>following</span> <span class=n>steps</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=o>*</span> <span class=n>pull</span> <span class=n>the</span> <span class=n>image</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=o>*</span> <span class=n>create</span> <span class=n>the</span> <span class=n>container</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=o>*</span> <span class=n>start</span> <span class=n>the</span> <span class=n>container</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=o>*</span> <span class=n>run</span> <span class=n>the</span> <span class=n>post</span> <span class=n>start</span> <span class=n>lifecycle</span> <span class=n>hooks</span> <span class=p>(</span><span class=k>if</span> <span class=n>applicable</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>func</span> <span class=p>(</span><span class=n>m</span> <span class=o>*</span><span class=n>kubeGenericRuntimeManager</span><span class=p>)</span> <span class=n>startContainer</span><span class=p>(</span><span class=n>podSandboxID</span> <span class=n>string</span><span class=p>,</span> <span class=n>podSandboxConfig</span> <span class=o>*</span><span class=n>runtimeapi</span><span class=o>.</span><span class=n>PodSandboxConfig</span><span class=p>,</span> <span class=n>container</span> <span class=o>*</span><span class=n>v1</span><span class=o>.</span><span class=n>Container</span><span class=p>,</span> <span class=n>pod</span> <span class=o>*</span><span class=n>v1</span><span class=o>.</span><span class=n>Pod</span><span class=p>,</span> <span class=n>podStatus</span> <span class=o>*</span><span class=n>kubecontainer</span><span class=o>.</span><span class=n>PodStatus</span><span class=p>,</span> <span class=n>pullSecrets</span> <span class=p>[]</span><span class=n>v1</span><span class=o>.</span><span class=n>Secret</span><span class=p>,</span> <span class=n>podIP</span> <span class=n>string</span><span class=p>,</span> <span class=n>podIPs</span> <span class=p>[]</span><span class=n>string</span><span class=p>)</span> <span class=p>(</span><span class=n>string</span><span class=p>,</span> <span class=n>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里的 <code>podSandboxConfig</code> 包含以下字段：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>Linux</span>                <span class=o>*</span><span class=nx>LinuxPodSandboxConfig</span> <span class=s>`protobuf:&#34;bytes,8,opt,name=linux,proto3&#34; json:&#34;linux,omitempty&#34;`</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// LinuxPodSandboxConfig holds platform-specific configurations for Linux
+</span></span><span class=line><span class=cl>// host platforms and Linux-based containers.
+</span></span><span class=line><span class=cl>type LinuxPodSandboxConfig struct {
+</span></span><span class=line><span class=cl>	// Parent cgroup of the PodSandbox.
+</span></span><span class=line><span class=cl>	// The cgroupfs style syntax will be used, but the container runtime can
+</span></span><span class=line><span class=cl>	// convert it to systemd semantics if needed.
+</span></span><span class=line><span class=cl>	CgroupParent string `protobuf:&#34;bytes,1,opt,name=cgroup_parent,json=cgroupParent,proto3&#34; json:&#34;cgroup_parent,omitempty&#34;`
+</span></span><span class=line><span class=cl>	// LinuxSandboxSecurityContext holds sandbox security attributes.
+</span></span><span class=line><span class=cl>	SecurityContext *LinuxSandboxSecurityContext `protobuf:&#34;bytes,2,opt,name=security_context,json=securityContext,proto3&#34; json:&#34;security_context,omitempty&#34;`
+</span></span><span class=line><span class=cl>	// Sysctls holds linux sysctls config for the sandbox.
+</span></span><span class=line><span class=cl>	Sysctls              map[string]string `protobuf:&#34;bytes,3,rep,name=sysctls,proto3&#34; json:&#34;sysctls,omitempty&#34; protobuf_key:&#34;bytes,1,opt,name=key,proto3&#34; protobuf_val:&#34;bytes,2,opt,name=value,proto3&#34;`
+</span></span><span class=line><span class=cl>	XXX_NoUnkeyedLiteral struct{}          `json:&#34;-&#34;`
+</span></span><span class=line><span class=cl>	XXX_sizecache        int32             `json:&#34;-&#34;`
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>这里可以看到 CgroupParent 限制了 cgroup创建的 父路径。 至此 k8s 层的cgroup创建过程结束。</p><p>创建结束后的 cgroup拓扑参考 Node章节结果。</p><h2 id=其他相关特性>其他相关特性</h2><h3 id=cpuset>CPUSet</h3><p>当 VM 与 Pod 进行混合编排， 虚拟化语义中的 vcpu pin 可以使用 cgroup 的 cpu_set 作为 功能映射</p><p>k8s 中 feature Gate <code>CPUManager </code>负责 管理 容器的 cpu set 设置 该功能 在 k8s 1.8 进入 alpha, 在 1.10 后 beta， 目前 （k8s 1.17） 仍然属于 beta 状态。</p><h4 id=cpu-manager工作流>CPU Manager工作流</h4><p>CPU Manager为满足条件的Container分配指定的CPUs时，会尽量按照CPU Topology来分配，也就是考虑CPU Affinity，按照如下的优先顺序进行CPUs选择：（Logic CPUs就是Hyperthreads）</p><ol><li>如果Container请求的Logic CPUs数量不小于单块CPU Socket中Logci CPUs数量，那么会优先把整块CPU Socket中的Logic CPUs分配给该Container。</li><li>如果Container剩余请求的Logic CPUs数量不小于单块物理CPU Core提供的Logic CPUs数量，那么会优先把整块物理CPU Core上的Logic CPUs分配给该Container。</li><li>Container剩余请求的Logic CPUs则从按照如下规则排好序的Logic CPUs列表中选择：</li></ol><ul><li>number of CPUs available on the same socket</li><li>number of CPUs available on the same core</li></ul><h4 id=discovering-cpu-topology>Discovering CPU topology</h4><p>CPU Manager能正常工作的前提，是发现Node上的CPU Topology，Discovery这部分工作是由cAdvisor完成的。</p><p>在cAdvisor的MachineInfo中通过Topology会记录cpu和mem的Topology信息。其中Topology的每个Node对象就是对应一个CPU Socket。</p><h4 id=创建容器>创建容器</h4><p>对于满足前面提到的满足static policy的Container创建时，kubelet会为其按照约定的cpu affinity来为其挑选最优的CPU Set。Container的创建时CPU Manager工作流程大致如下：</p><ol><li><p>Kuberuntime调用容器运行时去创建该Container。</p></li><li><p>Kuberuntime将该Container交给CPU Manager处理。</p></li><li><p>CPU Manager为Container按照static policy逻辑进行处理。</p></li><li><p>CPU Manager从当前Shared Pool中挑选“最佳”Set拓扑结构的CPU，对于不满足Static Policy的Contianer，则返回Shared Pool中所有CPUS组成的Set。</p></li><li><p>CPU Manager将对该Container的CPUs分配情况记录到Checkpoint State中，并且从Shared Pool中删除刚分配的CPUs。</p></li><li><p>CPU Manager再从state中读取该Container的CPU分配信息，然后通过UpdateContainerResources cRI接口将其更新到Cpuset Cgroups中，包括对于非Static Policy Container。</p></li><li><p>Kuberuntime调用容器运行时Start该容器。</p></li></ol><p>该过程入口处于 上一章节的 Container level 中的 <code>startContainer</code> 函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	// TODO(yuhua): 设置 CPUset
+</span></span><span class=line><span class=cl>	err = m.internalLifecycle.PreStartContainer(pod, container, containerID)
+</span></span><span class=line><span class=cl>	if err != nil {
+</span></span><span class=line><span class=cl>		s, _ := grpcstatus.FromError(err)
+</span></span><span class=line><span class=cl>		m.recordContainerEvent(pod, container, containerID, v1.EventTypeWarning, events.FailedToStartContainer, &#34;Internal PreStartContainer hook failed: %v&#34;, s.Message())
+</span></span><span class=line><span class=cl>		return s.Message(), ErrPreStartHook
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><h2 id=写在最后>写在最后</h2><p>libvirt 已经实现了完整的 cgroup 抽象， 但是缺少完整的 cgroup 管理流程，如果想要通过 cgroup将 vm 资源抽象 并与 Pod 的资源做统一管理， 我们在前端 （kubelet） 及 对应的 后端 （VRI） 设计完整的 cgroup 操作流程。</p><h3 id=参考>参考:</h3><ol><li><a class=link href=https://github.com/kubernetes/kubernetes target=_blank rel=noopener>k8s</a></li><li><a class=link href=https://cloud.tencent.com/developer/article/1402119 target=_blank rel=noopener>cpu manager</a></li><li><a class=link href=https://libvirt.org/cgroups.html target=_blank rel=noopener>libvirt cgroups</a></li></ol></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/vertical-scaling-of-pods-pod%E7%83%AD%E7%BC%A9%E6%94%BE/><div class=article-details><h2 class=article-title>Vertical Scaling of Pods | pod热缩放</h2></div></a></article><article><a href=/p/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%BA%94/><div class=article-details><h2 class=article-title>python重修之旅（五）</h2></div></a></article><article><a href=/p/zsh-git-%E6%8F%92%E4%BB%B6%E5%86%85%E7%BD%AE%E5%88%AB%E5%90%8D%E4%B8%80%E8%A7%88%E8%A1%A8/><div class=article-details><h2 class=article-title>zsh git 插件内置别名一览表</h2></div></a></article><article><a href=/p/%E5%88%A9%E7%94%A8lirc%E5%AF%B9%E6%9D%BE%E4%B8%8B%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8%E6%8C%87%E4%BB%A4%E7%9A%84%E5%BD%95%E5%88%B6/><div class=article-details><h2 class=article-title>利用lirc对松下空调遥控器指令的录制</h2></div></a></article><article><a href=/p/iterm2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/><div class=article-details><h2 class=article-title>iterm2常用快捷键总结</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//vic1blog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2016 -
+2024 何育华版权所有</section><section class=powerby><a href=http://beian.miit.gov.cn>粤ICP备19031392号</a><br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

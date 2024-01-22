@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>shell on 我的日记</title><link>http://blog.heyuhua.com/tags/shell/</link><description>Recent content in shell on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Fri, 02 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>linux shell 实用技巧</title><link>http://blog.heyuhua.com/p/linux-shell-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</link><pubDate>Fri, 02 Dec 2016 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/linux-shell-%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</guid><description>&lt;p>linux忽悠原则： 一切皆文件， 通信皆管道， 不管闲事，不说废话.(只能信50%)&lt;/p>
+&lt;h2 id="统计常用命令-使用次数最多的10条命令">统计常用命令 （使用次数最多的10条命令）&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">history&lt;/span> &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{print $2}&amp;#39;&lt;/span> &lt;span class="p">|&lt;/span> sort &lt;span class="p">|&lt;/span> uniq -c &lt;span class="p">|&lt;/span> sort -k1,1nr &lt;span class="p">|&lt;/span> head -10n
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>Tips: ohmyzsh扩大了history 记录行数到2000，大概索引宝宝平时一个月的命令 ，可以按需求修改 &lt;code>~zshrc&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="批量修改文件名rename">批量修改文件名（rename）&lt;/h2>
+&lt;blockquote>
+&lt;p>rename 在各发行版语法不同，写通用脚本宁可用 &lt;code>mv&lt;/code> &amp;hellip; 示例运行在ubuntu16.04&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>修改当前目录下的所有&lt;code>.log&lt;/code> 文件为&lt;code>.json&lt;/code> 格式&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rename &lt;span class="s1">&amp;#39;s/.log$/.json/&amp;#39;&lt;/span> *.log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="递归删除匹配到的文件">递归删除匹配到的文件&lt;/h2>
+&lt;blockquote>
+&lt;p>首先需要知道的是在bash／zsh 环境中， 不加引号的语句会首先被zsh 或者 bash 解析
+所以 类似 &lt;code>rm -r *.pyc&lt;/code> 这种语句是错误的（并不会像你想象的那样删除所有子目录下的pyc 文件）&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>stackoverflow上评分最高的两个答案：
+&lt;ol>
+&lt;li>&lt;code>find . -name &amp;quot;*.pyc&amp;quot; -exec rm -rf {} \;&lt;/code>&lt;/li>
+&lt;li>&lt;code>find . -name '*.pyc' -delete&lt;/code> 这种显然看上去更为安全一些。毕竟看到 &lt;code>rm -rf&lt;/code> 这样的东东总是感觉很害怕。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="命令行reformat-log-文件">命令行reformat log 文件&lt;/h2>
+&lt;p>比如说将log中的回车显式表示。&lt;code>sed -e ’s/#012/\n/g’&lt;/code>&lt;/p></description></item></channel></rss>

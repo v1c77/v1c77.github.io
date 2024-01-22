@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vim on 我的日记</title><link>http://blog.heyuhua.com/tags/vim/</link><description>Recent content in vim on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Sun, 18 Dec 2016 20:55:14 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/vim/index.xml" rel="self" type="application/rss+xml"/><item><title>vimium进阶小炒</title><link>http://blog.heyuhua.com/p/vimium%E8%BF%9B%E9%98%B6%E5%B0%8F%E7%82%92/</link><pubDate>Sun, 18 Dec 2016 20:55:14 +0000</pubDate><guid>http://blog.heyuhua.com/p/vimium%E8%BF%9B%E9%98%B6%E5%B0%8F%E7%82%92/</guid><description>&lt;p>{{ highlight }}
+推荐使用cvim，本人不再使用 vimium &amp;ndash; 2017.10.03
+{{ /highlight }}&lt;/p>
+&lt;p>CTO大人把组内gitlib的地址route到了ooxx.com，受他的启发我把*.zhihu.com host 到了冷宫，跟百度作伴。&lt;/p>
+&lt;blockquote>
+&lt;h4 id="写在周末的话">写在周末的话&lt;/h4>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>逃离帝都，工作离家太近了。一点都不自由。&lt;/li>
+&lt;li>以前一直不把清华的人当回事，因为我身边的水木硕士毕业生也不过是中人之姿。&lt;/li>
+&lt;li>今晚在github 上闲逛才发现他妈的有些变态真的是很变态啊。&lt;/li>
+&lt;li>99%的屁民统治者地球，1% 的大屌改变了世界。（改编自姚期智的名言）&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;h1 id="vimium-小炒">vimium 小炒&lt;/h1>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>被某一直用firefox vim插件的同事洗脑, vimium 其实还有很多不足。但是谁让我用chrome呢
+今天被google强行打广告也没什么办法&lt;/li>
+&lt;/ul>
+&lt;h2 id="可能会用到的">可能会用到的：&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>快捷键&lt;/th>
+&lt;th style="text-align:left">作用&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gs&lt;/code>&lt;/td>
+&lt;td style="text-align:left">查看网页源码&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>i&lt;/code>&lt;/td>
+&lt;td style="text-align:left">关闭vim 功能。直到&lt;code>ESC&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>r&lt;/code>&lt;/td>
+&lt;td style="text-align:left">刷新页面&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gu&lt;/code>&lt;/td>
+&lt;td style="text-align:left">返回网页的上层目录&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gU&lt;/code>&lt;/td>
+&lt;td style="text-align:left">返回网页的顶层目录（host）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>yy&lt;/code>&lt;/td>
+&lt;td style="text-align:left">复制当前网页链接&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>yf&lt;/code>&lt;/td>
+&lt;td style="text-align:left">开启选择模式，选择复制页面内的链接&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gi&lt;/code>&lt;/td>
+&lt;td style="text-align:left">定位到页面第一个文本框，搜索引擎绝配。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>alt&lt;/code> + &lt;code>f&lt;/code>&lt;/td>
+&lt;td style="text-align:left">以新标签页的形式打开多个链接&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>]]&lt;/code>, &lt;code>[[&lt;/code>&lt;/td>
+&lt;td style="text-align:left">上一页下一页，测试了几个页面，sphinx 类的文档页支持,baidu支持，但是google不支持&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>m&lt;/code>&lt;/td>
+&lt;td style="text-align:left">添加标签， 如 &lt;code>ma &lt;/code> 给当前页面浏览状态添加标签&lt;code>a&lt;/code>, &lt;code>mA&lt;/code> 给当前额页面的浏览状态添加全局标签&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>tab上面那个点&lt;/code>&lt;/td>
+&lt;td style="text-align:left">如果当前tab 有局部标签a , &lt;code>键盘tab上面的那个点&lt;/code> + &lt;code>a&lt;/code> 可以到a标签标记的位置， +&lt;code>A&lt;/code> 可以跳转到全局标签A&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gE&lt;/code>&lt;/td>
+&lt;td style="text-align:left">编辑当前页面url新页面打开&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>g0&lt;/code>&lt;/td>
+&lt;td style="text-align:left">到第一个tab&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>g$&lt;/code>&lt;/td>
+&lt;td style="text-align:left">最后一个&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>g&lt;/code> + 数字&lt;/td>
+&lt;td style="text-align:left">跳转到顺位第n个tab&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>T&lt;/code>&lt;/td>
+&lt;td style="text-align:left">在 当前打开的tab中搜索并跳转（我还是习惯用这个）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>yt&lt;/code>&lt;/td>
+&lt;td style="text-align:left">复制当前tab&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>w&lt;/code>&lt;/td>
+&lt;td style="text-align:left">将当前tab移动到新窗口&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>&amp;gt;&amp;gt;&lt;/code> &lt;code>&amp;lt;&amp;lt;&lt;/code>&lt;/td>
+&lt;td style="text-align:left">把当前tab 向左挪，向右挪&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;code>gi&lt;/code> 命令用起来没有想象中的好用，需要配合&lt;code>gg&lt;/code>&lt;/p></description></item><item><title>vim使用技巧</title><link>http://blog.heyuhua.com/p/vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link><pubDate>Wed, 30 Nov 2016 16:50:53 +0000</pubDate><guid>http://blog.heyuhua.com/p/vim%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid><description>&lt;p>看那白狐脸, 一手绣冬, 一手春雷&lt;/p>
+&lt;p>&lt;em>写在之前&lt;/em>&lt;/p>
+&lt;p>vim 我真的是不是喜欢用。处于同事们的威逼，才稍微学了一点点皮毛。 上古神器尽量少用。&lt;/p>
+&lt;blockquote>
+&lt;p>不定时看心情更新&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="批量tab">批量tab&lt;/h2>
+&lt;h3 id="法1">法1&lt;/h3>
+&lt;ol>
+&lt;li>先按10次 &lt;code>ESC&lt;/code>(所以你告诉我新mac怎么办*1)&lt;/li>
+&lt;li>&lt;code>:10,100&amp;gt;&lt;/code> 10到100行向右tab 1 次&lt;/li>
+&lt;/ol>
+&lt;h3 id="法2">法2&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>v&lt;/code> 视图模式&lt;/li>
+&lt;li>选好&lt;/li>
+&lt;li>&lt;code>shift&lt;/code> + &lt;code>&amp;gt;&lt;/code> 向右tab一次&lt;/li>
+&lt;/ol>
+&lt;h3 id="升级版法2">升级版法2&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>v&lt;/code> 视图模式&lt;/li>
+&lt;li>&lt;code>6&amp;gt;&lt;/code> 向右6次tab&lt;/li>
+&lt;/ol>
+&lt;h2 id="将当前编辑的行挪到屏幕中央">将当前编辑的行挪到屏幕中央&lt;/h2>
+&lt;ul>
+&lt;li>先按10次 &lt;code>ESC&lt;/code>(所以你告诉我新mac怎么办*2)&lt;/li>
+&lt;li>&lt;code>z&lt;/code> + &lt;code>.&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="替换">替换&lt;/h2>
+&lt;h3 id="语法">语法&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>[addr]s/源字符串/目的字符串/[option]&lt;/code>
+全局替换命令为：:&lt;code>%s/源字符串/目的字符串/g&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>[addr] 表示检索范围，省略时表示当前行。&lt;/p>
+&lt;p>如：&lt;code>1，20&lt;/code> ：表示从第1行到20行；
+&lt;code>%&lt;/code> ：表示整个文件，同“1,$”；
+&lt;code>. ,$&lt;/code> ：从当前行到文件尾；
+&lt;code>s&lt;/code> : 表示替换操作&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>[option] : 表示操作类型&lt;/p>
+&lt;p>如：&lt;code>g&lt;/code> 表示全局替换;
+&lt;code>c&lt;/code> 表示进行确认
+&lt;code>p&lt;/code> 表示替代结果逐行显示（&lt;code>Ctrl&lt;/code> + &lt;code>L&lt;/code>恢复屏幕）；
+省略option时仅对每行第一个匹配串进行替换；
+如果在源字符串和目的字符串中出现特殊字符，需要用”\”转义&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>eg： 将 全文中所有的‘@main’ 替换成 ‘@api’ &lt;code>:%s/@main/@api/g&lt;/code>&lt;/p>
+&lt;p>可以使用正则语法&lt;/p></description></item></channel></rss>

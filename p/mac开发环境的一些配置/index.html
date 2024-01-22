@@ -1,0 +1,141 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="开平衡车的人都会走残疾人通道。| 做人要谦逊。
+从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。
+"><title>mac开发环境的一些配置</title>
+<link rel=canonical href=http://blog.heyuhua.com/p/mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="mac开发环境的一些配置"><meta property="og:description" content="开平衡车的人都会走残疾人通道。| 做人要谦逊。
+从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。
+"><meta property="og:url" content="http://blog.heyuhua.com/p/mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/"><meta property="og:site_name" content="我的日记"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="blog"><meta property="article:published_time" content="2017-01-01T00:00:00+00:00"><meta property="article:modified_time" content="2017-01-01T00:00:00+00:00"><meta name=twitter:title content="mac开发环境的一些配置"><meta name=twitter:description content="开平衡车的人都会走残疾人通道。| 做人要谦逊。
+从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。
+"><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/mxbc_love_hu84bcc3680e7c4ed0b569d38fde18a01e_187938_300x0_resize_box_1.gif width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🫥</span></figure><div class=site-meta><h1 class=site-name><a href=/>我的日记</a></h1><h2 class=site-description>drafts.....</h2></div></header><ol class=social-menu><li><a href=https://github.com/v1c77 target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://stackoverflow.com/users/6382035/vi-ci target=_blank title="Stack Overflow" rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-stackoverflow" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1"/><path d="M8 16h8"/><path d="M8.322 12.582l7.956.836"/><path d="M8.787 9.168l7.826 1.664"/><path d="M10.096 5.764l7.608 2.472"/></svg></a></li><li><a href=https://t.me/v1c77 target=_blank title=telegram rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#正题在mac上配置远程开发环境>正题：在mac上配置远程开发环境</a><ol><li><a href=#远程桌面环境>远程桌面环境。</a><ol><li><a href=#1-安装tigervnc>1. 安装tigervnc</a></li><li><a href=#2-创建-xession-文件>2. 创建 <code>~/.xession</code> 文件</a></li><li><a href=#3-添加-gnome-control-center>3. 添加 <code>gnome-control-center</code></a></li><li><a href=#4-运行vncserver>4. 运行vncserver</a></li><li><a href=#5-mac连接>5. mac连接　　</a></li></ol></li><li><a href=#使用pycharm做远程开发>使用pycharm做远程开发</a></li><li><a href=#杂项>杂项</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/>mac开发环境的一些配置</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 01, 2017</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><p>开平衡车的人都会走残疾人通道。| 做人要谦逊。</p><blockquote><p>从学校考完试回来，掐指一算已经有一个月没写过代码了。今天下午见到某工程师，相比之下感觉现在的自己是个sb。</p></blockquote><h2 id=正题在mac上配置远程开发环境>正题：在mac上配置远程开发环境</h2><pre><code>&gt; 事出有因，在公司工程机上的开发环境是ubuntu16.04，现在要统统挪到本宝宝的mac上。
+</code></pre><h3 id=远程桌面环境>远程桌面环境。</h3><ul><li><p>连windows 直接安装应用<code>windows remote desktop beta</code>, 超级好用。beta版支持分屏，文件拖拽。</p></li><li><p>连ubuntu16.04 全色域 unity桌面环境 2k分辨率。</p><p>注意事项：</p><ul><li>目前只在ubuntu16.04 LTS 版本测试过，服务器版本或其他开发版版本暂无解决方案。</li><li>此方法要求网络环境及其良好，如内网环境中；</li><li>要求工程机性能达到一定程度，否则会卡顿；</li><li>大部分内容搬运自 <a class=link href=https://www.hiroom2.com/2016/08/28/ubuntu-16-04-remote-connect-to-unity-with-vnc-xrdp/ target=_blank rel=noopener>这里</a></li></ul><h4 id=1-安装tigervnc>1. 安装tigervnc</h4><p>下面是大佬写好的install.sh 文件内容。
+创建好文件后 直接 <code>chmod +x install.sh & ./install.sh</code></p><p>或者你也可以逐条复制粘贴。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=cp>#!/bin/sh
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=c1># 更新 repository</span>
+</span></span><span class=line><span class=cl>sudo apt update -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># install git and devscript.</span>
+</span></span><span class=line><span class=cl>sudo apt install -y git devscript
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Remove vnc4server.（或者其它同类vncserver，一定要删除！！！）</span>
+</span></span><span class=line><span class=cl>sudo apt remove -y vnc4server
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Create working directory.</span>
+</span></span><span class=line><span class=cl>mkdir tigervnc
+</span></span><span class=line><span class=cl><span class=nb>cd</span> tigervnc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Download source code.</span>
+</span></span><span class=line><span class=cl>git clone https://github.com/TigerVNC/tigervnc
+</span></span><span class=line><span class=cl><span class=nb>cd</span> tigervnc/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Avoid compiler error.（记得切换版本。胆子大的可以试试不切换，）</span>
+</span></span><span class=line><span class=cl>git checkout ff872614b507d0aa8bfbd09ef41550390cfe658a
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Prepare to build package.</span>
+</span></span><span class=line><span class=cl>ln -s contrib/packages/deb/ubuntu-xenial/debian
+</span></span><span class=line><span class=cl>chmod a+x debian/rules
+</span></span><span class=line><span class=cl>sudo apt install -y -o <span class=s1>&#39;apt::install-recommends=true&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>     <span class=sb>`</span>dpkg-checkbuilddeps 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>sed -e <span class=s1>&#39;s/.*build dependencies://g&#39;</span> -e <span class=s1>&#39;s/([^)]*)//g&#39;</span><span class=sb>`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Build package. (大概一杯咖啡的时间)</span>
+</span></span><span class=line><span class=cl>fakeroot debian/rules binary
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ..
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Install package with resolving dependent package.</span>
+</span></span><span class=line><span class=cl>sudo dpkg -i *.deb <span class=o>||</span> <span class=o>(</span>sudo apt-get -f install -y <span class=p>;</span> sudo dpkg -i *.deb <span class=o>||</span> <span class=nb>exit</span> 1<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ..
+</span></span></code></pre></td></tr></table></div></div><h4 id=2-创建-xession-文件>2. 创建 <code>~/.xession</code> 文件</h4><p>文件内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>/usr/lib/gnome-session/gnome-session-binary --session=ubuntu &amp;
+</span></span><span class=line><span class=cl>/usr/lib/x86_64-linux-gnu/unity/unity-panel-service &amp;
+</span></span><span class=line><span class=cl>/usr/lib/unity-settings-daemon/unity-settings-daemon &amp;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>for indicator in /usr/lib/x86_64-linux-gnu/indicator-*; do
+</span></span><span class=line><span class=cl>    basename=`basename ${indicator}`
+</span></span><span class=line><span class=cl>    dirname=`dirname ${indicator}`
+</span></span><span class=line><span class=cl>    service=${dirname}/${basename}/${basename}-service
+</span></span><span class=line><span class=cl>    ${service} &amp;
+</span></span><span class=line><span class=cl>done
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>unity
+</span></span></code></pre></td></tr></table></div></div><h4 id=3-添加-gnome-control-center>3. 添加 <code>gnome-control-center</code></h4><p>如果显示文件已存在， 就可以跳过了。（比如说之前做过个性化设置什么的）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo ln -s /usr/bin/unity-control-center /usr/bin/gnome-control-center
+</span></span></code></pre></td></tr></table></div></div><h4 id=4-运行vncserver>4. 运行vncserver</h4><p>创建vnc密码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ vncpasswd
+</span></span><span class=line><span class=cl>Password:
+</span></span><span class=line><span class=cl>Verify:
+</span></span><span class=line><span class=cl>Would you like to enter a view-only password <span class=o>(</span>y/n<span class=o>)</span>? n
+</span></span></code></pre></td></tr></table></div></div><p>运行vncserver，端口号为 5900 + 序号， 下面的端口就是： 5900 + 1 = 5901
+同时还指定了分辨率为1920*1080</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ vncserver -geimetry 1920x1080
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>New <span class=s1>&#39;ubuntu-16:1 (hiroom2)&#39;</span> desktop is ubuntu-16:1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Starting applications specified in /home/hiroom2/.vnc/xstartup
+</span></span><span class=line><span class=cl>Log file is /home/hiroom2/.vnc/ubuntu-16:1.log
+</span></span></code></pre></td></tr></table></div></div><p>你也可以在~/vnc/startup 里设置分辨率。</p><h4 id=5-mac连接>5. mac连接　　</h4><p>在 mac桌面环境下 使用快捷键<code>⌘（command）+ k</code> 呼出连接器
+输入 你的vnc服务器 <code>vnc://ip:port</code> 连接</p><p><img src=http://qiniu.heyuhua.com/2017-01-16contovnc1.png loading=lazy alt=连接窗口>
+<img src=http://qiniu.heyuhua.com/2017-01-16contovnc2.png loading=lazy alt=输入密码>
+<img src=http://qiniu.heyuhua.com/2017-01-16contovnc3.png loading=lazy alt=效果></p></li></ul><h3 id=使用pycharm做远程开发>使用pycharm做远程开发</h3><blockquote><p>配置方面借鉴了 &ndash;> <a class=link href=http://yidao620c.github.io/2016/05/26/python/pycharm-remote.html target=_blank rel=noopener>那年八月的博客</a></p></blockquote><h3 id=杂项>杂项</h3><ul><li>使用 GNU commandTool替换默认版本</li></ul><blockquote><p>注意到这个事情是因为 默认的 <code>grep</code> 太诡异。教程-> <a class=link href=http://www.nyx.net/~mlu/pages/computing/installing_and_configuring/installing_and_configuring_command-line_utilities/#.WHzKw7Z96sw target=_blank rel=noopener>传送门</a></p></blockquote><ul><li>代理的配置（不得不说的是今天 看到百度首页的title 居然是 我爱你中国 ）<ul><li>如果使用shadowshocks， 最好把端口改成1080 而不是默认的1086（因为之前做了一些配置文件云同步东东）</li><li>proxifier 负责全局调度（google_photo_backup & bropbox & 不支持socks5的可以很轻松的搞定）</li><li>github 什么的需要额外配置 <code>git config --global http.proxy ....</code></li><li>漏网之鱼用proxychains4</li></ul></li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/blog/>blog</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//vic1blog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2016 -
+2024 何育华版权所有</section><section class=powerby><a href=http://beian.miit.gov.cn>粤ICP备19031392号</a><br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

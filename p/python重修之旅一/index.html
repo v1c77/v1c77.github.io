@@ -1,0 +1,1078 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&amp;hellip; 本宝宝的第一个专题。第三次系统学习python。2017年计划之一。
+年底就是爽，每天就是开开会，下午就自己疯狂coding。
+"><title>python重修之旅（一）</title>
+<link rel=canonical href=http://blog.heyuhua.com/p/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%80/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="python重修之旅（一）"><meta property="og:description" content="还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&amp;hellip; 本宝宝的第一个专题。第三次系统学习python。2017年计划之一。
+年底就是爽，每天就是开开会，下午就自己疯狂coding。
+"><meta property="og:url" content="http://blog.heyuhua.com/p/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%80/"><meta property="og:site_name" content="我的日记"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="python"><meta property="article:published_time" content="2017-01-17T15:17:27+00:00"><meta property="article:modified_time" content="2017-01-17T15:17:27+00:00"><meta name=twitter:title content="python重修之旅（一）"><meta name=twitter:description content="还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&amp;hellip; 本宝宝的第一个专题。第三次系统学习python。2017年计划之一。
+年底就是爽，每天就是开开会，下午就自己疯狂coding。
+"><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/mxbc_love_hu84bcc3680e7c4ed0b569d38fde18a01e_187938_300x0_resize_box_1.gif width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🫥</span></figure><div class=site-meta><h1 class=site-name><a href=/>我的日记</a></h1><h2 class=site-description>drafts.....</h2></div></header><ol class=social-menu><li><a href=https://github.com/v1c77 target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://stackoverflow.com/users/6382035/vi-ci target=_blank title="Stack Overflow" rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-stackoverflow" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1"/><path d="M8 16h8"/><path d="M8.322 12.582l7.956.836"/><path d="M8.787 9.168l7.826 1.664"/><path d="M10.096 5.764l7.608 2.472"/></svg></a></li><li><a href=https://t.me/v1c77 target=_blank title=telegram rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#一道面试题>一道面试题</a><ol><li><a href=#-问题平面上有若干个点点与点可以重合寻找一条直线使其能穿过最多的点好吧我承认这是我去面试时候的面试题>> 问题：平面上有若干个点。点与点可以重合，寻找一条直线，使其能穿过最多的点。(好吧我承认这是我去面试时候的面试题。)</a></li></ol></li><li><a href=#图的python实现>图的python实现</a></li><li><a href=#socket>socket</a></li><li><a href=#threadprocess>thread／process</a><ol><li><a href=#threading>threading</a></li><li><a href=#multiprocessing-进程部分>multiprocessing 进程部分</a><ol><li><a href=#mapreduce-with-multiprocess>mapreduce with multiprocess</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/python%E9%87%8D%E4%BF%AE%E4%B9%8B%E6%97%85%E4%B8%80/>python重修之旅（一）</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 17, 2017</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 6 分钟</time></div></footer></div></header><section class=article-content><p>还有6个月就毕业了，才知道原来面试之前原来需要刷题什么的。怪不得之前面试我的人都是一脸看智障的样子&mldr;
+本宝宝的第一个专题。第三次系统学习python。2017年计划之一。</p><blockquote><p>年底就是爽，每天就是开开会，下午就自己疯狂coding。</p></blockquote><h2 id=一道面试题>一道面试题</h2><h3 id=-问题平面上有若干个点点与点可以重合寻找一条直线使其能穿过最多的点好吧我承认这是我去面试时候的面试题>> 问题：平面上有若干个点。点与点可以重合，寻找一条直线，使其能穿过最多的点。(好吧我承认这是我去面试时候的面试题。)</h3><p>搬运答案。。。<a class=link href=http://www.jiuzhang.com/solutions/max-points-on-a-line/# target=_blank rel=noopener>这里</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>/**</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=n>本代码由九章算法编辑提供</span><span class=err>。</span><span class=n>版权所有</span><span class=err>，</span><span class=n>转发请注明出处</span><span class=err>。</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=o>-</span> <span class=n>九章算法致力于帮助更多中国人找到好的工作</span><span class=err>，</span><span class=n>教师团队均来自硅谷和国内的一线大公司在职工程师</span><span class=err>。</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=o>-</span> <span class=n>现有的面试培训课程包括</span><span class=err>：</span><span class=n>九章算法班</span><span class=err>，</span><span class=n>系统设计班</span><span class=err>，</span><span class=n>算法强化班</span><span class=err>，</span><span class=n>Java入门与基础算法班</span><span class=err>，</span><span class=n>Android</span> <span class=n>项目实战班</span><span class=err>，</span><span class=n>Big</span> <span class=n>Data</span> <span class=n>项目实战班</span><span class=err>，</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=o>-</span> <span class=n>更多详情请见官方网站</span><span class=err>：</span><span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>www</span><span class=o>.</span><span class=n>jiuzhang</span><span class=o>.</span><span class=n>com</span><span class=o>/</span><span class=err>?</span><span class=n>source</span><span class=o>=</span><span class=n>code</span>
+</span></span><span class=line><span class=cl> <span class=o>*/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Definition for a point.</span>
+</span></span><span class=line><span class=cl><span class=c1># class Point:</span>
+</span></span><span class=line><span class=cl><span class=c1>#     def __init__(self, a=0, b=0):</span>
+</span></span><span class=line><span class=cl><span class=c1>#         self.x = a</span>
+</span></span><span class=line><span class=cl><span class=c1>#         self.y = b</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># @param {int[]} points an array of point</span>
+</span></span><span class=line><span class=cl>    <span class=c1># @return {int} an integer</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>maxPoints</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>points</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Write your code here</span>
+</span></span><span class=line><span class=cl>        <span class=n>len_points</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>points</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>len_points</span> <span class=o>&lt;=</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>len_points</span>
+</span></span><span class=line><span class=cl>        <span class=n>max_count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>index1</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>len_points</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>p1</span> <span class=o>=</span> <span class=n>points</span><span class=p>[</span><span class=n>index1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>gradients</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>            <span class=n>infinite_count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>            <span class=n>duplicate_count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>index2</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>index1</span><span class=p>,</span> <span class=n>len_points</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>                <span class=n>p2</span> <span class=o>=</span> <span class=n>points</span><span class=p>[</span><span class=n>index2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>                <span class=n>dx</span> <span class=o>=</span> <span class=n>p2</span><span class=o>.</span><span class=n>x</span> <span class=o>-</span> <span class=n>p1</span><span class=o>.</span><span class=n>x</span>
+</span></span><span class=line><span class=cl>                <span class=n>dy</span> <span class=o>=</span> <span class=n>p2</span><span class=o>.</span><span class=n>y</span> <span class=o>-</span> <span class=n>p1</span><span class=o>.</span><span class=n>y</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=mi>0</span> <span class=o>==</span> <span class=n>dx</span> <span class=ow>and</span> <span class=mi>0</span> <span class=o>==</span> <span class=n>dy</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>duplicate_count</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=mi>0</span> <span class=o>==</span> <span class=n>dx</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>infinite_count</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>g</span> <span class=o>=</span> <span class=nb>float</span><span class=p>(</span><span class=n>dy</span><span class=p>)</span> <span class=o>/</span> <span class=n>dx</span>
+</span></span><span class=line><span class=cl>                    <span class=n>gradients</span><span class=p>[</span><span class=n>g</span><span class=p>]</span> <span class=o>=</span> <span class=p>(</span><span class=n>gradients</span><span class=p>[</span><span class=n>g</span><span class=p>]</span> <span class=o>+</span> <span class=mi>1</span> <span class=k>if</span> <span class=n>gradients</span><span class=o>.</span><span class=n>has_key</span><span class=p>(</span><span class=n>g</span><span class=p>)</span> <span class=k>else</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>infinite_count</span> <span class=o>&gt;</span> <span class=n>max_count</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>max_count</span> <span class=o>=</span> <span class=n>infinite_count</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>k</span><span class=p>,</span> <span class=n>v</span> <span class=ow>in</span> <span class=n>gradients</span><span class=o>.</span><span class=n>items</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>                <span class=n>v</span> <span class=o>+=</span> <span class=n>duplicate_count</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>v</span> <span class=o>&gt;</span> <span class=n>max_count</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>max_count</span> <span class=o>=</span> <span class=n>v</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>max_count</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=图的python实现>图的python实现</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>fractions</span> <span class=kn>import</span> <span class=n>Fraction</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>deque</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Vertex</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 原生点 对象</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>x</span> <span class=o>=</span> <span class=n>x</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>y</span> <span class=o>=</span> <span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__repr__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s2>&#34;(</span><span class=si>{}</span><span class=s2>, </span><span class=si>{}</span><span class=s2>)&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>x</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=fm>__str__</span> <span class=o>=</span> <span class=fm>__repr__</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Edge</span><span class=p>(</span><span class=nb>tuple</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 继承自建tuple类型并重写new方法</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>e1</span><span class=p>,</span> <span class=n>e2</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>tuple</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=p>(</span><span class=n>e1</span><span class=p>,</span> <span class=n>e2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__repr__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s2>&#34;Edge(</span><span class=si>%s</span><span class=s2>, </span><span class=si>%s</span><span class=s2>)&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=bp>self</span><span class=p>[</span><span class=mi>0</span><span class=p>]),</span> <span class=nb>repr</span><span class=p>(</span><span class=bp>self</span><span class=p>[</span><span class=mi>1</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Graph</span><span class=p>(</span><span class=nb>dict</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>vs</span><span class=o>=</span><span class=p>[],</span> <span class=n>es</span><span class=o>=</span><span class=p>[]):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 建立一个新的图，(vs)为顶点vertices列表，(es)为边缘edges列表 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>v</span> <span class=ow>in</span> <span class=n>vs</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=n>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>e</span> <span class=ow>in</span> <span class=n>es</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_vertex</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>v</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 添加顶点 v:  使用字典结构&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=p>[</span><span class=n>v</span><span class=p>]</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_edge</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>e</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 添加边缘 e: e 为一个元组(v,w)
+</span></span></span><span class=line><span class=cl><span class=s2>            在两个顶点 w 和 v 之间添加成员e ，如果两个顶点之间已有边缘，则替换之 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>v</span><span class=p>,</span> <span class=n>w</span> <span class=o>=</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 由于一条边会产生两个项目，因此该实现代表了一个无向图</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=p>[</span><span class=n>v</span><span class=p>][</span><span class=n>w</span><span class=p>]</span> <span class=o>=</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=p>[</span><span class=n>w</span><span class=p>][</span><span class=n>v</span><span class=p>]</span> <span class=o>=</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>get_edge</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>v1</span><span class=p>,</span> <span class=n>v2</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 接收两个顶点，则返回这条边，否则返回None &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=p>[</span><span class=n>v1</span><span class=p>][</span><span class=n>v2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>vertices</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 返回图中所有顶点的列表 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>keys</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>edges</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 返回图中边的列表 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>es</span> <span class=o>=</span> <span class=nb>set</span><span class=p>()</span>  <span class=c1># 为了避免返回重复的边，设为集合</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>v1</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>vertices</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>v2</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>vertices</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>                <span class=n>es</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>get_edge</span><span class=p>(</span><span class=n>v2</span><span class=p>,</span> <span class=n>v1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>es</span><span class=o>.</span><span class=n>discard</span><span class=p>(</span><span class=kc>None</span><span class=p>)</span>  <span class=c1># 若集合中存在None元素,则删除 无向图可以不用写这步</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>list</span><span class=p>(</span><span class=n>es</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_all_edges</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>vs</span><span class=o>=</span><span class=kc>None</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 从一个无边的图开始，通过在各个顶点间添加边来生成一个完全图
+</span></span></span><span class=line><span class=cl><span class=s2>            输入为目标顶点的列表，如果为None,则对所有的点进行全联结 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>vs</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>vs</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>vertices</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>v1</span> <span class=ow>in</span> <span class=n>vs</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>v2</span> <span class=ow>in</span> <span class=n>vs</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>v1</span> <span class=ow>is</span> <span class=n>v2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>continue</span>  <span class=c1># 假设不存在单顶点连通</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=n>Edge</span><span class=p>(</span><span class=n>v1</span><span class=p>,</span> <span class=n>v2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>bfs</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        广度优先搜索
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=c1># parents 记录所有可达节点与对应的父节点，这里是一个字典，我们将其 可达节点 作为 key，而将其 父节点 作为 value</span>
+</span></span><span class=line><span class=cl>        <span class=c1># query_queue 是用来存放待探索节点的 to-do 列表，这里是一个 FIFO</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>node</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>vertices</span><span class=p>()[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>parents</span><span class=p>,</span> <span class=n>query_queue</span> <span class=o>=</span> <span class=p>{</span><span class=n>node</span><span class=p>:</span> <span class=kc>None</span><span class=p>},</span> <span class=n>deque</span><span class=p>([</span><span class=n>node</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=n>query_queue</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 总是从 FIFO 的左侧弹出待探索的节点</span>
+</span></span><span class=line><span class=cl>            <span class=n>q_node</span> <span class=o>=</span> <span class=n>query_queue</span><span class=o>.</span><span class=n>popleft</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>neighbor</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>out_vertices</span><span class=p>(</span><span class=n>q_node</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>neighbor</span> <span class=ow>in</span> <span class=n>parents</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>continue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=c1># 记录探索到的邻居节点及其父节点</span>
+</span></span><span class=line><span class=cl>                <span class=n>parents</span><span class=p>[</span><span class=n>neighbor</span><span class=p>]</span> <span class=o>=</span> <span class=n>q_node</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=c1># 将其邻居节点推入 to-do 列表</span>
+</span></span><span class=line><span class=cl>                <span class=n>query_queue</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>neighbor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>#如果想只得到点的话 可以</span>
+</span></span><span class=line><span class=cl>        <span class=c1># return prints.key()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>parents</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>out_vertices</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>v</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 接受一个Vertex并返回邻近顶点（通过一条边连接到给定节点的节点）的列表 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=p>[</span><span class=n>v</span><span class=p>]</span><span class=o>.</span><span class=n>keys</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>out_edges</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>v</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; 接受一个Vertex并返回连接到给定节点的边的列表 &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=p>[</span><span class=n>v</span><span class=p>]</span><span class=o>.</span><span class=n>values</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=socket>socket</h2><h2 id=threadprocess>thread／process</h2><blockquote><p>文字部分详见小明明 线程篇 和进程篇</p></blockquote><h3 id=threading>threading</h3><blockquote><p>当前代码版本&mdash;&ndash;》<a class=link href=https://github.com/woailuoli993/test/blob/660297df0614925307bb3272dde6eace19284cf0/dosth/testthread.py target=_blank rel=noopener>这里</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span><span class=lnt>344
+</span><span class=lnt>345
+</span><span class=lnt>346
+</span><span class=lnt>347
+</span><span class=lnt>348
+</span><span class=lnt>349
+</span><span class=lnt>350
+</span><span class=lnt>351
+</span><span class=lnt>352
+</span><span class=lnt>353
+</span><span class=lnt>354
+</span><span class=lnt>355
+</span><span class=lnt>356
+</span><span class=lnt>357
+</span><span class=lnt>358
+</span><span class=lnt>359
+</span><span class=lnt>360
+</span><span class=lnt>361
+</span><span class=lnt>362
+</span><span class=lnt>363
+</span><span class=lnt>364
+</span><span class=lnt>365
+</span><span class=lnt>366
+</span><span class=lnt>367
+</span><span class=lnt>368
+</span><span class=lnt>369
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=ch>#!/usr/bin/env python</span>
+</span></span><span class=line><span class=cl><span class=c1># -*- coding: utf-8 -*-</span>
+</span></span><span class=line><span class=cl><span class=c1># Created by vici on 22/01/2017</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>threading</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>platform</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>Queue</span> <span class=kn>import</span> <span class=n>Queue</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>random</span> <span class=kn>import</span> <span class=n>randint</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=vm>__doc__</span> <span class=o>=</span> <span class=s2>&#34;&#34;&#34; 抄董伟明,官方文档，廖雪峰 bogo  。。。。 threading 实验结果记录
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>format</span><span class=o>=</span><span class=s1>&#39;(</span><span class=si>%(threadName)-9s</span><span class=s1>) |||| </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>,)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>timeit</span><span class=p>(</span><span class=n>func</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;一个简单的函数时间装饰器&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>wrapper</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl>        <span class=n>start</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>func</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>end</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>{}</span><span class=s1> COST: </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>func</span><span class=o>.</span><span class=vm>__name__</span><span class=p>,</span> <span class=n>end</span><span class=o>-</span><span class=n>start</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>wrapper</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>show_thread_itself</span><span class=p>(</span><span class=n>arg</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;threading </span><span class=si>{}</span><span class=s2> is running! &#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>threading</span><span class=o>.</span><span class=n>current_thread</span><span class=p>()</span><span class=o>.</span><span class=n>getName</span><span class=p>()))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>xrange</span><span class=p>(</span><span class=mi>5</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Thread </span><span class=si>{}</span><span class=s1> &gt;&gt;&gt; </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>threading</span><span class=o>.</span><span class=n>current_thread</span><span class=p>()</span><span class=o>.</span><span class=n>getName</span><span class=p>(),</span> <span class=n>i</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Thread </span><span class=si>{}</span><span class=s2> end&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>threading</span><span class=o>.</span><span class=n>current_thread</span><span class=p>()</span><span class=o>.</span><span class=n>getName</span><span class=p>()))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>fib</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>&lt;=</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>fib</span><span class=p>(</span><span class=n>n</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=o>+</span> <span class=n>fib</span><span class=p>(</span><span class=n>n</span><span class=o>-</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@timeit</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>nothread</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>fib</span><span class=p>(</span><span class=mi>34</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>fib</span><span class=p>(</span><span class=mi>34</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@timeit</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>withthread</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>xrange</span><span class=p>(</span><span class=mi>2</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>fib</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=mi>34</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>main_thread</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>current_thread</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>t</span> <span class=ow>in</span> <span class=n>threading</span><span class=o>.</span><span class=n>enumerate</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>t</span> <span class=ow>is</span> <span class=n>main_thread</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>balance</span> <span class=o>=</span> <span class=mi>1000</span>
+</span></span><span class=line><span class=cl><span class=n>lock</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>change_balance</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>balance</span>
+</span></span><span class=line><span class=cl>    <span class=n>balance</span> <span class=o>+=</span> <span class=mi>1000</span>
+</span></span><span class=line><span class=cl>    <span class=n>balance</span> <span class=o>-=</span> <span class=mi>1000</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>money_laundering</span><span class=p>(</span><span class=n>num</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>xrange</span><span class=p>(</span><span class=n>num</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>change_balance</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>money_laundering_priveate</span><span class=p>(</span><span class=n>num</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>xrange</span><span class=p>(</span><span class=n>num</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>lock</span><span class=o>.</span><span class=n>acquire</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>change_balance</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>finally</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>lock</span><span class=o>.</span><span class=n>release</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>lock_is_important</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    这里的lock是一种互斥的 可重获的 锁 在一个加锁thread进行完之后将会释放。
+</span></span></span><span class=line><span class=cl><span class=s2>    lock 相当于信号量（Sempahore） 为 1
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@timeit</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test1</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Before i go to bank ,I have </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>balance</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>money_laundering</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=mi>2000000</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>money_laundering</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=mi>4000000</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;after two public_money_laundering, I have </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>balance</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@timeit</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test2</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>global</span> <span class=n>balance</span>
+</span></span><span class=line><span class=cl>        <span class=n>balance</span> <span class=o>=</span> <span class=mi>2000</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Before i go to a new bank ,I have </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>balance</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t3</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>money_laundering_priveate</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=mi>3000000</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t4</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>money_laundering_priveate</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=mi>3000000</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t3</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>t4</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>t3</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>t4</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;after two private money_launderingm I have </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>balance</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>test1</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>test2</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>consumer_producer</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>condition</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Condition</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>consumer</span><span class=p>(</span><span class=n>cond</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>current_thread</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>{}</span><span class=s1> start , and waiting for proc&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>t</span><span class=o>.</span><span class=n>name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>with</span> <span class=n>cond</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>cond</span><span class=o>.</span><span class=n>wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>{}</span><span class=s1> making resource avaiable to consumer&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>t</span><span class=o>.</span><span class=n>name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>producer</span><span class=p>(</span><span class=n>cond</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>current_thread</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>with</span> <span class=n>cond</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>{}</span><span class=s1> producer acaiable !&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>t</span><span class=o>.</span><span class=n>name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=n>cond</span><span class=o>.</span><span class=n>notifyAll</span><span class=p>()</span> <span class=c1># 激活条件</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>c1</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;cons1&#39;</span><span class=p>,</span> <span class=n>target</span><span class=o>=</span><span class=n>consumer</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>condition</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>    <span class=n>c2</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;cons2&#39;</span><span class=p>,</span> <span class=n>target</span><span class=o>=</span><span class=n>consumer</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>condition</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>    <span class=n>p</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;prod&#39;</span><span class=p>,</span> <span class=n>target</span><span class=o>=</span><span class=n>producer</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>condition</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>    <span class=n>c1</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>c2</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>p</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>consumber_producer_event</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;一个线程发送事件，其他的线程等待事件的触发  生产者消费者模型&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>random</span> <span class=kn>import</span> <span class=n>randint</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>TIMEOUT</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=n>eve</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Event</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>ll</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>threads</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>consumer</span><span class=p>(</span><span class=n>event</span><span class=p>,</span> <span class=n>l</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;消费者&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>mt</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>currentThread</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_is_set</span> <span class=o>=</span> <span class=n>event</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>TIMEOUT</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>event_is_set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>integer</span> <span class=o>=</span> <span class=n>l</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>{}</span><span class=s1> pop from list by </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>integer</span><span class=p>,</span> <span class=n>mt</span><span class=o>.</span><span class=n>name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                    <span class=n>event</span><span class=o>.</span><span class=n>clear</span><span class=p>()</span>  <span class=c1># 重制事件状态</span>
+</span></span><span class=line><span class=cl>                <span class=k>except</span> <span class=ne>IndexError</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>pass</span>  <span class=c1># 刚启动时容错。</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>producer</span><span class=p>(</span><span class=n>event</span><span class=p>,</span> <span class=n>l</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>mt</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>currentThread</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>integer</span> <span class=o>=</span> <span class=n>randint</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>l</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>integer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>{}</span><span class=s1> is append to list by </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>integer</span><span class=p>,</span> <span class=n>mt</span><span class=o>.</span><span class=n>name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=n>event</span><span class=o>.</span><span class=n>set</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>name</span> <span class=ow>in</span> <span class=p>(</span><span class=s1>&#39;consumer1&#39;</span><span class=p>,</span> <span class=s1>&#39;consumer2&#39;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=n>name</span><span class=p>,</span> <span class=n>target</span><span class=o>=</span><span class=n>consumer</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>eve</span><span class=p>,</span> <span class=n>ll</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>threads</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>p</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;producer&#39;</span><span class=p>,</span> <span class=n>target</span><span class=o>=</span><span class=n>producer</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>eve</span><span class=p>,</span> <span class=n>ll</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>p</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>threads</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>p</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>t</span> <span class=ow>in</span> <span class=n>threads</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>consumer_producer_queue</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34; 有两种模式 priority 优先级模式 LIFOqueue后进先出模式。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># priority 模式</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>random</span> <span class=kn>import</span> <span class=n>random</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>Queue</span> <span class=kn>import</span> <span class=n>PriorityQueue</span><span class=p>,</span> <span class=n>LifoQueue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>q</span> <span class=o>=</span> <span class=n>PriorityQueue</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>double</span><span class=p>(</span><span class=n>num</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>num</span> <span class=o>*</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>producer</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>wt</span> <span class=o>=</span> <span class=n>random</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;put&#39;</span><span class=p>,</span> <span class=n>wt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>q</span><span class=o>.</span><span class=n>put</span><span class=p>((</span><span class=n>double</span><span class=p>,</span> <span class=n>wt</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>consumer</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>task</span><span class=p>,</span> <span class=n>arg</span> <span class=o>=</span> <span class=n>q</span><span class=o>.</span><span class=n>get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span> <span class=n>arg</span><span class=p>,</span> <span class=n>task</span><span class=p>(</span><span class=n>arg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>q</span><span class=o>.</span><span class=n>task_done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>target</span> <span class=ow>in</span> <span class=p>(</span><span class=n>producer</span><span class=p>,</span> <span class=n>consumer</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>target</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>consumer_producer_priqueue</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;priority 优先级队列&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>random</span> <span class=kn>import</span> <span class=n>randint</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>Queue</span> <span class=kn>import</span> <span class=n>PriorityQueue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>pri_q</span> <span class=o>=</span> <span class=n>PriorityQueue</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>triple</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>n</span> <span class=o>*</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>consumer</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>pri_q</span><span class=o>.</span><span class=n>empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>            <span class=n>pri</span><span class=p>,</span> <span class=n>target</span><span class=p>,</span> <span class=n>arg</span> <span class=o>=</span> <span class=n>pri_q</span><span class=o>.</span><span class=n>get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;[PRI: </span><span class=si>{}</span><span class=s1>], </span><span class=si>{}</span><span class=s1> * 3 = </span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>pri</span><span class=p>,</span> <span class=n>arg</span><span class=p>,</span> <span class=n>target</span><span class=p>(</span><span class=n>arg</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>            <span class=n>pri_q</span><span class=o>.</span><span class=n>task_done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>producer</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>count</span> <span class=o>&gt;</span> <span class=mi>50</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>            <span class=n>pri</span> <span class=o>=</span> <span class=n>randint</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;put priority </span><span class=si>{}</span><span class=s1> &#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>pri</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=n>pri_q</span><span class=o>.</span><span class=n>put</span><span class=p>((</span><span class=n>pri</span><span class=p>,</span> <span class=n>triple</span><span class=p>,</span> <span class=n>pri</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=n>count</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>targ</span> <span class=ow>in</span> <span class=p>(</span><span class=n>producer</span><span class=p>,</span> <span class=n>consumer</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>targ</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>daemon_and_not_daemon</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>nd</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s2>&#34;start!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s2>&#34;end!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>d</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s2>&#34;start&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s2>&#34;end&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>t</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>d</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s2>&#34;deamon&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>nt</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>nd</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s1>&#39;no-deamon&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>t</span><span class=o>.</span><span class=n>setDaemon</span><span class=p>(</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>t</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>nt</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 论join 的重要性。</span>
+</span></span><span class=line><span class=cl>    <span class=n>t</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># threading pool &amp;&amp; threading module programing</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>quadra</span><span class=p>(</span><span class=n>strings</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>str</span><span class=p>(</span><span class=n>strings</span><span class=p>)</span> <span class=o>*</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Worker</span><span class=p>(</span><span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>queue</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>(</span><span class=n>Worker</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=fm>__init__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_q</span> <span class=o>=</span> <span class=n>queue</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>daemon</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>run</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>f</span><span class=p>,</span> <span class=n>args</span><span class=p>,</span> <span class=n>kwargs</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_q</span><span class=o>.</span><span class=n>get</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;USE </span><span class=si>{}</span><span class=s1> &#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                <span class=nb>print</span><span class=p>(</span><span class=n>f</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=nb>print</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_q</span><span class=o>.</span><span class=n>task_done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>ThreadingPool</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>num_con</span><span class=o>=</span><span class=mi>5</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_q</span> <span class=o>=</span> <span class=n>Queue</span><span class=p>(</span><span class=n>num_con</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=n>xrange</span><span class=p>(</span><span class=n>num_con</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>Worker</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>_q</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_task</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>f</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_q</span><span class=o>.</span><span class=n>put</span><span class=p>((</span><span class=n>f</span><span class=p>,</span> <span class=n>args</span><span class=p>,</span> <span class=n>kwargs</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>wait_complete</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_q</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>test_threading_pool</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>pool</span> <span class=o>=</span> <span class=n>ThreadingPool</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=n>xrange</span><span class=p>(</span><span class=mi>1000</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>wt</span> <span class=o>=</span> <span class=n>randint</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>9</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>pool</span><span class=o>.</span><span class=n>add_task</span><span class=p>(</span><span class=n>quadra</span><span class=p>,</span> <span class=n>wt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>pool</span><span class=o>.</span><span class=n>wait_complete</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># nothread()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># withthread(）</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ----------------- no threading vs use treading-------------------------</span>
+</span></span><span class=line><span class=cl>    <span class=c1># show_thread_itself(&#39;no muti&#39;)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># print(&#39;threading is running! thraead name is {}&#39;.format(threading.current_thread().getName()))</span>
+</span></span><span class=line><span class=cl>    <span class=c1># t = threading.Thread(target=show_thread_itself, args=(123,), name=&#39;Do yourself&#39;)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># t.start()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># t.join()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># print(&#39;threading {} end.&#39;.format(threading.current_thread().getName()))</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ------------------ problem on thread lock ---------------------------</span>
+</span></span><span class=line><span class=cl>    <span class=c1># lock_is_important()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ------------------ cunsumer / producter model with condition -----------------------</span>
+</span></span><span class=line><span class=cl>    <span class=c1># consumer_producer()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ------------------ cumsumer/ producter model with event -----------------</span>
+</span></span><span class=line><span class=cl>    <span class=c1># consumber_producer_event()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># --------   deamon and not deamon threading   ------------------------</span>
+</span></span><span class=line><span class=cl>    <span class=c1># daemon_and_not_daemon()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ------------------ cunsumer / producter model with Queue -----------------------</span>
+</span></span><span class=line><span class=cl>    <span class=c1># consumer_producer_queue() # 普通队列</span>
+</span></span><span class=line><span class=cl>    <span class=c1># consumer_producer_priqueue()  # 优先级队列</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ------------------ threadingpool ------------</span>
+</span></span><span class=line><span class=cl>    <span class=n>test_threading_pool</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;python version is </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>platform</span><span class=o>.</span><span class=n>python_version</span><span class=p>()))</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;done!&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=multiprocessing-进程部分>multiprocessing 进程部分</h3><h4 id=mapreduce-with-multiprocess>mapreduce with multiprocess</h4><blockquote><p><a class=link href=https://pymotw.com/2/multiprocessing/mapreduce.html target=_blank rel=noopener>文章搬运</a>, <a class=link href=https://github.com/woailuoli993/test/blob/master/dosth/testmapreducemultiprocess.py target=_blank rel=noopener>代码拷贝</a></p></blockquote></section><footer class=article-footer><section class=article-tags><a href=/tags/python/>python</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//vic1blog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2016 -
+2024 何育华版权所有</section><section class=powerby><a href=http://beian.miit.gov.cn>粤ICP备19031392号</a><br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

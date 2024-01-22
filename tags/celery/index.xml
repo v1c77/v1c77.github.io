@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>celery on 我的日记</title><link>http://blog.heyuhua.com/tags/celery/</link><description>Recent content in celery on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Tue, 29 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/celery/index.xml" rel="self" type="application/rss+xml"/><item><title>celery任务分发-术业有专攻的worker们</title><link>http://blog.heyuhua.com/p/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/</link><pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/celery%E4%BB%BB%E5%8A%A1%E5%88%86%E5%8F%91-%E6%9C%AF%E4%B8%9A%E6%9C%89%E4%B8%93%E6%94%BB%E7%9A%84worker%E4%BB%AC/</guid><description>&lt;p>本事借的钱，为什么要还？&lt;/p>
+&lt;blockquote>
+&lt;p>此文章脱胎于我在stackoverflow的某回答&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="celery-高阶用法">celery 高阶用法&lt;/h1>
+&lt;h2 id="需求">需求&lt;/h2>
+&lt;p>项目需要多个任务队列进行任务分发，每个队列的任务都会请求获取某种资源。
+CTO大人给的建议是使用线程模型自己维护队列。（说实话我当时就怒了） 什么年代了？昂？当然我并没有为此而辞职&lt;/p>
+&lt;h2 id="环境">环境&lt;/h2>
+&lt;ul>
+&lt;li>linux (Centos/ubuntu/arch)&lt;/li>
+&lt;li>pyhon 2.7&lt;/li>
+&lt;li>celery 任务队列中间件(djcelery 及flask 都适用)&lt;/li>
+&lt;/ul>
+&lt;h2 id="干活">干活&lt;/h2>
+&lt;h3 id="celery-worker-部署代码">celery worker 部署代码&lt;/h3>
+&lt;p>下面的代码实现了：&lt;/p>
+&lt;ul>
+&lt;li>生成了一堆以&lt;code>w_*&lt;/code> 命名的 worker 和 以 &lt;code>q_*&lt;/code>命名的任务队列，限制各个worker的并发数及绑定worker 与队列
+&lt;ul>
+&lt;li>&lt;code>w_celery&lt;/code> 负责默认&lt;code>celery&lt;/code>队列，并发数为10，&lt;/li>
+&lt;li>剩下的worker 都为单线程任务， 绑定各自的任务队列&lt;/li>
+&lt;li>&lt;code>-A celery_worker.celery&lt;/code> 表明了任务内容&lt;/li>
+&lt;li>&lt;code>-Q celery&lt;/code> 设置了默认队列为 celery&lt;/li>
+&lt;li>&lt;code>--pidfile&lt;/code>,&lt;code>--logfile&lt;/code> 定义了进程文件及日志名称规范及存放地点&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">celery multi start w_celery w_sas w_aosp w_avpro w_pw764 w_pw786 w_pxp w_cwxp w_cw786 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-c &lt;span class="m">1&lt;/span> -A celery_worker.celery -l debug -Q celery --pidfile&lt;span class="o">=&lt;/span>/tmp/celery_%n.pid --logfile&lt;span class="o">=&lt;/span>/tmp/celery_%n.log &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_celery celery -c:w_celery &lt;span class="m">10&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_sas q_sas &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_aosp q_aosp &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_avpro q_avpro &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_pw764 q_pw764 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_pw786 q_pw786 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_pxp q_pxp &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_cwxp q_cwxp &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span>-Q:w_cw786 q_cw786
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="task定义及调用方法示例">task定义及调用方法示例&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 定义
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@celery.task
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">def sub_sas(*args):
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # 申请某独占资源
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pass
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 如何在调用时绑定queue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">def sub():
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sub_sas.apply_async(args=(), queue=&amp;#39;q_sas&amp;#39;) # 将sas任务 提交到q_sas 队列，从而交由w_sas 实现
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>通过这样的绑定即可实现worker的术业专攻，并通过上下文控制（with）独占资源的锁&lt;/p>
+&lt;p>老哥稳！&lt;/p></description></item></channel></rss>

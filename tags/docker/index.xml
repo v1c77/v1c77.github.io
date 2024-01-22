@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on 我的日记</title><link>http://blog.heyuhua.com/tags/docker/</link><description>Recent content in docker on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Wed, 15 Feb 2017 16:20:14 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>postgresq-xl+docker分布式实践</title><link>http://blog.heyuhua.com/p/postgresq-xl-docker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</link><pubDate>Wed, 15 Feb 2017 16:20:14 +0000</pubDate><guid>http://blog.heyuhua.com/p/postgresq-xl-docker%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E8%B7%B5/</guid><description>&lt;blockquote>
+&lt;p>本文在 2017年3月7日被重写。祝愿各位女王及屏幕那边的大雕萌妹们节日快乐。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="思路">思路&lt;/h2>
+&lt;ul>
+&lt;li>全文围绕docker hub上的 potsgres-xl 镜像&lt;a class="link" href="https://hub.docker.com/u/tiredpixel/" target="_blank" rel="noopener"
+>在这&lt;/a>所写。
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/tiredpixel/postgres-xl-docker" target="_blank" rel="noopener"
+>github地址&lt;/a> 包括了 0.1/0.1 两版本。&lt;/li>
+&lt;li>被重写前的博客 基于该repo 的 tag 0.1 ，使用 &lt;code>pgxc_ctl&lt;/code> 自动化工具 及 ssh 隧道。有兴趣的可以去探索一波。其实还是蛮方便的。&lt;/li>
+&lt;li>重写后的博客 fork from tag 0.2（默认提供docker-compose 部署方式）。我还是改成了swarm 构建方式。原因如下：&lt;a class="link" href="https://github.com/tiredpixel/postgres-xl-docker/issues/11" target="_blank" rel="noopener"
+>tirdpixel对使用swarm还是compose的解释&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>本博客需要用到的源码， dockerfile， 及一些补充说明。都在&lt;a class="link" href="https://github.com/woailuoli993/postgres-xl-docker" target="_blank" rel="noopener"
+>这里&lt;/a>。&lt;/li>
+&lt;/ul>
+&lt;h2 id="overview">overview&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>OLTP&lt;/code> 联机事务处理&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>pssh&lt;/code> 用来多主机部署测试的工具&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>关于postgresql-xl 的更多中文介绍 可以看&lt;a class="link" href="https://www.biaodianfu.com/postgres-xl.html" target="_blank" rel="noopener"
+>这里&lt;/a>。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>postgre-xl 的&lt;a class="link" href="http://files.postgres-xl.org/documentation/index.html" target="_blank" rel="noopener"
+>官方文档&lt;/a>详细介绍了使用方法。
+&lt;img src="http://blog.heyuhua.com/postgre-xl.jpg"
+loading="lazy"
+alt="架构图"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>psql-xl 组件概述&lt;/p>
+&lt;ol>
+&lt;li>GTM（Global Transaction Monitor） 全局事务监视器&lt;/li>
+&lt;/ol>
+&lt;p>确保集群范围内的事务一致性。（如果想要提升性能， 可以进一步添加各数据节点的 GTM proxy）&lt;/p>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Coordinator 协调器&lt;/p>
+&lt;ul>
+&lt;li>处理客户端网络链接。 数据库接入点。&lt;/li>
+&lt;li>分析查询语句，执行计划， 将计划传递给 DataNode&lt;/li>
+&lt;li>对DataNode 返回的查询中间结果做最后处理&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Data Node&lt;/p>
+&lt;ul>
+&lt;li>储存表和索引&lt;/li>
+&lt;li>只有协调器 Coordinator 连接数据节点&lt;/li>
+&lt;li>执行 Coordinator 发送的 查询&lt;/li>
+&lt;li>节点间可以建立一对一连接。交换分布式表关联查询信息。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>GTM Proxy&lt;/p>
+&lt;ul>
+&lt;li>与Coordinator, Datanode 一起运行。&lt;/li>
+&lt;li>Coordinator 和 Datanode 于GTM Proxy 交互，proxy起到中间人的作用&lt;/li>
+&lt;li>将原本对GTM 的请求进行分组归类。 多请求一次性提交给 GTM&lt;/li>
+&lt;li>获取数据快照。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>创建 postgres-xl 集群的注意事项。&lt;/p>
+&lt;ul>
+&lt;li>整个搭建过程都严重依赖各个节点的环境变量。&lt;/li>
+&lt;li>把防火墙整好。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>docker 的补充知识&lt;/p>
+&lt;ul>
+&lt;li>创建swarm manager &lt;code>docker swarm init --advertise-addr *.*.*.*&lt;/code>&lt;/li>
+&lt;li>在 想要加入为worker的host 运行 &lt;code>docker swarm join 。。。。。&lt;/code> （init 完 会告诉你
+的。）&lt;/li>
+&lt;li>查看swarm node &lt;code>docker node ls&lt;/code>&lt;/li>
+&lt;li>批量删除 swarm 容器 &lt;code>docker service ls | grep &amp;quot;post&amp;quot; | awk '{print $1}' | xargs docker service rm&lt;/code>&lt;/li>
+&lt;li>寡人写的一个查看 docker remote tags 的 &lt;a class="link" href="http://stackoverflow.com/questions/28320134/how-to-list-all-tags-for-a-docker-image-on-a-remote-registry/39454426#39454426" target="_blank" rel="noopener"
+>脚本&lt;/a>&lt;/li>
+&lt;li>每次测试环境结束后都要记得清空那些东东。
+&lt;ul>
+&lt;li>volume：&lt;code>docker volume prune&lt;/code>&lt;/li>
+&lt;li>network： &lt;code>docker network prune&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="实践">实践&lt;/h2>
+&lt;blockquote>
+&lt;p>1 GTM 2proxy 2coordinator 10 datanode in two swarm node&lt;/p>
+&lt;/blockquote>
+&lt;p>文档就不抄了，出来吧！ &lt;a class="link" href="https://github.com/woailuoli993/postgres-xl-docker/tree/master/deploy" target="_blank" rel="noopener"
+>传送门！！&lt;/a>&lt;/p></description></item><item><title>docker 入门笔记</title><link>http://blog.heyuhua.com/p/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 28 Nov 2016 19:48:21 +0000</pubDate><guid>http://blog.heyuhua.com/p/docker-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid><description>&lt;!-- toc -->
+&lt;h1 id="入门">入门&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.gitbook.com/book/hujb2000/docker-flow-evolution/details" target="_blank" rel="noopener"
+>入门手册一(偏理论)&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.gitbook.com/book/yeasy/docker_practice/details" target="_blank" rel="noopener"
+>入门手册二(偏实践)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="qus1-使用安装docker后-使用普通用户无法运行docker-run-and-docker-version">qus1: 使用安装docker后 使用普通用户无法运行&lt;code>docker run&lt;/code> AND &lt;code>docker version&lt;/code>&lt;/h2>
+&lt;h3 id="错误提示">错误提示:&lt;/h3>
+&lt;blockquote>
+&lt;p>Cannot connect to the Docker daemon. Is the docker daemon running on this host?&lt;/p>
+&lt;/blockquote>
+&lt;p>在使用&lt;code>groupadd&lt;/code> 添加了docker 用户组及 将当前 ==$USER== 添加到用户组之后,&lt;strong>务必要进行注销重新登录&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cat /etc/group # 可以获取当前系统所有组及权限
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="技巧1-使用阿里云做ecs-的docker-镜像下载加速">技巧1: 使用阿里云做ecs 的docker 镜像下载加速&lt;/h2>
+&lt;p>&lt;a class="link" href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="noopener"
+>点进这里申请及查看自己的加速地址&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>一下是ubuntu 14.04 的配置加速器命令&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-perl" data-lang="perl">&lt;span class="line">&lt;span class="cl">&lt;span class="n">echo&lt;/span> &lt;span class="s">&amp;#34;DOCKER_OPTS=\&amp;#34;\$DOCKER_OPTS --registry-mirror=https://95s2tvj3.mirror.aliyuncs.com\&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">sudo&lt;/span> &lt;span class="n">tee&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">a&lt;/span> &lt;span class="sr">/etc/&lt;/span>&lt;span class="n">default&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">service&lt;/span> &lt;span class="n">docker&lt;/span> &lt;span class="n">restart&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>以下是 centos 7的..&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo cp -n /lib/systemd/system/docker.service /etc/systemd/system/docker.service
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo sed -i &lt;span class="s2">&amp;#34;s|ExecStart=/usr/bin/docker daemon|ExecStart=/usr/bin/docker daemon --registry-mirror=https://95s2tvj3.mirror.aliyuncs.com|g&amp;#34;&lt;/span> /etc/systemd/system/docker.service
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo service docker restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中那个神奇的域名(&lt;a class="link" href="https://95s2tvj3.mirror.aliyuncs.com" target="_blank" rel="noopener"
+>https://95s2tvj3.mirror.aliyuncs.com&lt;/a>)是 阿里云开发者账号生成的个人加速镜像地址&lt;/p>
+&lt;h2 id="技巧2-修改docker-容器镜像的默认地址ubuntu1604">技巧2: 修改docker 容器镜像的默认地址（ubuntu16.04）：&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 关闭服务&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl stop docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo mv /var/lib/docker /data/docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sddo ln -s /data/docker /var/lib/docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl start docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="docker-部署工具自动化部署">docker 部署工具(自动化部署):&lt;/h2>
+&lt;ul>
+&lt;li>Swarm&lt;/li>
+&lt;li>Rancher&lt;/li>
+&lt;li>Kubernetes&lt;/li>
+&lt;li>Helios&lt;/li>
+&lt;/ul>
+&lt;h2 id="大白话">大白话&lt;/h2>
+&lt;p>** docker与虚拟机的相互理解:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>docker&lt;/th>
+&lt;th style="text-align:right">像啥&lt;/th>
+&lt;th style="text-align:center">术语&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>镜像&lt;/td>
+&lt;td style="text-align:right">iso 系统镜像&lt;/td>
+&lt;td style="text-align:center">image&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>容器&lt;/td>
+&lt;td style="text-align:right">跑着的虚拟机&lt;/td>
+&lt;td style="text-align:center">Container&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>仓库&lt;/td>
+&lt;td style="text-align:right">github&lt;/td>
+&lt;td style="text-align:center">repository&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>++使用&lt;code>docker run&lt;/code> 命令 相当于 在虚拟机中进行了一次从iso 到 运行实例的 过程++&lt;/p>
+&lt;ul>
+&lt;li>docker client 操纵 docker daemon, docker deamon 为底层的管家&lt;/li>
+&lt;li>由上面的大白话可以推测出, 镜像(image) 是只读对象 ,类似于工厂函数,可以创建多个实例 容器&lt;/li>
+&lt;li>因为镜像的只读性, 容器在启动时会在 最上层添加 可写层 做个性化部署&lt;/li>
+&lt;/ul>
+&lt;p>docker 基于 linux 的容器机制实现 其中关于 namespace 的进程 隔离部分 及 文件系统的分层 readonly / readwrite 决定了 docker 的运行机制&lt;/p>
+&lt;h2 id="镜像操作">镜像操作&lt;/h2>
+&lt;h4 id="显示所有本地存放的镜像">显示所有本地存放的镜像&lt;/h4>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker images
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="从镜像仓库拉取镜像">从镜像仓库拉取镜像&lt;/h4>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker pull imagename
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="运行镜像">运行镜像&lt;/h4>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker run imagename
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="容器常用操作命令">容器常用操作命令&lt;/h3>
+&lt;h4 id="启动容器">启动容器&lt;/h4>
+&lt;p>启动容器有两种方式，一种是基于镜像新建一个容器并启动，另外一个是将在终止状态（stopped）的容器 重新启动。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$sudo&lt;/span> docker run node:latest /bin/echo &lt;span class="s2">&amp;#34;Hello World&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$sudo&lt;/span> docker run -t -i node:latest /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中， &lt;code>-t&lt;/code> 选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上， &lt;code>-i&lt;/code> 则让容器的标 准输入保持打开。
+当利用 &lt;code>docker run&lt;/code> 来创建容器时，Docker 在后台运行的标准操作包括：
+检查本地是否存在指定的镜像，不存在就从公有仓库下载
+利用镜像创建并启动一个容器
+分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+从地址池配置一个 ip 地址给容器
+执行用户指定的应用程序
+执行完毕后容器被终止
+docker run 命令参数较多，可以通过以下命令&lt;code>docker run --help&lt;/code>查看参数&lt;/p>
+&lt;p>可以利用 &lt;code>docker start [containerId|containerName]&lt;/code> 命令，直接将一个已经终止的容器启动运行。&lt;/p>
+&lt;h4 id="重启容器">重启容器&lt;/h4>
+&lt;p>&lt;code>docker restart&lt;/code> 命令会将一个运行态的容器终止，然后再重新启动它。&lt;/p>
+&lt;h4 id="守护态运行">守护态运行&lt;/h4>
+&lt;p>更多的时候，需要让 Docker 容器在后台以守护态（Daemonized）形式运行。此时，可以通过添加 -d 参 数来实现。&lt;/p>
+&lt;h4 id="进入容器">进入容器&lt;/h4>
+&lt;p>&lt;code>docker exec -it [containerId|containerName] /bin/bash&lt;/code>
+获取容器的输出信息&lt;/p>
+&lt;p>要获取容器的输出信息，可以通过 &lt;code>docker logs [containerId|containerName]&lt;/code> 命令。&lt;/p>
+&lt;h4 id="查看容器">查看容器&lt;/h4>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo docker ps &lt;span class="c1"># 查看正在运行的容器&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo docker ps -a &lt;span class="c1"># 查看所有的容器状态&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="删除容器">删除容器&lt;/h4>
+&lt;p>可以使用 &lt;code>docker rm&lt;/code> 来删除一个处于终止状态的容器。如果要删除一个运行中的容器，可以添加 ==-f== 参数。Docker 会发送 SIGKILL 信号给容器。
+删除所有容器 &lt;code>docker rm $(docker ps –a –q)&lt;/code>&lt;/p>
+&lt;h3 id="docker-run-命令-重要参数">&lt;code>docker run&lt;/code> 命令 重要参数&lt;/h3>
+&lt;p>==-b==: 默认是空，附加在已存在的网桥上，如果是用&amp;rsquo;none&amp;rsquo;参数，就禁用了容器的网络&lt;br>
+==-p==：随机映射容器的所有暴露端口给主机 -p: 映射容器端口给主机
+==&amp;ndash;env==: 设置环境变量
+==-v==: 挂载一个数据卷
+==-entrypoint==: 覆盖镜像的默认的入口指令
+==&amp;ndash;name==: 给容器指定一个名称
+==&amp;ndash;link==: 连接另外的容器&lt;/p>
+&lt;h4 id="在原有镜像的基础上创建镜像">在原有镜像的基础上创建镜像&lt;/h4>
+&lt;p>首先在&lt;code>docker run&lt;/code> 之后一顿操作
+然后:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker commit -m &lt;span class="s2">&amp;#34;提交说明&amp;#34;&lt;/span> -a &lt;span class="s2">&amp;#34;指定更新用户信息&amp;#34;&lt;/span> &lt;span class="m">01231412981&lt;/span> huahua/start:test
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 上面的一串数字是容器id&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>容器id 就是 打开 docker bash 后的主机名&lt;/li>
+&lt;li>最后一部分为目标镜像的仓库名和tag 名&lt;/li>
+&lt;/ul>
+&lt;h4 id="通过dokerfile-生成镜像">通过dokerfile 生成镜像&lt;/h4>
+&lt;p>使用 docker commit 来扩展一个镜像比较简单，但是不方便在一个团队中分享。我们可以使用 docker build 来创建一个新的镜像。为此，首先需要创建一个 Dockerfile，包含一些如何创建镜像的指令。
+新建一个目录和一个Dockerfile:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># This is a comment&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">FROM&lt;/span>&lt;span class="s"> node:latest&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">MAINTAINER&lt;/span>&lt;span class="s"> Vi.Ci&amp;lt;heyuhuade@gmail.com&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> apt-get -qq curl&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> apt-get -qq babe-cli&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>编写完成 Dockerfile 后可以使用 docker build 来生成镜像。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo docker build -t &lt;span class="s2">&amp;#34;huahua/start:v2&amp;#34;&lt;/span> .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中 ==-t== 标记来添加 tag，指定新的镜像的用户信息。 “.” 是 Dockerfile 所在的路径（当前目录），也可以 替换为一个具体的 Dockerfile 的路径。&lt;/p>
+&lt;p>Dockfile 中的指令被一条一条的执行。每一步都创建了一个新的容器，在 容器中执行指令并提交修改（就跟之前介绍过的 docker commit 一样）。当所有的指令都执行完毕之 后，返回了最终的镜像 id。所有的中间步骤所产生的容器都被删除和清理了。&lt;/p>
+&lt;p>&lt;strong>值得注意的是在dockerfile中的命令都必须避免io交互&lt;/strong>
+例如:&lt;/p>
+&lt;ul>
+&lt;li>在ubuntu中 apt-get 要根据情况加上 ==-qq==(除了错误外什么都不输出 | linux哲学中有一条:什么都不提示就是最好的情况) 或者 ==-y==(对所有的询问回答yes)&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>##############################上面是入门笔记#################################&lt;/p>
+&lt;h2 id="docker-项目部署">docker 项目部署&lt;/h2>
+&lt;p>&lt;strong>(按照官方文档进行安装)&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="在安装后的一些必要操作">在安装后的一些必要操作&lt;/h3>
+&lt;ul>
+&lt;li>添加docker用户组 并将docker管理者添加到group中
+&lt;ol>
+&lt;li>&lt;code>sudo group add docker&lt;/code> 添加docker用户组&lt;/li>
+&lt;li>&lt;code>sudo usermod -aG docker huahua&lt;/code> 将花花添加到docker 组&lt;/li>
+&lt;li>&lt;code>sudo service docker restart&lt;/code> 重启docker deamo&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>将docker 添加到开机自启动后退出root
+4. &lt;code>sudo chkconfig docker on&lt;/code>
+5. 切换到 huahua 进行 无拘无束的docker操作&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;h4 id="项目文件-存放在数据卷或着数据卷容器中">项目文件 存放在数据卷或着数据卷容器中&lt;/h4>
+&lt;/li>
+&lt;/ul>
+&lt;p>数据卷的添加 可以看做mount&lt;/p>
+&lt;p>使用 -v 标记也可以指定挂载一个本地主机的目录到容器中去。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>上面的命令加载主机的 /src/webapp 目录到容器的 /opt/webapp 目录。这个功能在进行测试的时候十分方便，比如用户可以放置一些程序到本地目录中，来查看容器是否正常工作。本地目录的路径必须是绝对路径，如果目录不存在 Docker 会自动为你创建它。&lt;/p>
+&lt;ul>
+&lt;li>注意：Dockerfile 中不支持这种用法，这是因为 Dockerfile 是为了移植和分享用的。然而，不同操作系统的路径格式不一样，所以目前还不能支持。&lt;/li>
+&lt;/ul>
+&lt;p>Docker 挂载数据卷的默认权限是读写，用户也可以通过 :ro 指定为只读。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo docker run -d -P --name web -v /src/webapp:/opt/webapp:ro
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">training/webapp python app.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>加了 :ro 之后，就挂载为只读了。&lt;/p>
+&lt;p>查看数据卷的具体信息&lt;/p>
+&lt;p>在主机里使用以下命令可以查看指定容器的信息&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ docker inspect web
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&amp;hellip;&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="实验环节-在app2上部署mongo-replica-arbiter仲裁者">实验环节: 在app2上部署mongo replica arbiter(仲裁者)&lt;/h3>
+&lt;ul>
+&lt;li>从hub中下载合适的mongo镜像(version 3.0.1)
+&lt;strong>一定要使用阿里提供的加速服务,否则慢的爆炸&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker pull mongo:3.0.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>在宿主机上创建mongo的数据目录及配置文件目录 并映射到容器&lt;/p>
+&lt;ul>
+&lt;li>数据目录&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo mkdir -p /data/mongo_data/mongo_arbiter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo chmod -R a+rw /data/mongo_data/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>生成上线仲裁者容器
+日志目录绑定; db数据目录绑定; 端口绑定;&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run --name ksx_arbiter -p 10.163.8.90:27099:27017 -v /data/mongo_data/mongo_arbiter:/data/db -d mongo:3.0.1 --replSet &amp;#34;ksxingrs1&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>--name&lt;/code> 定义了容器名
+&lt;code>-p&lt;/code> 将内网ip的27099 端口映射到了docker中的mongodb端口
+&lt;code>-v&lt;/code> 必要的目录及文件映射
+&lt;code>-d&lt;/code> 建守护进程&lt;/p>
+&lt;ul>
+&lt;li>切换到 db1 服务器 -&amp;gt;添加arbiter节点&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;gt; rs.addArb(&amp;#39;10.163.8.90:27099&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>返回app2 进入 ksx_arbiter -&amp;gt; 查看 mongo状态&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker exec -it ksx_arbiter /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>如果有错误 查看docker 日志信息&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo journalctl -u docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash; 全文完 &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="某部署版方案简略请略过">某部署版方案简略(请略过)&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>mongo docker 快速部署&lt;/p>
+&lt;ul>
+&lt;li>配置文件目录&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo mkdir /data/mongo_data/mongo_conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>日志目录&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ sudo mkdir /data/mongo_data/mongo_log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>使用配置(上传到了公司知识库)&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ sudo vi /data/mongo_data/mongo_conf/mongo.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemLog:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> destination: file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> path: &amp;#34;/data/mongo_data/mongo_log/mongodb.log&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> logAppend: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">storage:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> journal:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> enabled: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">processManagement:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fork: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>mysql
+&lt;strong>版本:5.6.31&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>mecache&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>nginx
+&lt;strong>目前使用的nginx 版本为 1.6.2&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>python 环境 flask&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

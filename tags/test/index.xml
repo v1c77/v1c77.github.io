@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>test on 我的日记</title><link>http://blog.heyuhua.com/tags/test/</link><description>Recent content in test on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Tue, 29 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/test/index.xml" rel="self" type="application/rss+xml"/><item><title>为什么要开个人博客</title><link>http://blog.heyuhua.com/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link><pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate><guid>http://blog.heyuhua.com/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid><description>&lt;blockquote>
+&lt;p>副标题+ 内容缩略：好看的皮囊千篇一律，有趣的人200多斤。想变的有趣还是得多吃多睡。。。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-mysql" data-lang="mysql">&lt;span class="line">&lt;span class="cl">&lt;span class="n">ChangeLog&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="err">「&lt;/span>&lt;span class="mi">2017&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="err">」&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">生成框架迁移到&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">`&lt;/span>&lt;span class="n">hugo&lt;/span>&lt;span class="o">`&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="err">「&lt;/span>&lt;span class="mi">2017&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="err">」&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="err">主题迁移到&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">hugo&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tranquilpeak&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">theme&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="为什么要开这个博客">为什么要开这个博客&lt;/h2>
+&lt;ul>
+&lt;li>之前有在csdn 和cnblog 写过博客，作为一个永远18岁的小正太，它们无法跟我一起保持青春&lt;/li>
+&lt;li>写了很多工作笔记存在印象，在考虑一点一点把它们公开，而且我很有先见之明的留下了markdown底稿&lt;/li>
+&lt;li>我想证明一件事：你永远都会觉得“1年前的我是个sb.” 而不是老的时候觉得”我年轻的时候就像个sb.”&lt;/li>
+&lt;li>副标题为随机Unicode编码组合，由本人随机生成。&lt;/li>
+&lt;/ul></description></item></channel></rss>

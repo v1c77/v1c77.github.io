@@ -1,0 +1,431 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="生死怎能看淡, 不服就是要干
+"><title>python 的坑 </title><link rel=canonical href=http://blog.heyuhua.com/p/python-%E7%9A%84%E5%9D%91/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="python 的坑 "><meta property="og:description" content="生死怎能看淡, 不服就是要干
+"><meta property="og:url" content="http://blog.heyuhua.com/p/python-%E7%9A%84%E5%9D%91/"><meta property="og:site_name" content="我的日记"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="python"><meta property="article:published_time" content="2016-12-15T16:17:05+00:00"><meta property="article:modified_time" content="2016-12-15T16:17:05+00:00"><meta name=twitter:title content="python 的坑 "><meta name=twitter:description content="生死怎能看淡, 不服就是要干
+"><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/mxbc_love_hu84bcc3680e7c4ed0b569d38fde18a01e_187938_300x0_resize_box_1.gif width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🫥</span></figure><div class=site-meta><h1 class=site-name><a href=/>我的日记</a></h1><h2 class=site-description>drafts.....</h2></div></header><ol class=social-menu><li><a href=https://github.com/v1c77 target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://stackoverflow.com/users/6382035/vi-ci target=_blank title="Stack Overflow" rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-stackoverflow" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1"/><path d="M8 16h8"/><path d="M8.322 12.582l7.956.836"/><path d="M8.787 9.168l7.826 1.664"/><path d="M10.096 5.764l7.608 2.472"/></svg></a></li><li><a href=https://t.me/v1c77 target=_blank title=telegram rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#一-亲身经历>一. 亲身经历</a></li><li><a href=#python2-对-range-的想法>python2： 对 <em>range</em> 的想法</a></li><li><a href=#为什么我的super报错>为什么我的super报错？</a></li><li><a href=#二-搬运wtfpyhon项目--自评>二. 搬运wtfpyhon项目 + 自评</a><ol><li><a href=#字符编码>字符编码</a></li><li><a href=#缩进--py-version--3>缩进 | py-version &lt; 3</a></li><li><a href=#python的hash特性>python的hash特性</a></li><li><a href=#生成器--for-x-in-y-if-z>生成器 for x in y if z</a></li><li><a href=#dict迭代中编辑>dict迭代中编辑</a></li><li><a href=#list的迭代中编辑>List的迭代中编辑</a></li><li><a href=#字符串联结>字符串联结</a></li><li><a href=#字符串滞留>字符串滞留</a></li><li><a href=#else的扭曲之处>else的扭曲之处</a></li><li><a href=#是是非非is>是是非非——is</a></li><li><a href=#循环内的闭包>循环内的闭包</a></li><li><a href=#不可变对象被玩弄>不可变对象被玩弄###</a><ol><li><a href=#消失的外部变量>消失的外部变量###</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/python-%E7%9A%84%E5%9D%91/>python 的坑</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Dec 15, 2016</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 9 分钟</time></div></footer></div></header><section class=article-content><p>生死怎能看淡, 不服就是要干</p><h2 id=一-亲身经历>一. 亲身经历</h2><blockquote><p>python 是我第一个拿出10分认真的态度去学习的语言.</p></blockquote><p>但是可能需要12分的认真。因为周围毕竟还有一些十分认真的人在尝试着用她解决问题。之前零零散散的坑笔记也懒得往过搬了。</p><blockquote><h2 id=python2-对-range-的想法>python2： 对 <em>range</em> 的想法</h2></blockquote><ul><li>于 2016年12月15日16:26:12<ul><li><p>一个小时前CTO大人（以下简称杰哥）过来找我说一个很奇怪的问题：同一个脚本检索两台数据库，一台国内一台国外，国外的没出问题，国内的时不时报错。
+（讲道理我的第一反应是&mldr;觉得国外的服务器香一些。。。）</p></li><li><p>登到监控服务器 vi+ pdb 一顿调试，问题出在了神奇的地方：</p></li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># python伪代码</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;file/to/path&#39;</span><span class=p>,</span> <span class=s1>&#39;r&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>localfsize</span> <span class=o>=</span> <span class=n>getsize</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>localfsize</span><span class=p>,</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>f</span><span class=o>.</span><span class=n>seek</span><span class=p>(</span><span class=n>size</span><span class=o>-</span><span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># dosomething..,</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><p>第一次运行 <code>for i in range</code> 就报出memeryError，很自然的想到是range.</p><p>因为python2 的range 返回的还是一个完整的数组， 而推荐使用的<code>xrange</code> 返回的是一个生成器，占用内存空间更小.</p><p>一开始我是拒绝的，因为之前一直都是懒的多写那个<code>x</code>,因为本屁民觉得在2016年的今天，一个多占了几mb内存的range并不可能发生内存溢出错误</p><p>像我们这种土豪公司，开发机都是4核8线程 64g内存，怎么可能运行个脚本会发生内存错误？</p><p>它真的发生了：</p><p>这个故事发生在一个十分尴尬的环境，杰哥把脚本跑在了他自己的开车服务器（aws大流量1g内存1核），
+整个脚本的流程是开两个线程，分别从国内集群和国外集群的log_db上查询 &#187; 增量追加到内部处理log。</p><p>一个本地日志文件大概是300mb-1g不等的样子。
+没错，日志很大，,但又恰好都没有到造成内存溢出的程度，所以就愉快的继续运行了，到了<code>range</code> 这里，localfilesize刚好是一个千万级别的整形数字（假设为1kw），即使是按c的计算方法，不考虑堆栈大小，在内存重要占用空间为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 顺便说一句python 3.6 新功能:写长数字时可以在中间加下划线`_` ,方便阅读</span>
+</span></span><span class=line><span class=cl><span class=mi>4</span> <span class=err>×</span> <span class=mi>1000_0000</span> <span class=o>=</span> <span class=mi>4000_0000</span><span class=n>B</span> <span class=o>=</span> <span class=mi>40000</span><span class=n>KB</span> <span class=o>=</span> <span class=mi>40</span><span class=n>MB</span>
+</span></span></code></pre></td></tr></table></div></div><p>同事脑补了触发memoryERROR 两种可能:1. 这个大数组挤爆了栈空间 | 2. 它成了挤爆内存的最后一根稻草</p><ul><li>于 2016年12月15日20:54:08</li></ul><p>上面的脑补不是很靠谱，刚才又做了一堆测试，发现了更多的问题。</p><ul><li><p>测试过程</p><ul><li>偷了台实验室的计算服务器 :D</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 测试range 占用内存函数</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>sys</span> <span class=kn>import</span> <span class=n>getsizeof</span>
+</span></span><span class=line><span class=cl><span class=n>foo1</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span><span class=n>getsizeof</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=mi>10</span><span class=o>**</span><span class=n>x</span><span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 返回的数字与实际最高内存占用出入很大, 另开一个shell 监控memory</span>
+</span></span><span class=line><span class=cl>watch -n 0.01  <span class=s2>&#34;free -m&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=http://qiniu.heyuhua.com/2016-12-15%2021-42-21%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png loading=lazy alt=辛苦的见证啊></p><p><code>foo1(x)</code> 结果：</p><div class=table-wrapper><table><thead><tr><th style=text-align:center><code>x</code>的值</th><th style=text-align:right>运行时最高占用</th></tr></thead><tbody><tr><td style=text-align:center>10</td><td style=text-align:right>&lsquo;memoryError&rsquo;</td></tr><tr><td style=text-align:center>9</td><td style=text-align:right>31138_mb</td></tr><tr><td style=text-align:center>8</td><td style=text-align:right>3111_mb</td></tr><tr><td style=text-align:center>7</td><td style=text-align:right>77mb</td></tr></tbody></table></div><ul><li><p>跟之前口算的理想大小40mb 没差, 可以接受</p></li><li><p>然后给foo1 做一些修改：</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>sys</span> <span class=kn>import</span> <span class=n>getsizeof</span>
+</span></span><span class=line><span class=cl><span class=n>foo2</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span><span class=n>getsizeof</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>int</span><span class=p>(</span><span class=mi>10</span><span class=o>**</span><span class=n>x</span><span class=p>),</span> <span class=mi>1</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>foo2(x)</code> 结果：</p><div class=table-wrapper><table><thead><tr><th style=text-align:center><code>x</code>的值</th><th style=text-align:right>运行时最高占用</th></tr></thead><tbody><tr><td style=text-align:center>10</td><td style=text-align:right>&lsquo;memoryError&rsquo;</td></tr><tr><td style=text-align:center>9</td><td style=text-align:right>31138_mb</td></tr><tr><td style=text-align:center>8</td><td style=text-align:right>3111_mb</td></tr><tr><td style=text-align:center>7</td><td style=text-align:right>235mb</td></tr></tbody></table></div><p>**比较两次 <code>foo(7)</code> 可怕的事情发生了， range 生成同一内容的两种调用方法会有两种内存占用。 **</p><blockquote><p>至于国外集群不出问题的原因， 国外服务器一天生产的log 比较少，所以文件也比较小。so &mldr;</p></blockquote><p>end.</p><blockquote><h2 id=为什么我的super报错>为什么我的super报错？</h2></blockquote><ul><li>于 2016年12月16日15:06:31</li></ul><ul><li>问题代码：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>B</span><span class=p>(</span><span class=n>a</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>(</span><span class=n>B</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=fm>__init__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>B</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>上述代码会报<code>TypeError: super() argument 1 must be type, not classobj</code>错误</p><ul><li><p>解决办法 <code>class A:</code> 旧的类型写法已经被弃用， 改用<code>class A(object)</code> 万事大吉</p><ul><li>刚才我在想，为什么我不会范这个错误? 因为我已经懒到了根本不会写class&mldr;
+这就是我的<em>BOP</em> 编程思想： <strong>Bed Oriented Programming</strong></li></ul></li></ul><h2 id=二-搬运wtfpyhon项目--自评>二. 搬运wtfpyhon项目 + 自评</h2><blockquote><p>项目地址： <a class=link href=https://github.com/satwikkansal/wtfpython target=_blank rel=noopener>wtfpy</a> 该项目使用DO WHAT THE FUCK YOU WANT 开源协议。所以应该在不获取授权的情况下搬运应该是没什么事的。</p><p>python 2的wft尽量少写。</p></blockquote><ol><li><h3 id=字符编码>字符编码</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>In [2]: &#39;value&#39; == &#39;valuе&#39;
+</span></span><span class=line><span class=cl>Out[2]: False
+</span></span></code></pre></td></tr></table></div></div><p>坑比指数 ⭐️</p><p>虽然看起来很魔幻，但是现实生活中能打出两个e的几率其实感觉相当低。必经我特么连cyrillic 码是啥都不知道。。。</p><ol start=2><li><h3 id=缩进--py-version--3>缩进 | py-version &lt; 3</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>square</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    A simple function to calculate square of a number by addition.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>sum_so_far</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>counter</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>sum_so_far</span> <span class=o>=</span> <span class=n>sum_so_far</span> <span class=o>+</span> <span class=n>x</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>sum_so_far</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面的代码会输出 10而不会输出想象的 100</p><p>坑比指数⭐️</p><p>这码在idea里甚至会报错。。。就算vim党一般在配置里也会显式区分tab与spcace的区别（1tab=4space or 2space）</p><p>原因：在python2 的解释器中，1tab = 8space，所以return语句进入了for循环。python3已修复。</p><ol start=3><li><h3 id=python的hash特性>python的hash特性</h3></li></ol><p>坑比指数⭐️⭐️</p><p>eg：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>some_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=n>some_dict</span><span class=p>[</span><span class=mf>5.5</span><span class=p>]</span> <span class=o>=</span> <span class=s2>&#34;Ruby&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>some_dict</span><span class=p>[</span><span class=mf>5.0</span><span class=p>]</span> <span class=o>=</span> <span class=s2>&#34;JavaScript&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>some_dict</span><span class=p>[</span><span class=mi>5</span><span class=p>]</span> <span class=o>=</span> <span class=s2>&#34;Python&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>magic:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>some_dict[5.0] == some_dict[5] == &#34;python&#34;
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>&ldquo;javascript"终究会被python无情碾压 ;D</p></blockquote><p>python的 list 使用 下标的hash作为实际索引，同时使用hash的还有equal。</p><p>如果你希望 <code>5.0 == 5</code> 这个判断句在python中是成立的，就需要接受 hash(5.0) == hash(5)。</p><p>同时也应该能接受 javascript被python碾压的结果。</p><ol start=4><li><h3 id=生成器--for-x-in-y-if-z>生成器 for x in y if z</h3></li></ol><p>坑比指数⭐️⭐🌟</p><p>eg:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>array</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>15</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>g</span> <span class=o>=</span> <span class=p>(</span><span class=n>x</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>array</span> <span class=k>if</span> <span class=n>array</span><span class=o>.</span><span class=n>count</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>array</span> <span class=o>=</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>22</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>Output:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>In [3]: print(list(g))
+</span></span><span class=line><span class=cl>In [4]: 8
+</span></span></code></pre></td></tr></table></div></div><p>在generator语法中， in 后面的对象是在声明时被确定的，而 if 后面的语句则会在生成器被执行时才被确定。所以<code>point(list(g))</code>等价于：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=nb>print</span><span class=p>([</span><span class=n>x</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>15</span><span class=p>]</span> <span class=k>if</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>22</span><span class=p>]</span><span class=o>.</span><span class=n>count</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>])</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li><h3 id=dict迭代中编辑>dict迭代中编辑</h3></li></ol><p>坑比指数：⭐️🌟</p><p>就在看wftpython 前一天，还收到一个想学python的前端同事抱怨：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 为什么下面的语句会报错？！</span>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;a&#39;</span><span class=p>:</span><span class=mi>1</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=o>=</span><span class=mi>2</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>a</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>  <span class=n>a</span><span class=o>.</span><span class=n>pop</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>哈哈哈哈这事就这么过去吧。（这个锅python是不能背的）</p><p>wtfpy中的eg：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=n>x</span> <span class=o>=</span> <span class=p>{</span><span class=mi>0</span><span class=p>:</span> <span class=kc>None</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>x</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>del</span> <span class=n>x</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>output:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0
+</span></span><span class=line><span class=cl>1
+</span></span><span class=line><span class=cl>2
+</span></span><span class=line><span class=cl>3
+</span></span><span class=line><span class=cl>4
+</span></span><span class=line><span class=cl>5
+</span></span><span class=line><span class=cl>6
+</span></span><span class=line><span class=cl>7
+</span></span></code></pre></td></tr></table></div></div><p>tips：永远不曾要尝试在iter dict时尝试添加和修改key.</p><ol start=6><li><h3 id=list的迭代中编辑>List的迭代中编辑</h3><p>坑比指数⭐️🌟</p><p>eg:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>list_1</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>list_2</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>list_3</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>list_4</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>item</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>list_1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>del</span> <span class=n>item</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>item</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>list_2</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>list_2</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>item</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>list_3</span><span class=p>[:]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>list_3</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>item</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>list_4</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>list_4</span><span class=o>.</span><span class=n>pop</span><span class=p>(</span><span class=n>idx</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>output:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>list_1</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>list_2</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>list_3</span>
+</span></span><span class=line><span class=cl><span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>list_4</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><p>逐个分析：</p><p>​ list_1 的 enumrate的迭代中, del item 只是删除了 list中对象的副本。所以并不会变。</p><p>​ list_2和list_4在遍历的第一步删除数字<code>1</code>后list的内容变成了<code>[2, 3, 4]</code> .这些剩余的元素下标会顺延，比如 2的下标会变成0， 3的变成1，所以，当第二次遍历时，index 为 1的元素3将会被删除。</p><ol start=7><li><h3 id=字符串联结>字符串联结</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_string_with_plus</span><span class=p>(</span><span class=n>iters</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>iters</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=o>+=</span> <span class=s2>&#34;xyz&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>assert</span> <span class=nb>len</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=o>==</span> <span class=mi>3</span><span class=o>*</span><span class=n>iters</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_string_with_format</span><span class=p>(</span><span class=n>iters</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>fs</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>*</span><span class=n>iters</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>=</span> <span class=n>fs</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=o>*</span><span class=p>([</span><span class=s2>&#34;xyz&#34;</span><span class=p>]</span><span class=o>*</span><span class=n>iters</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>assert</span> <span class=nb>len</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=o>==</span> <span class=mi>3</span><span class=o>*</span><span class=n>iters</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_string_with_join</span><span class=p>(</span><span class=n>iters</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>l</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>iters</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>l</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=s2>&#34;xyz&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>assert</span> <span class=nb>len</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=o>==</span> <span class=mi>3</span><span class=o>*</span><span class=n>iters</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>convert_list_to_string</span><span class=p>(</span><span class=n>l</span><span class=p>,</span> <span class=n>iters</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>assert</span> <span class=nb>len</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=o>==</span> <span class=mi>3</span><span class=o>*</span><span class=n>iters</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&gt;&gt;&gt; timeit(add_string_with_plus(10000))
+</span></span><span class=line><span class=cl>100 loops, best of 3: 9.73 ms per loop
+</span></span><span class=line><span class=cl>&gt;&gt;&gt; timeit(add_string_with_format(10000))
+</span></span><span class=line><span class=cl>100 loops, best of 3: 5.47 ms per loop
+</span></span><span class=line><span class=cl>&gt;&gt;&gt; timeit(add_string_with_join(10000))
+</span></span><span class=line><span class=cl>100 loops, best of 3: 10.1 ms per loop
+</span></span><span class=line><span class=cl>&gt;&gt;&gt; l = [&#34;xyz&#34;]*10000
+</span></span><span class=line><span class=cl>&gt;&gt;&gt; timeit(convert_list_to_string(l, 10000))
+</span></span><span class=line><span class=cl>10000 loops, best of 3: 75.3 µs per loop
+</span></span></code></pre></td></tr></table></div></div><p>耗时天壤之别。但是坑比等级：⭐️</p><ul><li><p>大三找实习的时候就有hr叔叔问过我你喜欢用什么做字符串联结。本萌新立马说 用➕。然后那个面试没过。加号的慢是因为 python中的str为不可变对象。加法作为一个双目运算符，每次做一次字符串联结都要创建一次新str对象。当对多个string进行联结时，比如 ‘’aa‘’ +&lsquo;&lsquo;bb&rsquo;&rsquo;+&ldquo;cc&rdquo;, 会首先生成中间变量 ”aabb“,在由“aabb”+&ldquo;cc&rdquo; 得到随后的 “aabbcc”</p></li><li><p>python内置的字符串填充工具 <code>.format</code> 和 <code>%</code>在做长字符串处理时效率很高, 但是在处理短字符串时表现欠佳。</p></li><li><p>使用join是最好的选择，一次join只会创建一次对象，多目运算神清气爽。</p></li><li><p>再给join创建 字符串数组的时候 不要使用append，list的动态扩容内存开销极大。</p><p>​</p></li></ul><ol start=8><li><h3 id=字符串滞留>字符串滞留</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=o>=</span> <span class=s2>&#34;some_string&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>id</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=mi>140420665652016</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>id</span><span class=p>(</span><span class=s2>&#34;some&#34;</span> <span class=o>+</span> <span class=s2>&#34;_&#34;</span> <span class=o>+</span> <span class=s2>&#34;string&#34;</span><span class=p>)</span> <span class=c1># Notice that both the ids are same.</span>
+</span></span><span class=line><span class=cl><span class=mi>140420665652016</span>
+</span></span><span class=line><span class=cl><span class=c1># using &#34;+&#34;, three strings:</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>timeit</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=s2>&#34;s1 = s1 + s2 + s3&#34;</span><span class=p>,</span> <span class=n>setup</span><span class=o>=</span><span class=s2>&#34;s1 = &#39; &#39; * 100000; s2 = &#39; &#39; * 100000; s3 = &#39; &#39; * 100000&#34;</span><span class=p>,</span> <span class=n>number</span><span class=o>=</span><span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=mf>0.25748300552368164</span>
+</span></span><span class=line><span class=cl><span class=c1># using &#34;+=&#34;, three strings:</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>timeit</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=s2>&#34;s1 += s2 + s3&#34;</span><span class=p>,</span> <span class=n>setup</span><span class=o>=</span><span class=s2>&#34;s1 = &#39; &#39; * 100000; s2 = &#39; &#39; * 100000; s3 = &#39; &#39; * 100000&#34;</span><span class=p>,</span> <span class=n>number</span><span class=o>=</span><span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=mf>0.012188911437988281</span>
+</span></span></code></pre></td></tr></table></div></div><p>坑比等级：⭐️</p><p>同样是没什么卵用的字符串机制。在进行多次重复三字符串联结时，使用 += 要比单纯的两个加号快很多。因为在使用+=时 等号右面的<code>s2+s3</code>对象并不会销毁。</p><ol start=9><li><h3 id=else的扭曲之处>else的扭曲之处</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl> <span class=k>def</span> <span class=nf>does_exists_num</span><span class=p>(</span><span class=n>l</span><span class=p>,</span> <span class=n>to_find</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>l</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=n>num</span> <span class=o>==</span> <span class=n>to_find</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>              <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Exists!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=k>break</span>
+</span></span><span class=line><span class=cl>      <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Does not exist&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>some_list</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>does_exists_num</span><span class=p>(</span><span class=n>some_list</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Exists</span><span class=err>!</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>does_exists_num</span><span class=p>(</span><span class=n>some_list</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Does</span> <span class=ow>not</span> <span class=n>exist</span>
+</span></span></code></pre></td></tr></table></div></div><p>for-else会在for循环内无break发生后触发else.</p><p>同理 try-except-else 无脑三连在try中语句正确执行后才会触发else.</p><p>坑壁指数：⭐️</p><ol start=10><li><h3 id=是是非非is>是是非非——is</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>256</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>256</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=ow>is</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>257</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>257</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=ow>is</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>257</span><span class=p>;</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>257</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span> <span class=ow>is</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><p>坑比指数：⭐️⭐️⭐️⭐️</p><p><code>is</code> 与 <code>==</code> 的区别在于, 前者比较的是操作数是否为同一对象，即检查操作数id， 后者考量的是对象的数值是否相等，比如说使用 hash。</p><p>这里的现象涉及到了python的实现，当python启动时，整型数字中 -5 到 256的所有数字都会以对象形式预分配到内存中。所以 当 a，b为256 时， 他们都是一个<code>256</code>对象的引用, <code>a is b</code>返回True。</p><p>而当创建一个 大于256的数字时，则会生成一个新的integer对象。那么第二段case返回False也就理所应当了。</p><p>最后的True则涉及到另一个python的实现。当在一行初始化赋值多个变量时，同一值只会被创建一次。<code>a = 257; b = 257</code>, <code>c, d= 257, 257 </code>这里 <code>a is b</code>,<code>c is d</code> 都会被判True。</p><ol start=11><li><h3 id=循环内的闭包>循环内的闭包</h3></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>funcs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=n>results</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>7</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>some_func</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>x</span>
+</span></span><span class=line><span class=cl>    <span class=n>funcs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>some_func</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>results</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>some_func</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>funcs_results</span> <span class=o>=</span> <span class=p>[</span><span class=n>func</span><span class=p>()</span> <span class=k>for</span> <span class=n>func</span> <span class=ow>in</span> <span class=n>funcs</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>results</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>funcs_results</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>6</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>6</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>坑比指数：⭐️⭐️✨</p><p>定义在循环中的闭包 如果使用外部循环变量，闭包将会绑定该变量而不是变量值。所以在循环结束后调用闭包时，闭包内使用的循环变量是其遍历结束时的值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=n>funcs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>7</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>some_func</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>x</span>
+</span></span><span class=line><span class=cl>    <span class=n>funcs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>some_func</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种局部函数的写法更加妥当。</p><ol start=12><li>##被调戏的自加##</li></ol><p>input:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=p>[</span><span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>Output:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>嗯，似乎是正常的。下面是核爆现场。</p><p>Input：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>+=</span> <span class=p>[</span><span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>Output:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>坑比指数 ⭐️⭐️⭐️✨</p><p><code>a = a + [5, 6, 7, 8]</code> 会生成一个新list赋值给a, 此时的b就成了旧的a对象的唯一引用。</p><p><code>a += [5, 6, 7, 8]</code> 会产生不同的结果是因为这里list的自加实现 使用了extend 直接在原list上添加新对象。 所以 这里a和b此时还是指向的同一个list。</p><ol start=13><li><h3 id=不可变对象被玩弄>不可变对象被玩弄###</h3></li></ol><p>同样是利用了上一条 list 的 自加实现。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>another_tuple</span> <span class=o>=</span> <span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>],</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>],</span> <span class=p>[</span><span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>another_tuple</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>+=</span> <span class=p>[</span><span class=mi>99</span><span class=p>,</span> <span class=mi>999</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=ne>TypeError</span><span class=p>:</span> <span class=s1>&#39;tuple&#39;</span> <span class=nb>object</span> <span class=n>does</span> <span class=ow>not</span> <span class=n>support</span> <span class=n>item</span> <span class=n>assignment</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>another_tuple</span>
+</span></span><span class=line><span class=cl><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>],</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>],</span> <span class=p>[</span><span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>1000</span><span class=p>,</span> <span class=mi>99</span><span class=p>,</span> <span class=mi>999</span><span class=p>])</span>
+</span></span></code></pre></td></tr></table></div></div><p>坑比指数：⭐️⭐️⭐️⭐️</p><p>这个是连环坑。首先这个自加会被执行并赋值，同时还会报tuple不可变的错误。</p><p>我觉得这就是个大bug。。。</p><ol start=14><li><h4 id=消失的外部变量>消失的外部变量###</h4></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>e</span> <span class=o>=</span> <span class=mi>7</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>raise</span> <span class=ne>Exception</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=ne>NameError</span><span class=p>:</span> <span class=n>name</span> <span class=s1>&#39;e&#39;</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>defined</span>
+</span></span></code></pre></td></tr></table></div></div><p>坑比指数：⭐️</p><p>虽然很奇葩。但是如果按照规范coding是不会犯这种错误的。</p><p>这个现象涉及到expect as 语法的实现逻辑，当离开except 上下文时，会有一个隐式的del 语句将e删除.</p><p>一个正常的except语句：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>except</span> <span class=n>E</span> <span class=k>as</span> <span class=n>N</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>foo</span>
+</span></span></code></pre></td></tr></table></div></div><p>会被解析成酱：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=k>except</span> <span class=n>E</span> <span class=k>as</span> <span class=n>N</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>do_any_thing_you_like</span>
+</span></span><span class=line><span class=cl>    <span class=k>finally</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>del</span> <span class=n>N</span>
+</span></span></code></pre></td></tr></table></div></div><p>（挑着翻译看心情。插眼 2017.09.05， 第二次更新 2017.09.18）</p></section><footer class=article-footer><section class=article-tags><a href=/tags/python/>python</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//vic1blog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2016 -
+2024 何育华版权所有</section><section class=powerby><a href=http://beian.miit.gov.cn>粤ICP备19031392号</a><br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

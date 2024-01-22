@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>shortcuts on 我的日记</title><link>http://blog.heyuhua.com/tags/shortcuts/</link><description>Recent content in shortcuts on 我的日记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>何育华版权所有</copyright><lastBuildDate>Mon, 07 Aug 2017 13:45:06 +0000</lastBuildDate><atom:link href="http://blog.heyuhua.com/tags/shortcuts/index.xml" rel="self" type="application/rss+xml"/><item><title>iterm2常用快捷键总结</title><link>http://blog.heyuhua.com/p/iterm2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 07 Aug 2017 13:45:06 +0000</pubDate><guid>http://blog.heyuhua.com/p/iterm2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/</guid><description>&lt;p>其实我不太喜欢用tmux, 就跟不喜欢用vim 一样。&lt;/p>
+&lt;h2 id="iterm2-常用快捷键">iterm2 常用快捷键&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th style="text-align:center">&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>新建标签&lt;/td>
+&lt;td style="text-align:center">⌘ + T&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>切换标签&lt;/td>
+&lt;td style="text-align:center">⌘ + 左／右／123&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>新建水平table&lt;/td>
+&lt;td style="text-align:center">⌘ + D&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>新建竖直table&lt;/td>
+&lt;td style="text-align:center">⌘ + shift + D&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>切换table&lt;/td>
+&lt;td style="text-align:center">⌘ + [/]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>最大化最小化table&lt;/td>
+&lt;td style="text-align:center">⌘ +shift+↵&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>关闭标签/关闭table&lt;/td>
+&lt;td style="text-align:center">⌘ + W&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>在多个terminal间切换&lt;/td>
+&lt;td style="text-align:center">⌘ +⌥ +123&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>清除当前行&lt;/td>
+&lt;td style="text-align:center">ctrl + u&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>清屏1&lt;/td>
+&lt;td style="text-align:center">ctrl + l&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>行首&lt;/td>
+&lt;td style="text-align:center">ctrl + a&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>行尾&lt;/td>
+&lt;td style="text-align:center">ctrl + e&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>自定义跳单词&lt;/td>
+&lt;td style="text-align:center">⌘ + 前后&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>删除当前单词&lt;/td>
+&lt;td style="text-align:center">ctrl + w&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>搜索历史&lt;/td>
+&lt;td style="text-align:center">ctrl + r&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>上条命令&lt;/td>
+&lt;td style="text-align:center">ctrl + p&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>删除当前光标后的字母&lt;/td>
+&lt;td style="text-align:center">ctrl + d&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>删除光标前的字母&lt;/td>
+&lt;td style="text-align:center">ctrl + h&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>快速填密码&lt;/td>
+&lt;td style="text-align:center">⌘ + ⌥ + F&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>其中自定义跳单词设置方法 : itrem2-&amp;gt; preferences -&amp;gt; keys -&amp;gt; 添加如下配置。&lt;/p>
+&lt;p>&lt;img src="http://qiniu.heyuhua.com/item_command_1.png"
+loading="lazy"
+alt="command1"
+>&lt;/p>
+&lt;p>​&lt;/p>
+&lt;p>​ &lt;img src="http://qiniu.heyuhua.com/item_command_2.png"
+loading="lazy"
+alt="command2"
+>&lt;/p></description></item></channel></rss>
